@@ -4,7 +4,7 @@ import Navbar from './Navbar';
 function PageContainer() {
     return (
         <>
-            
+            <Navbar />
         </>
     )
 }
