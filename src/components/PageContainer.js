@@ -1,10 +1,10 @@
 import Footer from './Footer';
-import Navbar from './Navbar';
+// import Navbar from './Navbar';
 
 function PageContainer() {
     return (
         <>
-            
+           <Footer/> 
         </>
     )
 }
