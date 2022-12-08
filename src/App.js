@@ -2,6 +2,7 @@ import {useEffect,useInsertionEffect,useState} from 'react';
 // import Footer from './components/Footer';
 // import Header from './components/Header';
 import API from './utils/API';
+import PageContainer from './components/PageContainer';
 
 function App() {
   const [userId, setUserId]= useState(0);
@@ -78,7 +79,7 @@ const handleSignupSubmit = e =>{
     {isLoggedIn?(
       <div>
         {/* Put stuff here to append to page */}
-        <h1>test login</h1>
+        <PageContainer />
       </div>
     ):(
       <>
