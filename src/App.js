@@ -55,7 +55,7 @@ const handleLogout = ()=>{
     {isLoggedIn?(
       <div>
         {/* Put stuff here to append to page */}
-        <h1>test login</h1>
+        <PageContainer />
       </div>
     ):(
       <>
