@@ -1,6 +1,7 @@
 import {useEffect,useInsertionEffect,useState} from 'react';
 import Footer from './components/Footer';
 // import Header from './components/Header';
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import API from './utils/API';
 import PageContainer from './components/PageContainer';
 
@@ -74,7 +75,7 @@ const handleSignupSubmit = e =>{
 }
 
   return (
-   <div className='App'>
+   <div className='App '>
     {isLoggedIn&&<button onClick={handleLogout}>Logout</button>}
     {isLoggedIn?(
       <div>

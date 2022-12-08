@@ -1,10 +1,14 @@
+import React, {useState} from 'react'
 // import '../styles/ShoppingList.css';
 
+
 function ShoppingList() {
+
     return (
-        <>
-            <h1>Shopping list placeholder</h1>
-        </>
+        <div>
+            <h1>NAME Shopping List</h1>
+            
+        </div>
     )
 }
 
