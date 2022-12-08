@@ -1,4 +1,5 @@
 // This needs to be renamed because it houses the navbar components and routing
+import '../styles/PageContainer.css';
 
 import React, { useState} from 'react';
 import Navbar from './Navbar';
@@ -39,7 +40,9 @@ function PageContainer() {
                     <div className='text-2xl'>WasteNot</div>
                     <Navbar currentPage={currentPage} handlePageChange={handlePageChange}/>
                 </div>
+                <div className="pageContainer">
                 {renderPage()}
+                </div>
         </>
     );
 }
