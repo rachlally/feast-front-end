@@ -1,5 +1,5 @@
 import {useEffect,useInsertionEffect,useState} from 'react';
-// import Footer from './components/Footer';
+import Footer from './components/Footer';
 // import Header from './components/Header';
 import API from './utils/API';
 import PageContainer from './components/PageContainer';
@@ -109,6 +109,7 @@ const handleSignupSubmit = e =>{
         <input type="password" name="password" value={signupPassword} onChange={e=>setSignupPassword(e.target.value)} placeholder="password"/>
           <button>Sign up!</button>
       </form>
+      <Footer />
       </>
     )}
    </div>

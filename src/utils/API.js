@@ -2,7 +2,7 @@
 // const URL_PREFIX = 'http://localhost:3001'
 
 // LIVE SERVER
-const URL_PREFIX = 'http://wastenot.herokuapp.com'
+const URL_PREFIX = 'https://wastenot.herokuapp.com'
 
 const API = {
     //login user
