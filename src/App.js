@@ -1,20 +1,21 @@
 import { useEffect, useInsertionEffect, useState } from "react";
 import Footer from "./components/Footer";
-// import Header from './components/Header';
+import Navbar from './components/Navbar';
 import API from "./utils/API";
 // import PageContainer from './components/PageContainer';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/pages/Login";
+import ShoppingList from './components/pages/ShoppingList';
+import DonationList from './components/pages/DonationList';
+import Calendar from './components/pages/Calendar';
+import Kitchen from './components/pages/Kitchen';
+import Recipe from './components/pages/Recipe';
+import Storage from './components/pages/Storage';
 
 function App() {
   const [userId, setUserId] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const [signupUserName, setSignupUserName] = useState("");
-  const [signupEmail, setSignupEmail] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -33,11 +34,11 @@ function App() {
     }
   }, []);
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
+  const handleLoginSubmit = (userObj) => {
+  
     API.login({
-      email: loginEmail,
-      password: loginPassword,
+      email: userObj.email,
+      password: userObj.password,
     }).then((data) => {
       console.log(data);
       if (data.token) {
@@ -56,18 +57,16 @@ function App() {
     setToken("");
   };
 
-  const handleSignupSubmit = (e) => {
-    e.preventDefault();
+  const handleSignupSubmit = (userObj) => {
     API.signup({
-      name: signupUserName,
-      email: signupEmail,
-      password: signupPassword,
+      name: userObj.name,
+      email: userObj.email,
+      password: userObj.password,
     }).then((data) => {
       console.log(data);
       if (data.token) {
         setUserId(data.user.id);
         setToken(data.token);
-        setSignupEmail(data.user.email);
         setIsLoggedIn(true);
         localStorage.setItem("token", data.token);
       }
@@ -77,6 +76,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+      <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
         <Routes>
           <Route
             path="/login"
@@ -88,6 +88,12 @@ function App() {
               />
             }
           />
+          <Route path="/shoppinglist" element={<ShoppingList/>}/>
+          <Route path="/donationlist" element={<DonationList/>}/>
+          <Route path="/calendar" element={<Calendar/>}/>
+          <Route path="/kitchen" element={<Kitchen/>}/>
+          <Route path="/recipe" element={<Recipe/>}/>
+          <Route path="/storage" element={<Storage/>}/>
         </Routes>
       </Router>
 

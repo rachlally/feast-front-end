@@ -35,7 +35,16 @@ const API = {
                 "Content-Type":"application/json"
             }
         }).then(res=>res.json())
-    }
+    },
+    // getKitchens: (userId, storageId)=>{
+    //     return fetch(`${URL_PREFIX}/api/kitchens/`,{
+    //         method:"GET",
+    //         headers:{
+    //             "Authorization": `Bearer ${token}`,
+    //             "Content-Type":"application/json"
+    //         }
+    //     }).then(res=>res.json())
+    // }
 }
 
 export default API
