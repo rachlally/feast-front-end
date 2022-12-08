@@ -1,9 +1,9 @@
-import '../styles/ShoppingList.css';
+// import '../styles/ShoppingList.css';
 
 function ShoppingList() {
     return (
         <>
-
+            <h1>Shopping list placeholder</h1>
         </>
     )
 }
