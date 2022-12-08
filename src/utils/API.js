@@ -26,6 +26,15 @@ const API = {
                 "Authorization": `Bearer ${token}`
             }
         }).then(res=>res.json())
+    },
+    signup: (userObj)=>{
+        return fetch(`${URL_PREFIX}/api/users`,{
+            method:"POST",
+            body:JSON.stringify(userObj),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
     }
 }
 
