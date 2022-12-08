@@ -1,10 +1,10 @@
 // Recipe API lives here
-import '../styles/Recipe.css';
+// import '../styles/Recipe.css';
 
 function Recipe() {
     return (
         <>
-
+            <h1>Recipe placeholder</h1>
         </>
     )
 }
