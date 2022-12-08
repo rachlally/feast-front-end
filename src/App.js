@@ -2,6 +2,7 @@ import {useEffect,useInsertionEffect,useState} from 'react';
 // import Footer from './components/Footer';
 // import Header from './components/Header';
 import API from './utils/API';
+import PageContainer from './components/PageContainer';
 
 function App() {
   const [userId, setUserId]= useState(0);
@@ -60,16 +61,13 @@ const handleLogout = ()=>{
     ):(
       <>
       {/*not logged in */}
-      {/* <h1>not logged in</h1> */}
- 
+      <h1>not logged in</h1>
       <form onSubmit={handleLoginSubmit}>
-        <h2 >Login</h2>
+        <h2>Login</h2>
         <input name="email"  value={loginEmail} onChange={e=>setLoginEmail(e.target.value)} placeholder="email"/>
           <input type="password" name="password" value={loginPassword} onChange={e=>setLoginPassword(e.target.value)} placeholder="password"/>
-          <button>Log in</button>
-          <button>Create Account</button>
+          <button>Log in!</button>
       </form>
-    
       </>
     )}
    </div>

@@ -2,8 +2,9 @@
 module.exports = {
   content: [
     // Pathing to all our component files for Tailwind class names
-    './src/components/*'
+    './src/components/**'
   ],
+
   theme: {
     extend: {},
   },
