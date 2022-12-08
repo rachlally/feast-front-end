@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import '../styles/Login.css';
-
+// import '../styles/Login.css';
 
 export default function Login(props) {
     const navigate = useNavigate()
@@ -26,8 +25,9 @@ export default function Login(props) {
     const signupHandle = e => {
         e.preventDefault();
         props.handleSignupSubmit({
-            email: loginEmail,
-            password: loginPassword
+            name: signupUserName,
+            email: signupEmail,
+            password: signupPassword
         })
     }
     return (

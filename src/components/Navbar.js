@@ -1,58 +1,35 @@
-// Navbar accordian with 
-    //Shopping list
-    // Donation list
-    // Kitchen list
-    // Calendar
+// Navbar accordian with
+//Shopping list
+// Donation list
+// Kitchen list
+// Calendar
 
 // Recipe suggestions
 
 // Logout
 
 // Tenatively Meal planner
-import React from 'react';
-import '../styles/Navbar.css';
+import "../styles/Navbar.css";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom"
 
-function Navbar({ currentPage, handlePageChange }) {
-    return (
-    <ul className='flex justify-around'>
-        <a 
-            className={currentPage === 'ShoppingList' ? 'nav-link active' : 'nav-link'}
-            href='#ShoppingList'
-            onClick={() => handlePageChange('ShoppingList')}>
-            Shopping List
-        </a>
-        <a 
-            className={currentPage === 'DonationList' ? 'nav-link active' : 'nav-link'}
-            href='#DonationList'
-            onClick={() => handlePageChange('DonationList')}>
-            Donation List
-        </a>
-        <a 
-            className={currentPage === 'Calendar' ? 'nav-link active' : 'nav-link'}
-            href='#Calendar'
-            onClick={() => handlePageChange('Calendar')}>
-            Calendar
-        </a>
-        <a 
-            className={currentPage === 'Kitchen' ? 'nav-link active' : 'nav-link'}
-            href='#Kitchen'
-            onClick={() => handlePageChange('Kitchen')}>
-            Kitchen
-        </a>           
-        <a 
-            className={currentPage === 'Recipe' ? 'nav-link active' : 'nav-link'}
-            href='#Recipe'
-            onClick={() => handlePageChange('Recipe')}>
-            Filter recipes by ingredients
-        </a>           
-        <a 
-            className={currentPage === 'Storage' ? 'nav-link active' : 'nav-link'}
-            href='#Storage'
-            onClick={() => handlePageChange('Storage')}>
-            Storage
-        </a>           
+function Navbar(props) {
+    const navigate = useNavigate();
+    const logoutFunc = () => {
+        props.handleLogout();
+        navigate("/login")
+    }
+  return (
+    <ul className="flex justify-around flex-wrap">
+      {props.isLoggedIn ? <a href="/logout" onClick = {logoutFunc}>Logout</a> : <a href="/login">Login/Signup</a>}
+      <a href="/shoppinglist">Shopping List</a>
+      <a href="/donationlist">Donation List</a>
+      <a href="/calendar">Calendar</a>
+      <a href="/kitchen">Kitchen</a>
+      <a href="/recipe">Filter recipes by ingredients</a>
+      <a href="/storage">Storage</a>
     </ul>
-    );
+  );
 }
 
 export default Navbar;
