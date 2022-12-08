@@ -9,6 +9,9 @@ function App() {
   const [token, setToken] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword]= useState("");
+  const [signupUserName, setSignupUserName]=useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword]= useState("");
 
 useEffect(()=>{
   const storedToken = localStorage.getItem("token")
@@ -42,11 +45,31 @@ const handleLoginSubmit = e=>{
     }
   })
 }
+
 const handleLogout = ()=>{
   localStorage.removeItem("token");
   setIsLoggedIn(false);
   setUserId(0);
   setToken("");
+}
+
+const handleSignupSubmit = e =>{
+  e.preventDefault();
+  API.signup({
+    name: signupUserName,
+    email:signupEmail,
+    password:signupPassword
+  }).then(data=>{
+    console.log(data);
+    if(data.token){
+      
+      setUserId(data.user.id)
+      setToken(data.token)
+      setSignupEmail(data.user.email)
+      setIsLoggedIn(true)
+      localStorage.setItem("token", data.token)
+    }
+  })
 }
 
   return (
@@ -66,6 +89,14 @@ const handleLogout = ()=>{
         <input name="email"  value={loginEmail} onChange={e=>setLoginEmail(e.target.value)} placeholder="email"/>
           <input type="password" name="password" value={loginPassword} onChange={e=>setLoginPassword(e.target.value)} placeholder="password"/>
           <button>Log in!</button>
+      </form>
+
+      <form onSubmit = {handleSignupSubmit}>
+        <h2>Create Account</h2>
+        <input name="userName"  value={signupUserName} onChange={e=>setSignupUserName(e.target.value)} placeholder="Username"/>
+        <input name="email"  value={signupEmail} onChange={e=>setSignupEmail(e.target.value)} placeholder="email"/>
+        <input type="password" name="password" value={signupPassword} onChange={e=>setSignupPassword(e.target.value)} placeholder="password"/>
+          <button>Sign up!</button>
       </form>
       </>
     )}
