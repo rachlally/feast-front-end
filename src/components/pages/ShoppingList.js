@@ -3,11 +3,10 @@ import React, {useState} from 'react'
 
 
 function ShoppingList() {
-//     const {products, setProduct} = useState(["Apples", "Ramen", "Mayonaise"
-// ])
+
     return (
-        <div className="display flex flex-wrap justify-content-center">
-            <h1 className="display flex flex-wrap justify-content-center" >NAME Shopping List</h1>
+        <div>
+            <h1>NAME Shopping List</h1>
             
         </div>
     )

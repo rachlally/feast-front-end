@@ -6,7 +6,7 @@ function Kitchen() {
   
     return (
         <div>
-            <h1 className="bg-purple-400">Welcome to your Kitchen Placeholder</h1>
+            <h1>Welcome to your Kitchen Placeholder</h1>
           
         </div>
     )
