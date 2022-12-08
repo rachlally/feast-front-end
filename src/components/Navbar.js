@@ -19,17 +19,17 @@ function Navbar(props) {
         props.handleLogout();
         navigate("/login")
     }
-  return (
-    <ul className="flex justify-around flex-wrap">
-      {props.isLoggedIn ? <a href="/logout" onClick = {logoutFunc}>Logout</a> : <a href="/login">Login/Signup</a>}
-      <a href="/shoppinglist">Shopping List</a>
-      <a href="/donationlist">Donation List</a>
-      <a href="/calendar">Calendar</a>
-      <a href="/kitchen">Kitchen</a>
-      <a href="/recipe">Filter recipes by ingredients</a>
-      <a href="/storage">Storage</a>
-    </ul>
-  );
+    return (
+        <ul className="bg-slate-800 p-8 display flex row flex-wrap justify-around text-purple-200 font-mono font-bold">
+        {props.isLoggedIn ? <a className='hover:text-yellow-400  hover:tracking-wide' href="/logout " onClick = {logoutFunc}>Logout</a> : <a className='hover:text-yellow-400  hover:tracking-wide' href="/login">Login/Signup</a>}
+        <a className='hover:text-yellow-400  hover:tracking-wide' href="/shoppinglist">Shopping List</a>
+        <a href="/donationlist">Donation List</a>
+        <a className='hover:text-yellow-400  hover:tracking-wide' href="/calendar">Calendar</a>
+        <a className='hover:text-yellow-400  hover:tracking-wide' href="/kitchen">Kitchen</a>
+        <a className='hover:text-yellow-400  hover:tracking-wide' href="/recipe">Filter recipes by ingredients</a>
+        <a className='hover:text-yellow-400  hover:tracking-wide' href="/storage">Storage</a>
+        </ul>
+    );
 }
 
 export default Navbar;
