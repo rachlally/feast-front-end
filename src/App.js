@@ -50,7 +50,7 @@ const handleLogout = ()=>{
 }
 
   return (
-   <div className='App'>
+   <div className='App '>
     {isLoggedIn&&<button onClick={handleLogout}>Logout</button>}
     {isLoggedIn?(
       <div>
@@ -60,13 +60,16 @@ const handleLogout = ()=>{
     ):(
       <>
       {/*not logged in */}
-      <h1>not logged in</h1>
+      {/* <h1>not logged in</h1> */}
+ 
       <form onSubmit={handleLoginSubmit}>
-        <h2>Login</h2>
+        <h2 >Login</h2>
         <input name="email"  value={loginEmail} onChange={e=>setLoginEmail(e.target.value)} placeholder="email"/>
           <input type="password" name="password" value={loginPassword} onChange={e=>setLoginPassword(e.target.value)} placeholder="password"/>
-          <button>Log in!</button>
+          <button>Log in</button>
+          <button>Create Account</button>
       </form>
+    
       </>
     )}
    </div>
