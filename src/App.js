@@ -14,6 +14,7 @@ function App() {
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword]= useState("");
 
+
 useEffect(()=>{
   const storedToken = localStorage.getItem("token")
   if(storedToken){
@@ -79,7 +80,16 @@ const handleSignupSubmit = e =>{
     {isLoggedIn?(
       <div>
         {/* Put stuff here to append to page */}
-        <PageContainer />
+        <PageContainer 
+          isLoggedIn={isLoggedIn} 
+          userId={userId} 
+          token={token} 
+          loginEmail={loginEmail}
+          setIsLoggedIn={setIsLoggedIn}
+          setToken={setToken}
+          setUserId={setUserId}
+          setLoginEmail={setLoginEmail}
+        />
       </div>
     ):(
       <>
