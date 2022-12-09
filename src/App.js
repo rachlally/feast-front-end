@@ -88,7 +88,7 @@ function App() {
               />
             }
           />
-          <Route path="/shoppinglist" element={<ShoppingList/>}/>
+          <Route path="/shoppinglist" element={<ShoppingList />}/>
           <Route path="/donationlist" element={<DonationList/>}/>
           <Route path="/calendar" element={<Calendar/>}/>
           <Route path="/kitchen" element={<Kitchen/>}/>
