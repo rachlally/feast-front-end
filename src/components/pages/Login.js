@@ -6,7 +6,7 @@ export default function Login(props) {
     const navigate = useNavigate()
     useEffect(() => {
         if (props.isLoggedIn) {
-            navigate("/profile")
+            navigate("/kitchen")
         }
     }, [props.isLoggedIn])
     const [loginEmail, setLoginEmail] = useState("");
