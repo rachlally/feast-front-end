@@ -14,6 +14,7 @@ import Storage from './components/pages/Storage';
 
 function App() {
   const [userId, setUserId] = useState(0);
+  const [kitchenId, setKitchenId] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
 
@@ -23,7 +24,7 @@ function App() {
       console.log(storedToken);
       API.getUserFromToken(storedToken).then((data) => {
         if (data.user) {
-          console.log(data);
+          // console.log(data);
           setToken(storedToken);
           setIsLoggedIn(true);
           setUserId(data.user.id);
@@ -93,7 +94,7 @@ function App() {
           <Route path="/calendar" element={<Calendar/>}/>
           <Route path="/kitchen" element={<Kitchen userId={userId}/>} />
           <Route path="/recipe" element={<Recipe/>}/>
-          <Route path="/storage" element={<Storage/>}/>
+          <Route path="/storage" element={<Storage kitchenId={kitchenId}/>}/>
         </Routes>
       </Router>
 

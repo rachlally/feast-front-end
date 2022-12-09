@@ -36,8 +36,17 @@ const API = {
             }
         }).then(res=>res.json())
     },
-    getKitchens: (token, userId, storageId)=>{
+    getKitchens: (token, kitchenObj)=>{
         return fetch(`${URL_PREFIX}/api/kitchens/`,{
+            method:"GET",
+            headers:{
+                "Authorization": `Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
+    getStorage: (token) =>{
+        return fetch(`${URL_PREFIX}/api/storages`,{
             method:"GET",
             headers:{
                 "Authorization": `Bearer ${token}`,
