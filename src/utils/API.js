@@ -15,9 +15,12 @@ const API = {
             }
         }).then(res=>res.json())
     },
+    
+    //Get user
     getUser:(userId)=>{
         return fetch(`${URL_PREFIX}/api/users/${userId}`).then(res=>res.json())
     },
+
     //get user from localstorage
     getUserFromToken:(token)=>{
         return fetch(`${URL_PREFIX}/api/users/getuserfromtoken`,{
@@ -27,6 +30,8 @@ const API = {
             }
         }).then(res=>res.json())
     },
+
+    //Signup new user
     signup: (userObj)=>{
         return fetch(`${URL_PREFIX}/api/users`,{
             method:"POST",
@@ -36,8 +41,10 @@ const API = {
             }
         }).then(res=>res.json())
     },
-    getKitchens: (token, kitchenObj)=>{
-        return fetch(`${URL_PREFIX}/api/kitchens/`,{
+
+    //Get kitchens
+    getKitchens: (token, userId)=>{
+        return fetch(`${URL_PREFIX}/api/kitchens/user/${userId}`,{
             method:"GET",
             headers:{
                 "Authorization": `Bearer ${token}`,
@@ -45,15 +52,39 @@ const API = {
             }
         }).then(res=>res.json())
     },
-    getStorage: (token) =>{
-        return fetch(`${URL_PREFIX}/api/storages`,{
+
+    //Get storages
+    getStorages: (token, userId)=>{
+        return fetch(`${URL_PREFIX}/api/storages/user/${userId}`,{
             method:"GET",
             headers:{
                 "Authorization": `Bearer ${token}`,
                 "Content-Type":"application/json"
             }
         }).then(res=>res.json())
+    },
+
+    //Get Donation list
+    getDonations: (token, userId)=>{
+        return fetch(`${URL_PREFIX}/api/donation/user/${userId}`,{
+            method:"GET",
+            headers:{
+                "Authorization": `Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
+    
+    //Get products
+    getProducts: (token, KitchenId)=> {
+        return fetch(`${URL_PREFIX}/api/products/kitchen/${KitchenId}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-type':'applcation/json'
+            }
+        }).then(res=>res.json())
     }
 }
 
-export default API
+export default API;
