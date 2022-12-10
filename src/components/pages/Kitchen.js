@@ -15,20 +15,22 @@ function Kitchen(props) {
         })
     }, [props.userId])
 
+    const kitchenOwner = kitchen.map((k,i) => {
+        return (
+            <div key={i}>{k.User.name}'s Kitchen</div>
+        )
+    })
+
     const kitchens = kitchen.map((k,i) => {
             return (
-                <ul key={i}>
-                    <li>{k.User.name}'s Kitchen #{k.id} found at zipcode {k.zipCode}</li>
-                </ul>
+                <div key={i}>#{k.id} found at zipcode {k.zipCode}</div>
             )
         })
+        console.log(kitchens)
 
     return (
         <div>
-            <h1>Welcome to your Kitchen Placeholder</h1>
-            <div>
-                {kitchens}
-            </div>
+            <h1>{kitchenOwner}</h1>
         </div>
     )
 }
