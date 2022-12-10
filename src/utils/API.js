@@ -74,6 +74,17 @@ const API = {
             }
         }).then(res=>res.json())
     },
+
+    //Get Shopping list
+    getShopping: (token, userId)=>{
+        return fetch(`${URL_PREFIX}/api/shopping/user/${userId}`,{
+            method:"GET",
+            headers:{
+                "Authorization": `Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
     
     //Get products
     getProducts: (token, KitchenId)=> {
@@ -81,9 +92,21 @@ const API = {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Content-type':'applcation/json'
+                'Content-type':'application/json'
             }
         }).then(res=>res.json())
+    },
+
+    // Add product to shoppingList
+    addToShopping: (shoppingObj, token) => {
+        return fetch(`${URL_PREFIX}/api/products/`,{
+            method: 'POST',
+            body: JSON.stringify(shoppingObj),
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => res.json())
     }
 }
 
