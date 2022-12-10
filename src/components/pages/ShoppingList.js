@@ -19,49 +19,49 @@ function ShoppingList(props) {
     ])
 
     // WIP add new product to a user shopping list
-    // const handleFormSubmit = e => {
-    //     e.preventDefault();
-    //     const newListItem = {
-    //         name: newProduct,
-    //         isPerishable: true,
-    //         datePurchased: "2022-12-05",
-    //         expirationDate: "2023-09-05" 
-    //     }
-    //     setNewProduct('')
+    const handleFormSubmit = e => {
+        e.preventDefault();
+        const newListItem = {
+            name: newProduct,
+            isPerishable: true,
+            datePurchased: "2022-12-05",
+            expirationDate: "2023-09-05" 
+        }
+        setShopping([...shopping, newListItem])
         
-    //     API.addToShopping(newListItem, props.token).then(
-    //         newShoppingData => {
-    //             API.getShopping(props.userId.id).then(data => {
-    //                 setNewProduct(data.shopping)
-    //             })
-    //         }
-    //     )
-    // }
+        // API.addToShopping(newListItem, props.token).then(
+        //     newShoppingData => {
+        //         API.getShopping(props.userId.id).then(data => {
+        //             setNewProduct(data.shopping)
+        //         })
+        //     }
+        // )
+    }
 
     // Shopping list owner
-    const shoppingListOwner = shopping.map((s,i) => {
-        return (
-            <div key={i}>{s.name}</div>
-        )
-    })
+    // const shoppingListOwner = shopping.map((s,i) => {
+    //     return (
+    //         <div key={i}>{s.name}</div>
+    //     )
+    // })
     
-    const shoppings = shopping.map((s,i) => {
-        const products = s.Products.map((p,i) => {
-            console.log(p)
+    // const shoppings = shopping.map((s,i) => {
+    //     const products = s.Products.map((p,i) => {
+    //         console.log(p)
 
-            // Returning product names
-            return (
-                <div key={i}>{p.name}</div>
-            )
-        })
+    //         // Returning product names
+    //         return (
+    //             <div key={i}>{p.name}</div>
+    //         )
+    //     })
 
-        console.log(s)
-        return (
-            <div key={i}>
-                {products}
-            </div>
-        )
-    })
+    //     console.log(s)
+    //     return (
+    //         <div key={i}>
+    //             {products}
+    //         </div>
+    //     )
+    // })
 
     // Other
     // const purchasedItem = idx=>{
@@ -77,9 +77,9 @@ function ShoppingList(props) {
             </h1>
                 
             <form 
-                // onSubmit=
-                //     {handleFormSubmit} 
-                // className=""
+                onSubmit=
+                    {handleFormSubmit} 
+                className=""
                 >
                 <input 
                     name="newProduct" 
