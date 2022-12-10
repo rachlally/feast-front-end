@@ -91,7 +91,7 @@ function App() {
             }
           />
           {/* Might want to come back and re route the psuedo routes to be more in line with the actual routes */}
-          <Route path="/shoppinglist" element={<ShoppingList/>}/>
+          <Route path="/shoppinglist" element={<ShoppingList userId={userId} token={token}/>}/>
           <Route path="/donationlist" element={<DonationList userId={userId} token={token}/>}/>
           <Route path="/calendar" element={<Calendar/>}/>
           <Route path="/kitchen" element={<Kitchen userId={userId} token={token}/>} />

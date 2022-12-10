@@ -1,43 +1,69 @@
-import React, { useState } from 'react'
-import Products from '../pages/Products'
+import React, { useEffect, useState } from 'react';
+import Products from '../pages/Products';
+import API from '../../utils/API';
 // import '../styles/ShoppingList.css';
 
 
-
-function ShoppingList() {
+// New
+function ShoppingList(props) {
     const [newProduct, setNewProduct] = useState('')
-    const [products, setProducts] = useState([
+    const [shopping, setShopping] = useState([])
 
-        {
-            product: "Bread",
-            isPurchased:false
-        },
-        {
-            product: "Mayonaise",
-            isPurchased:false
-        },
-        {
-            product: "Apples",
-            isPurchased:false
-        },
-        {
-            product: "Peanut Butter",
-            isPurchased:false
-        },
-        {
-            product: "Chicken Noodle Soup",
-            isPurchased:false
-        }
+    useEffect(() => {
+        API.getShopping(props.token, props.userId.id).then(data => {
+            console.log(data)
+            setShopping(data)
+        })
+    }, [
+        props.userId
     ])
 
-    const handleFormSubmit = e => {
-        e.preventDefault();
-        const newListItem = {
-            product: newProduct,
-            isPurchased:false
-        }
-        setProducts([...products, newListItem])
-    }
+    // WIP add new product to a user shopping list
+    // const handleFormSubmit = e => {
+    //     e.preventDefault();
+    //     const newListItem = {
+    //         name: newProduct,
+    //         isPerishable: true,
+    //         datePurchased: "2022-12-05",
+    //         expirationDate: "2023-09-05" 
+    //     }
+    //     setNewProduct('')
+        
+    //     API.addToShopping(newListItem, props.token).then(
+    //         newShoppingData => {
+    //             API.getShopping(props.userId.id).then(data => {
+    //                 setNewProduct(data.shopping)
+    //             })
+    //         }
+    //     )
+    // }
+
+    // Shopping list owner
+    const shoppingListOwner = shopping.map((s,i) => {
+        return (
+            <div key={i}>{s.name}</div>
+        )
+    })
+    
+    const shoppings = shopping.map((s,i) => {
+        const products = s.Products.map((p,i) => {
+            console.log(p)
+
+            // Returning product names
+            return (
+                <div key={i}>{p.name}</div>
+            )
+        })
+
+        console.log(s)
+        return (
+            <div key={i}>
+                {products}
+            </div>
+        )
+    })
+
+    // Other
     // const purchasedItem = idx=>{
     //     const arrCopy = [...products];
     //     arrCopy[idx].isPurchased = !arr[idx].isPurchased
@@ -46,14 +72,31 @@ function ShoppingList() {
 
     return (
         <div className="bg-sky-300 font-mono flex flex-wrap justify-center">
-            <h1 className="text-purple-800 font-mono font-bold underline">Name's Shopping List</h1>
-            <form onSubmit={handleFormSubmit} className="">
-                <input name="newProduct" placeholder='product' value={newProduct} onChange={e => setNewProduct(e.target.value)} /><br/>
-                <button className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">Add to Shopping List</button>
+            <h1 
+                className="text-purple-800 font-mono font-bold underline">{shoppingListOwner}
+            </h1>
+                
+            <form 
+                // onSubmit=
+                //     {handleFormSubmit} 
+                // className=""
+                >
+                <input 
+                    name="newProduct" 
+                    placeholder='product' 
+                    value={newProduct} 
+                    onChange={e => setNewProduct(e.target.value)} /><br/>
+                <button 
+                    className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">
+                        Add to Shopping List
+                </button>
             </form>
-            <ul>
-                {products.map((item, i) => <Products key={i} product={item.product}  />)}
 
+            <ul>
+                <li className="m-4 p-4 font-bold">{shoppings}</li>
+                <button className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">
+                    Purchased
+                </button>
             </ul>
         </div>
     )
