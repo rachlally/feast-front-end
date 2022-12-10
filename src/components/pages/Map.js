@@ -7,83 +7,102 @@
 // import '../../styles/DonationList.css'
 
 // Map Geolocation Api lives here
-import { render } from 'react-dom';
-import React, { useMemo } from 'react';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import { MarkerClusterer } from '@googlemaps/markerclusterer';
+import { render } from "react-dom";
+import React, { useState, useMemo } from "react";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  Autocomplete,
+} from "@react-google-maps/api";
+import { MarkerClusterer } from "@googlemaps/markerclusterer";
 // import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
-import '../../styles/DonationList.css'
-{/* 
+import "../../styles/DonationList.css";
 
-<script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVq588qSxiAVHeDMayN1kY-qnHdVMF6CQ&libraries=places&callback=initMap">
-    </script>
-    <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVq588qSxiAVHeDMayN1kY-qnHdVMF6CQ&libraries=places&callback=initAutocomplete" async defer>
-</script> */}
-{/* <script async
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVq588qSxiAVHeDMayN1kY-qnHdVMF6CQ&libraries=places&callback=initMap">
-</script> */}
-{/* <script>
-let autocomplete;
-function initAutocomplete(){
-    autocomplete= new google.maps.places.Autocomplete(
-        document.getElementById('autocomplete'),
-        {
-            types:['establishment'],
-            componentRestrictions:{'country': ['AU']},
-            fields:['places_id', 'geometry', 'name']
-        });
-        autocomplete.addListener('place_changed', onPlaceChanged);
-}
-function onPlaceChanged(){
-    var place = autocomplete.getPlace();
+// let autocomplete;
+// function initAutocomplete(){
+//     autocomplete= new google.maps.places.Autocomplete(
+//         document.getElementById('autocomplete'),
+//         {
+//             types:['establishment'],
+//             componentRestrictions:{'country': ['AU']},
+//             fields:['places_id', 'geometry', 'name']
+//         });
+//         autocomplete.addListener('place_changed', onPlaceChanged);
+// }
+// function onPlaceChanged(){
+//     var place = autocomplete.getPlace();
 
-    if(!place.geometry){
-        document.getElementById('autocomplete').placeholder='Enter a place';
-    } else {
-        document.getElementById('details').innerHTML=place.name;
-    }
-}
+//     if(!place.geometry){
+//         document.getElementById('autocomplete').placeholder='Enter a place';
+//     } else {
+//         document.getElementById('details').innerHTML=place.name;
+//     }
+// }
 
-</script> */}
-
-<input id="autocomplete" placeholder="Enter a place" type="text"/>
 function MapInit() {
-    
-    
-    <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVq588qSxiAVHeDMayN1kY-qnHdVMF6CQ&libraries=places&callback=initAutocomplete" async defer>
-</script>
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey: "AIzaSyBVq588qSxiAVHeDMayN1kY-qnHdVMF6CQ",
-    });
-    
-    if (!isLoaded) return <div>Loading...</div>
-    return (
-        <Map />
-        )
-    }
-    
-    function Map() {
-        const center = useMemo(() => ({lat: 37.0902, lng: -95.7129}), []);
-        return (
-            <GoogleMap
-            zoom={4}
-            center={center}
-            mapContainerClassName='map-container'
-            >
-            <Marker position={{ lat: 37.0902, lng: -95.7129 }} />
-        </GoogleMap>
-    )
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVq588qSxiAVHeDMayN1kY-qnHdVMF6CQ&libraries=places&callback=initAutocomplete"
+    async
+    defer
+  ></script>;
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: "AIzaSyBVq588qSxiAVHeDMayN1kY-qnHdVMF6CQ", libraries:["places"]
+  });
+
+  if (!isLoaded) return <div>Loading...</div>;
+  return (
+      <Map />
+  );
 }
 
+function Map() {
+    // let autocomplete;
+    const [autocomplete, setautocomplete ] = useState(null)
+    function onLoad (a) {
+        console.log('autocomplete: ', a)
+    
+        setautocomplete(a)
+      }
+    
+      function onPlaceChanged () {
+        console.log(autocomplete)
+        if (autocomplete !== null) {
+          console.log(autocomplete.getPlace())
+        } else {
+          console.log('Autocomplete is not loaded yet!')
+        }
+      }
+  const center = useMemo(() => ({ lat: 47.606209, lng: -122.332069 }), []);
+  return (
+    <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
+      <Marker position={{ lat: 47.606209, lng: -122.332069 }} />
 
-
-
-
-
+      <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
+        <input
+          type="text"
+          placeholder="Customized your placeholder"
+          style={{
+            boxSizing: `border-box`,
+            border: `1px solid transparent`,
+            width: `240px`,
+            height: `32px`,
+            padding: `0 12px`,
+            borderRadius: `3px`,
+            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+            fontSize: `14px`,
+            outline: `none`,
+            textOverflow: `ellipses`,
+            position: "absolute",
+            left: "50%",
+            marginLeft: "-120px",
+          }}
+        />
+      </Autocomplete>
+    </GoogleMap>
+  );
+}
 
 // ======================================================================
 // import React from "react";
@@ -355,7 +374,5 @@ function MapInit() {
 //     </div>
 //   );
 // }
-
-
 
 export default MapInit;

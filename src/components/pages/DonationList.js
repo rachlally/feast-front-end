@@ -34,6 +34,7 @@ function DonationList(props) {
 
     return (
         <>
+        <Map/>
             <h1>Here is your Donation list:</h1>
             <div>
                 {donations}
