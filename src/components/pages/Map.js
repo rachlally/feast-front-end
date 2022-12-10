@@ -60,6 +60,7 @@ function MapInit() {
 function Map() {
     // let autocomplete;
     const [autocomplete, setautocomplete ] = useState(null)
+
     function onLoad (a) {
         console.log('autocomplete: ', a)
     
@@ -69,7 +70,11 @@ function Map() {
       function onPlaceChanged () {
         console.log(autocomplete)
         if (autocomplete !== null) {
-          console.log(autocomplete.getPlace())
+            console.log(autocomplete.getPlace())
+          console.log(autocomplete.getPlace().geometry.viewport.Ia.hi)
+          console.log(autocomplete.getPlace().geometry.viewport.Wa.hi)
+
+
         } else {
           console.log('Autocomplete is not loaded yet!')
         }
@@ -82,7 +87,7 @@ function Map() {
       <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
         <input
           type="text"
-          placeholder="Customized your placeholder"
+          placeholder="Search for a place"
           style={{
             boxSizing: `border-box`,
             border: `1px solid transparent`,
