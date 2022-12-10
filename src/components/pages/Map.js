@@ -60,29 +60,42 @@ function MapInit() {
 function Map() {
     // let autocomplete;
     const [autocomplete, setautocomplete ] = useState(null)
+    const [centerLatCoordinates, setCenterLatCoordinates ] = useState(47.606209)
+    const [centerLongCoordinates, setCenterLongCoordinates ] = useState(-122.332069)
+
 
     function onLoad (a) {
         console.log('autocomplete: ', a)
-    
+        
         setautocomplete(a)
-      }
-    
+    }
+    let center = useMemo(() => ({ lat: centerLatCoordinates, lng: centerLongCoordinates }), []);
+    let searchLat;
+    let searchLong;
       function onPlaceChanged () {
         console.log(autocomplete)
         if (autocomplete !== null) {
             console.log(autocomplete.getPlace())
-          console.log(autocomplete.getPlace().geometry.viewport.Ia.hi)
-          console.log(autocomplete.getPlace().geometry.viewport.Wa.hi)
-
+            //search coordinates logging
+            console.log(autocomplete.getPlace().geometry.viewport.Wa.hi)
+            searchLat=autocomplete.getPlace().geometry.viewport.Wa.hi
+             //search coordinates logging
+            console.log(autocomplete.getPlace().geometry.viewport.Ia.hi)
+            searchLong=autocomplete.getPlace().geometry.viewport.Ia.hi
+          console.log(autocomplete.getPlace().formatted_address)
+          
+          setCenterLatCoordinates(searchLat)
+          setCenterLongCoordinates(searchLong)
+          console.log(centerLatCoordinates, centerLongCoordinates)
 
         } else {
           console.log('Autocomplete is not loaded yet!')
         }
-      }
-  const center = useMemo(() => ({ lat: 47.606209, lng: -122.332069 }), []);
+    }
+    center = useMemo(() => ({ lat: centerLatCoordinates, lng: centerLongCoordinates }), [centerLatCoordinates,centerLongCoordinates]);
   return (
     <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
-      <Marker position={{ lat: 47.606209, lng: -122.332069 }} />
+      <Marker position={{ lat: centerLatCoordinates, lng: centerLongCoordinates }} />
 
       <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}>
         <input
