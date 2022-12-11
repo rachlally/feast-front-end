@@ -40,7 +40,7 @@ function DonationList(props) {
             isPerishable: true,
             datePurchased: "2022-12-05",
             expirationDate: "2023-09-05",
-            DonationListId: donations[0].id
+            DonationListId: donation[0].id
         };
         setNewProductName('')
         console.log(newListItem)
