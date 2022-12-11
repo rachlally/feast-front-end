@@ -1,6 +1,7 @@
 import '../../styles/Kitchen.css';
 import API from '../../utils/API'
 import React, { useState, useEffect } from 'react'
+// import {Link, useNavigate} from 'react-router-dom'
 
 
 function Kitchen(props) {
@@ -30,6 +31,7 @@ function Kitchen(props) {
                         <div key={'c'}>This kitchen is found at zipcode: {k.zipCode}</div>
                         <div key={'a'}>It belongs to {k.User.name}</div>
                         <div key={'d'}>It has the following storage types: {storages}</div>
+                        {/* <button to = '/storages' ></button> */}
                     </div>
         
 
