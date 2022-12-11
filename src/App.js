@@ -11,7 +11,6 @@ import Calendar from './components/pages/Calendar';
 import Kitchen from './components/pages/Kitchen';
 import Recipe from './components/pages/Recipe';
 import Storage from './components/pages/Storage';
-// import Products from './components/pages/ProductTest';
 
 function App() {
   const [userId, setUserId] = useState(0);
