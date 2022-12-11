@@ -6,11 +6,13 @@ import API from "../../utils/API";
 // New
 function ShoppingList(props) {
   const [newProductName, setNewProductName] = useState("");
+  const [datePurchased, setDatePurchased] = useState("")
+  const [expirationDate, setExpirationDate] = useState("")
   const [shopping, setShopping] = useState([]);
 
   useEffect(() => {
     API.getShopping(props.token, props.userId.id).then((data) => {
-        console.log(data);
+        // console.log(data);
         setShopping(data);
     });
 }, [props.userId]);
@@ -42,11 +44,14 @@ function ShoppingList(props) {
       const newListItem = {
         name: newProductName,
         isPerishable: true,
-        datePurchased: "2022-12-05",
-        expirationDate: "2023-09-05",
+        //dates are passed in as YYYY-MM-DD
+        datePurchased: datePurchased,
+        expirationDate: expirationDate,
         ShoppingListId: shopping[0].id
       };
       setNewProductName("")
+      setDatePurchased("")
+      setExpirationDate("")
       console.log(newListItem)
       
       API.addToShopping(newListItem, props.token).then((newShoppingData) => {
@@ -81,6 +86,22 @@ function ShoppingList(props) {
           placeholder="product"
           value={newProductName}
           onChange={(e) => setNewProductName(e.target.value)}
+          className='mr-2'
+        />
+        <input
+          name="datePicker"
+          placeholder="Date purchased"
+          value={datePurchased}
+          onChange={(e) => setNewProductName(e.target.value)}
+          className='mr-2'
+        />
+
+        <input
+          name="expirationDate"
+          placeholder="Expiration Date"
+          value={expirationDate}
+          onChange={(e) => setExpirationDate(e.target.value)}
+          className='mr-2'
         />
         <br />
         <button
