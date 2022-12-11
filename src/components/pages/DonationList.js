@@ -1,4 +1,4 @@
-import Map from './Map';
+// import Map from './Map';
 import API from '../../utils/API';
 import React, { useState, useEffect } from 'react';
 
@@ -24,17 +24,12 @@ function DonationList(props) {
         const products = d.Products.map((p,i) => {
             console.log(p)
             return (
-                <ul key={i}>
-                    <li>{p.name}</li>
-                </ul>
+                <div key={i}>
+                    {p.name}
+                </div>
             )
         })
-        return (
-            <ul key={i}>
-                <li className='font-bold'>This is: {d.name}</li>
-                <li> {products}</li>
-            </ul>
-        )
+        return <div key={i}>{products}</div>;
     })
 
     const handleFormSubmit = (e) => {
@@ -83,7 +78,7 @@ function DonationList(props) {
             </form>
         
             <ul>
-                <li className="m-4 p-4 font-bold">{donation}</li>
+                <li className="m-4 p-4 font-bold">{donations}</li>
                 <button className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">
                 Purchased
                 </button>
