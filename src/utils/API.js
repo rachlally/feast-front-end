@@ -107,6 +107,16 @@ const API = {
                 'Authorization': `Bearer ${token}`
             }
         }).then(res => res.json())
+    },
+    addToDonation: (donationObj, token) => {
+        return fetch(`${URL_PREFIX}/api/products/`,{
+            method: 'POST',
+            body: JSON.stringify(donationObj),
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => res.json())
     }
 }
 

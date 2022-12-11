@@ -10,7 +10,7 @@ function ShoppingList(props) {
 
   useEffect(() => {
     API.getShopping(props.token, props.userId.id).then((data) => {
-        // console.log(data);
+        console.log(data);
         setShopping(data);
     });
 }, [props.userId]);
