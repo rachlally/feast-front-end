@@ -11,9 +11,7 @@ function DonationList(props) {
             console.log(data)
             setDonation(data)
         })
-    }, [
-        props.userId
-    ])
+    }, [props.userId])
 
     const donationListOwner = donation.map((d,i) => {
         return <div key={i}>{d.name}</div>
@@ -22,7 +20,7 @@ function DonationList(props) {
     const donations = donation.map((d,i) => {
         //Maps over products of donation list
         const products = d.Products.map((p,i) => {
-            console.log(p)
+            // console.log(p)
             return (
                 <div key={i}>
                     {p.name}
@@ -34,7 +32,7 @@ function DonationList(props) {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log(donations[0])
+        // console.log(donation[0])
         const newListItem = {
             name: newProductName,
             isPerishable: true,
