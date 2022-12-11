@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Products from "../pages/Products";
 import API from "../../utils/API";
-import DateChange from './DateChange';
+// import DateChange from './DatePurchased';
+import Datepicker from 'react-tailwindcss-datepicker';
+// import ExpirationDate from "./ExpirationDate";
 // import '../styles/ShoppingList.css';
 
 // New
@@ -51,19 +53,54 @@ function ShoppingList(props) {
         ShoppingListId: shopping[0].id
       };
       setNewProductName("")
-      setDatePurchased("")
+      // setDatePurchased("")
       setExpirationDate("")
       console.log(newListItem)
       
       API.addToShopping(newListItem, props.token).then((newShoppingData) => {
           API.getShopping(props.userId.id).then(data => {
-              console.log(data)
+              // console.log(data)
               setShopping(data[0].Products)
             //   setNewProductName(shopping);
             //   console.log(newProductName)
           })
       });
     };
+
+    // Calendar picker for DATE PURCHASED
+    const DatePicker = () => {
+      const [date, setDate] = useState({
+          startDate: null,
+          endDate: null
+      });
+  
+      const handleDateChange = (newDate) => {
+          console.log(newDate)
+          console.log(newDate.startDate)
+          console.log(newDate.endDate)
+          setDatePurchased(newDate.startDate)
+          setExpirationDate(newDate.endDate)
+      }
+  
+      return (
+          <Datepicker
+              primaryColor={"green"}
+              placeholder={'Choose your dates'}
+              useRange={false}
+              value={date}
+              onChange={handleDateChange}
+          />
+      )
+  }
+
+        // <input
+        //   name="datePicker"
+        //   placeholder="Date purchased"
+        //   value={datePurchased}
+        //   onChange={(e) => setNewProductName(e.target.value)}
+        //   className='mr-2'
+        // />
+
 
   // Other
   // const purchasedItem = idx=>{
@@ -89,22 +126,16 @@ function ShoppingList(props) {
           onChange={(e) => setNewProductName(e.target.value)}
           className='mr-2'
         />
-        {/* <input
-          name="datePicker"
-          placeholder="Date purchased"
-          value={datePurchased}
-          onChange={(e) => setNewProductName(e.target.value)}
-          className='mr-2'
-        /> */}
-        <DateChange/>
+        <p>Choose your date purchased and expiration date:</p>
+        <DatePicker/>
 
-        <input
+        {/* <input
           name="expirationDate"
           placeholder="Expiration Date"
           value={expirationDate}
           onChange={(e) => setExpirationDate(e.target.value)}
           className='mr-2'
-        />
+        /> */}
         <br />
         <button
           className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"

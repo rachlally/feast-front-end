@@ -31,7 +31,7 @@ function Storage(props) {
         // Main return statement
         return (
             <ul key={i}>
-                <li>This is a: {s.storageType}. This is storage #{s.id}. It has: {products}</li>
+                <li  className='border' >This is a: {s.storageType}. This is storage #{s.id}. It has: {products}</li>
             </ul>
         )
     })

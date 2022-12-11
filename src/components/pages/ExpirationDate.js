@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
 
-const DateChange = () => {
+const ExpirationDate = () => {
     const [date, setDate] = useState({
-        startDate: new Date(),
-        endDate: new Date().setMonth(11)
+        startDate: null,
+        endDate: null
     });
 
     const handleDateChange = (newDate) => {
@@ -15,10 +15,13 @@ const DateChange = () => {
     return (
         <Datepicker
             primaryColor={"green"}
+            placeholder={'Expiration date'}
+            asSingle={true}
             value={date}
             onChange={handleDateChange}
+            showShortcuts={true}
         />
     )
 }
 
-export default DateChange;
+export default ExpirationDate;

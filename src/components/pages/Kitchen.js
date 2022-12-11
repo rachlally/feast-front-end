@@ -1,11 +1,13 @@
 import '../../styles/Kitchen.css';
 import API from '../../utils/API'
 import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'; 
 
 
 function Kitchen(props) {
     const [kitchen, setKitchen] = useState([]);
     const [newKitchenLocation, setNewKitchenLocation] = useState('');
+    const [storageId, setStorageId] = useState(0)
     // Not currently being used
     // const [storages, setStorages] = useState([])
 
@@ -19,17 +21,17 @@ function Kitchen(props) {
     const kitchens = kitchen.map((k,i) => {
         const storages = k.Storages.map((s,i) => {
             return (
-                <div key={i}>{s.storageType}</div>
+                <a href={'/storages/' + s.id} className='border' key={i}>{s.storageType}</a>
             )
         })
             return (
                 <>
                 {/* kitchen lists */}
-                    <div className='border' key={i}>
+                    <div className='border bg-sky-300 font-helvetica justify-center' key={i}>
                         <div className='text-xl text-bold'>{k.User.name}'s Kitchen #{i+1}</div>
                         <div key={'c'}>This kitchen is found at zipcode: {k.zipCode}</div>
                         <div key={'a'}>It belongs to {k.User.name}</div>
-                        <div key={'d'}>It has the following storage types: {storages}</div>
+                        <div className='' key={'d'}>It has the following storage types: {storages}</div>
                     </div>
         
 
