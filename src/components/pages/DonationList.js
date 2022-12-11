@@ -34,23 +34,24 @@ function DonationList(props) {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log(donations[0])
+        console.log(donation[0])
         const newListItem = {
             name: newProductName,
             isPerishable: true,
             datePurchased: "2022-12-05",
             expirationDate: "2023-09-05",
-            DonationListId: donations[0].id
+            DonationListId: donation[0].id
         };
         setNewProductName('')
         console.log(newListItem)
 
-        API.addToDonation(newListItem, props.token).then((newDonationData) => {
-            API.getDonations(props.userId.id).then(data => {
-                console.log(data)
-                setDonation(data[0].Products)
-            })
-        })
+        API.addToDonation(newListItem, props.token)
+        // .then((newDonationData) => {
+        //     API.getDonations(props.userId.id).then(data => {
+        //         console.log(data)
+        //         setDonation(data[0].Products)
+        //     })
+        // })
     }
 
     return (
@@ -71,7 +72,7 @@ function DonationList(props) {
                 />
                 <br />
                 <button
-                className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                    className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
                 >
                 Add to Donation List
                 </button>
