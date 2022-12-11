@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Products from "../pages/Products";
 import API from "../../utils/API";
+import DateChange from './DateChange';
 // import '../styles/ShoppingList.css';
 
 // New
@@ -88,13 +89,14 @@ function ShoppingList(props) {
           onChange={(e) => setNewProductName(e.target.value)}
           className='mr-2'
         />
-        <input
+        {/* <input
           name="datePicker"
           placeholder="Date purchased"
           value={datePurchased}
           onChange={(e) => setNewProductName(e.target.value)}
           className='mr-2'
-        />
+        /> */}
+        <DateChange/>
 
         <input
           name="expirationDate"
