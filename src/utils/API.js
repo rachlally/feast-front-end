@@ -131,6 +131,27 @@ const API = {
             }
         }).then(res=>res.json())
     },
+    addToStorage: (storageObj, token)=>{
+        return fetch(`${URL_PREFIX}/api/storages/`,{
+            method:"POST",
+            body: JSON.stringify(storageObj),
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        }).then(res=>res.json())
+    },
+    //get one kitchen by id
+    getOneKitchen: (token, kitchenId)=>{
+        return fetch(`${URL_PREFIX}/api/kitchens/${kitchenId}`,{
+            method:"GET",
+            headers:{
+                "Authorization": `Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
+
 }
 
 export default API;

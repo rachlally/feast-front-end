@@ -1,15 +1,17 @@
 import React from 'react'
 // import '../styles/Recipe.css';
 
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': 'ec9e8aa11bmsh01afb5356f556dep1d5473jsn3185f0830ed0',
-		'X-RapidAPI-Host': 'edamam-food-and-grocery-database.p.rapidapi.com'
-	}
-};
+// const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': '4d3ee4a8bbd450583932d553443686b8',
+// 		'X-RapidAPI-Host': 'api.edamam.com'
+// 	}
+// };
+//var needs to split input on space and reconcat with %20 where spaces were
+var userInput = "banana"
 
-fetch('https://edamam-food-and-grocery-database.p.rapidapi.com/parser?ingr=apple', options)
+fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=Ben%20and%20Jerry's%20Phish%20Food&app_id=f8d2a9ae&app_key=4d3ee4a8bbd450583932d553443686b8`)
 	.then(response => response.json())
 	.then(response => console.log(response))
 	.catch(err => console.error(err));

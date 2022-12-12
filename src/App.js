@@ -15,6 +15,7 @@ import Storage from './components/pages/Storage';
 
 function App() {
   const [userId, setUserId] = useState(0);
+  // const [kitchenId, setKitchenId] = useState(0)
   const [userObj, setUserObj] = useState({})
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
@@ -25,6 +26,7 @@ function App() {
       console.log(storedToken);
       API.getUserFromToken(storedToken).then((data) => {
         if (data.user) {
+          // console.log(data)
           setToken(storedToken);
           setIsLoggedIn(true);
           setUserId(data.user.id);
