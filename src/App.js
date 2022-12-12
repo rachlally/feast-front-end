@@ -99,60 +99,8 @@ function App() {
         </Routes>
       </Router>
 
-      {/* {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
-      {isLoggedIn ? (
-        <div>
-          Put stuff here to append to page
-          <PageContainer />
-        </div>
-      ) : (
-        <> */}
-          {/*not logged in */}
-          {/* <h1>not logged in</h1>
-          <form onSubmit={handleLoginSubmit}>
-            <h2>Login</h2>
-            <input
-              name="email"
-              value={loginEmail}
-              onChange={(e) => setLoginEmail(e.target.value)}
-              placeholder="email"
-            />
-            <input
-              type="password"
-              name="password"
-              value={loginPassword}
-              onChange={(e) => setLoginPassword(e.target.value)}
-              placeholder="password"
-            />
-            <button>Log in!</button>
-          </form>
-
-          <form onSubmit={handleSignupSubmit}>
-            <h2>Create Account</h2>
-            <input
-              name="userName"
-              value={signupUserName}
-              onChange={(e) => setSignupUserName(e.target.value)}
-              placeholder="Username"
-            />
-            <input
-              name="email"
-              value={signupEmail}
-              onChange={(e) => setSignupEmail(e.target.value)}
-              placeholder="email"
-            />
-            <input
-              type="password"
-              name="password"
-              value={signupPassword}
-              onChange={(e) => setSignupPassword(e.target.value)}
-              placeholder="password"
-            />
-            <button>Sign up!</button>
-          </form> */}
-          <Footer />
-        {/* </> */}
-      {/* )} */}
+      <Footer />
+        
     </div>
   );
 }
