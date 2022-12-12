@@ -11,7 +11,7 @@ function DonationList(props) {
 
     useEffect(() => {
         API.getDonations(props.token, props.userId.id).then((data) => {
-            // console.log(data)
+            console.log(data)
             setDonation(data)
         })
     }, [props.userId])

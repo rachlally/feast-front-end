@@ -31,7 +31,7 @@ function App() {
           // console.log(data)
           setToken(storedToken);
           setIsLoggedIn(true);
-          setUserId(data.user.id);
+          // setUserId(data.user.id);
           setUserId(data.user);
         }
       });
@@ -91,6 +91,7 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 handleLoginSubmit={handleLoginSubmit}
                 handleSignupSubmit={handleSignupSubmit}
+                userId={userId} token={token}
               />
             }
           />

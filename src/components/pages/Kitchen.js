@@ -15,8 +15,9 @@ const navigate = useNavigate();
   // const [storages, setStorages] = useState([])
 
   useEffect(() => {
+    console.log(props.userId.id)
     API.getKitchens(props.token, props.userId.id).then((data) => {
-      // console.log(data)
+      console.log(data)
       setKitchen(data);
     });
   }, [props.userId]);
@@ -88,11 +89,11 @@ const navigate = useNavigate();
   // console.log(kitchens)
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    // console.log(kitchen[0])
+    console.log(kitchen)
     const newKitchen = {
       name:newKitchenName,
       zipCode: newKitchenLocation,
-      UserId: kitchen[0].UserId,
+      UserId: props.userId.id,
     };
     setNewKitchenLocation("");
     console.log(newKitchen);
