@@ -1,9 +1,13 @@
 // import '../styles/Storage.css';
 import API from '../../utils/API'
 import React, { useState, useEffect } from 'react';
+import Datepicker from 'react-tailwindcss-datepicker';
 
 function Storage(props) {
     const [storage, setStorage] = useState([])
+    const [datePurchased, setDatePurchased] = useState("")
+    const [expirationDate, setExpirationDate] = useState("")
+    const [newProductName, setNewProductName] = useState("");
 
     useEffect(() => {
         API.getStorages(props.token, props.userId.id).then(data => {
@@ -36,9 +40,44 @@ function Storage(props) {
         )
     })
 
+    const DatePicker = () => {
+        const [date, setDate] = useState({
+            startDate: null,
+            endDate: null
+        });
+    
+        const handleDateChange = (newDate) => {
+            console.log(newDate)
+            console.log(newDate.startDate)
+            console.log(newDate.endDate)
+            setDatePurchased(newDate.startDate)
+            setExpirationDate(newDate.endDate)
+        }
+    
+        return (
+            <Datepicker
+                primaryColor={"green"}
+                placeholder={'Choose your dates'}
+                useRange={false}
+                value={date}
+                onChange={handleDateChange}
+            />
+        )
+    }
+
     return (
         <>
             <h1>Welcome to your storages</h1>
+
+            {/* These commented out sections are for user input to add a product to their SINGULAR STORAGE */}
+            {/* <input
+                name="newProductName"
+                placeholder="product"
+                value={newProductName}
+                onChange={(e) => setNewProductName(e.target.value)}
+                className='mr-2'
+            />
+            <DatePicker/> */}
             <div>
                 {storages}
                 {storages.products}
