@@ -89,6 +89,7 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 handleLoginSubmit={handleLoginSubmit}
                 handleSignupSubmit={handleSignupSubmit}
+                userId={userId} token={token}
               />
             }
           />
@@ -107,11 +108,8 @@ function App() {
             element={<Kitchen userId={userId} token={token} />}
           />
           {/* <Route path="/recipe" element={<Recipe/>}/> */}
-          <Route
-            path="/storage"
-            element={<Storage userId={userId} token={token} />}
-          />
-          <Route path="/kitchen/:id" component={<KitchenById />} />
+          <Route path="/storage" element={<Storage userId={userId} token={token}/>}/>
+          <Route path="/kitchen/:id" element= {<KitchenById/>}/>
         </Routes>
       </Router>
 
