@@ -1,13 +1,6 @@
-import "../../styles/Kitchen.css";
-import API from "../../utils/API";
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-  Link,
-} from "react-router-dom";
+import '../../styles/Kitchen.css';
+import API from '../../utils/API'
+import React, { useState, useEffect } from 'react'
 
 import Storage from "./Storage";
 import KitchenById from "./KitchenById";
