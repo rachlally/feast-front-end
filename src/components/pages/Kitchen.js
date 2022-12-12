@@ -103,7 +103,7 @@ function Kitchen(props) {
             {/* kitchen lists */}
             <div className="border" key={k.id}>
               <div key={"a" + k.id} className="text-xl text-bold">
-                {k.User.name}'s Kitchen #{i + 1}
+                {k.User.name}'s Kitchen: {k.name}
               </div>
               <div key={"b" + k.id}>
                 This kitchen is found at zipcode: {k.zipCode}
