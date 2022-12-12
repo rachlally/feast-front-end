@@ -2,6 +2,8 @@
 import API from '../../utils/API'
 import React, { useState, useEffect } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
+import Recipe from './Recipe';
+// import Recipe from "./Recipe"
 
 function Storage(props) {
     // console.log(props)
@@ -10,6 +12,7 @@ function Storage(props) {
     const [expirationDate, setExpirationDate] = useState("")
     const [newProductName, setNewProductName] = useState("");
     const [newStorageType, setNewStorageType]=useState("refrigerator")
+    const [newRecipeSearch, setnewRecipeSearch]=useState("")
 
     useEffect(() => {
         API.getStorages(props.token, props.userId.id).then(data => {
@@ -94,6 +97,13 @@ function Storage(props) {
         // })
     }
 
+    const recipeFormSubmit = (e) => {
+        e.preventDefault();
+        console.log("test")
+        Recipe(newRecipeSearch)
+
+    }
+
     return (
         <>
             <h1>Welcome to your storages</h1>
@@ -133,6 +143,20 @@ function Storage(props) {
                     </button>
                 </form>
             </div>
+
+            <div>
+            <h1>Cooking Inspiration</h1>
+            <form onSubmit={recipeFormSubmit}>
+            <input 
+                className="form-control block px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+                value={newRecipeSearch} 
+                onChange={e => setnewRecipeSearch(e.target.value)} 
+                placeholder="Ingredient" />
+                <button                         className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                >Search recipes!
+                </button>
+                </form>
+        </div>
         </>
     )
 }
