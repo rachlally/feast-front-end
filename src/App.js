@@ -1,24 +1,23 @@
-
 import { useEffect, useInsertionEffect, useState } from "react";
 import Footer from "./components/Footer";
-import Navbar from './components/Navbar';
+import Navbar from "./components/Navbar";
 import API from "./utils/API";
 // import PageContainer from './components/PageContainer';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/pages/Login";
-import ShoppingList from './components/pages/ShoppingList';
-import DonationList from './components/pages/DonationList';
-import Calendar from './components/pages/Calendar';
-import Kitchen from './components/pages/Kitchen';
-import Recipe from './components/pages/Recipe';
-import Storage from './components/pages/Storage';
+import ShoppingList from "./components/pages/ShoppingList";
+import DonationList from "./components/pages/DonationList";
+import Calendar from "./components/pages/Calendar";
+import Kitchen from "./components/pages/Kitchen";
+import Recipe from "./components/pages/Recipe";
+import Storage from "./components/pages/Storage";
 
-import KitchenById from './components/pages/KitchenById';
+import KitchenById from "./components/pages/KitchenById";
 
 function App() {
   const [userId, setUserId] = useState(0);
   // const [kitchenId, setKitchenId] = useState(0)
-  const [userObj, setUserObj] = useState({})
+  const [userObj, setUserObj] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
 
@@ -31,7 +30,7 @@ function App() {
           // console.log(data)
           setToken(storedToken);
           setIsLoggedIn(true);
-          // setUserId(data.user.id);
+          //   setUserId(data.user);
           setUserId(data.user);
         }
       });
@@ -41,14 +40,13 @@ function App() {
   }, []);
 
   const handleLoginSubmit = (userObj) => {
-  
     API.login({
       email: userObj.email,
       password: userObj.password,
     }).then((data) => {
       console.log(data);
       if (data.token) {
-        setUserId(data.user.id);
+        setUserId(data.user);
         setToken(data.token);
         setIsLoggedIn(true);
         localStorage.setItem("token", data.token);
@@ -71,7 +69,7 @@ function App() {
     }).then((data) => {
       console.log(data);
       if (data.token) {
-        setUserId(data.user.id);
+        setUserId(data.user);
         setToken(data.token);
         setIsLoggedIn(true);
         localStorage.setItem("token", data.token);
@@ -82,7 +80,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+        <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
         <Routes>
           <Route
             path="/login"
@@ -96,10 +94,19 @@ function App() {
             }
           />
           {/* Might want to come back and re route the psuedo routes to be more in line with the actual routes */}
-          <Route path="/shoppinglist" element={<ShoppingList userId={userId} token={token}/>}/>
-          <Route path="/donationlist" element={<DonationList userId={userId} token={token}/>}/>
-          <Route path="/calendar" element={<Calendar/>}/>
-          <Route path="/kitchen" element={<Kitchen userId={userId} token={token}/>} />
+          <Route
+            path="/shoppinglist"
+            element={<ShoppingList userId={userId} token={token} />}
+          />
+          <Route
+            path="/donationlist"
+            element={<DonationList userId={userId} token={token} />}
+          />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route
+            path="/kitchen"
+            element={<Kitchen userId={userId} token={token} />}
+          />
           {/* <Route path="/recipe" element={<Recipe/>}/> */}
           <Route path="/storage" element={<Storage userId={userId} token={token}/>}/>
           <Route path="/kitchen/:id" element= {<KitchenById/>}/>
@@ -107,7 +114,6 @@ function App() {
       </Router>
 
       <Footer />
-        
     </div>
   );
 }
