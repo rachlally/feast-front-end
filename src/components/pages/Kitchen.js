@@ -42,9 +42,17 @@ function Kitchen(props) {
         )
       });
     };
-    //renders a single kitchen component
 
-    //   navigate("/storage")
+    const handleKitchenDelete = (e) => {
+      e.preventDefault();
+      console.log("test")
+      
+      //handle kitchen delete
+      API.deleteKitchen(k.id, props.token).then((data)=>{
+        console.log(data)
+      })
+    }
+
 
     return (
       <>
@@ -58,14 +66,21 @@ function Kitchen(props) {
           </div>
           <div key={"c" + k.id}>It belongs to {k.User.name}</div>
           <div key={"d" + k.id}>
-            It has the following storage types: {storages}
+            It has the following storage type: {storages}
           </div>
-          <button
+          <button key={"e" + k.id}
             className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
             type="button"
             onClick={handleRedirectClick}
           >
             Add Storage
+          </button>
+          <button key={"f" + k.id}
+            className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+            type="button"
+            onClick={handleKitchenDelete}
+          >
+            Delete Kitchen
           </button>
           {/* <Link to="/storage" element={<Storage />}onClick={handleRedirectClick}>Add Storage</Link> */}
           {/* <Router>
@@ -104,9 +119,11 @@ function Kitchen(props) {
   };
 
   return (
-    <div className="">
-      {kitchens}
+    <div>
+      
       {/* Add a kitchen */}
+      <div className="flex">
+        {/* <h1>{kitchen[0].zipCode}'s Kitchens</h1> */}
       <form onSubmit={handleFormSubmit}>
         <input
           name="zipCode"
@@ -119,6 +136,8 @@ function Kitchen(props) {
           Create Kitchen
         </button>
       </form>
+      </div>
+      {kitchens}
     </div>
   );
 }

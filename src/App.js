@@ -96,7 +96,7 @@ function App() {
           <Route path="/donationlist" element={<DonationList userId={userId} token={token}/>}/>
           <Route path="/calendar" element={<Calendar/>}/>
           <Route path="/kitchen" element={<Kitchen userId={userId} token={token}/>} />
-          <Route path="/recipe" element={<Recipe/>}/>
+          {/* <Route path="/recipe" element={<Recipe/>}/> */}
           <Route path="/storage" element={<Storage userId={userId} token={token}/>}/>
         </Routes>
       </Router>

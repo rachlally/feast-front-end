@@ -65,6 +65,15 @@ const API = {
         }).then(res=>res.json())
     },
 
+    deleteKitchen: (id, token) => {
+        return fetch(`${URL_PREFIX}/api/kitchens/${id}`,{
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => res.json())
+    },
+
     //Get storages
     getStorages: (token, userId)=>{
         return fetch(`${URL_PREFIX}/api/storages/user/${userId}`,{
