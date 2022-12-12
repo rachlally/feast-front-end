@@ -85,6 +85,26 @@ const API = {
         }).then(res=>res.json())
     },
 
+    editStorage: (storageObj, id, token) => {
+        return fetch(`${URL_PREFIX}/api/storages/${id}`,{
+            method:"PUT",
+            body: JSON.stringify(storageObj),
+            headers:{
+                "Content-Type":"application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        }).then(res=>res.json())
+    },
+
+    deleteStorage: (id, token) => {
+        return fetch(`${URL_PREFIX}/api/storages/${id}`,{
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => res.json())
+    },
+
     //Get Donation list
     getDonations: (token, userId)=>{
         return fetch(`${URL_PREFIX}/api/donation/user/${userId}`,{
