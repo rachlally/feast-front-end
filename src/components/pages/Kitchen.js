@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 function Kitchen(props) {
   const [kitchen, setKitchen] = useState([]);
   const [newKitchenLocation, setNewKitchenLocation] = useState("");
+  const [newKitchenName, setNewKitchenName] = useState("");
 const navigate = useNavigate();
 
   // Not currently being used
@@ -51,7 +52,7 @@ const navigate = useNavigate();
         {/* kitchen lists */}
         <div className="border" key={k.id}>
           <div key={"a" + k.id} className="text-xl text-bold">
-            {k.User.name}'s Kitchen #{i + 1}
+            {k.User.name}'s Kitchen: {k.name}
           </div>
           <div key={"b" + k.id}>
             This kitchen is found at zipcode: {k.zipCode}
@@ -89,6 +90,7 @@ const navigate = useNavigate();
     e.preventDefault();
     // console.log(kitchen[0])
     const newKitchen = {
+      name:newKitchenName,
       zipCode: newKitchenLocation,
       UserId: kitchen[0].UserId,
     };
@@ -117,6 +119,10 @@ const navigate = useNavigate();
       <div className="flex">
         {/* <h1>{kitchen[0].zipCode}'s Kitchens</h1> */}
       <form onSubmit={handleFormSubmit}>
+        <input name='name'
+        placeholder='kitchen name'
+        value={newKitchenName}
+        onChange={(e)=> setNewKitchenName(e.target.value)}/>
         <input
           name="zipCode"
           placeholder="Zipcode, please?"

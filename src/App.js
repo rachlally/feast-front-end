@@ -101,7 +101,7 @@ function App() {
           <Route path="/kitchen" element={<Kitchen userId={userId} token={token}/>} />
           {/* <Route path="/recipe" element={<Recipe/>}/> */}
           <Route path="/storage" element={<Storage userId={userId} token={token}/>}/>
-          <Route path="/kitchen/:id" component= {<KitchenById/>}/>
+          <Route path="/kitchen/:id" element= {<KitchenById/>}/>
         </Routes>
       </Router>
 

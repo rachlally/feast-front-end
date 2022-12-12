@@ -64,7 +64,7 @@ function DonationList(props) {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log(donation[0])
+        console.log(donation)
         const newListItem = {
             name: newProductName,
             isPerishable: true,
