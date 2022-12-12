@@ -6,10 +6,11 @@
     "@googlemaps/markerclusterer": "^2.0.14",
     "@googlemaps/react-wrapper": "^1.1.35",
     "@react-google-maps/api": "^2.17.1",
-    "@ubilabs/google-maps-react-hooks": "^2.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@ubilabs/google-maps-react-hooks": "^2.0.0",
+    "dayjs": "^1.11.7",
     "antd": "^5.0.5",
     "dotenv": "^16.0.3",
     "google-map-react": "^2.2.0",
@@ -21,6 +22,7 @@
     "react-google-maps": "^9.4.5",
     "react-router-dom": "^6.4.5",
     "react-scripts": "5.0.1",
+    "react-tailwindcss-datepicker": "^1.2.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
