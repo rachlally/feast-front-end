@@ -26,7 +26,7 @@ function Navbar(props) {
         <a className='hover:text-yellow-400  hover:tracking-wide' href="/donationlist">Donation List</a>
         <a className='hover:text-yellow-400  hover:tracking-wide' href="/calendar">Calendar</a>
         <a className='hover:text-yellow-400  hover:tracking-wide' href="/kitchen">Kitchen</a>
-        <a className='hover:text-yellow-400  hover:tracking-wide' href="/recipe">Filter recipes by ingredients</a>
+        {/* <a className='hover:text-yellow-400  hover:tracking-wide' href="/recipe">Filter recipes by ingredients</a> */}
         <a className='hover:text-yellow-400  hover:tracking-wide' href="/storage">Storage</a>
         </ul>
     );
