@@ -14,12 +14,13 @@ function ShoppingList(props) {
   const [expirationDate, setExpirationDate] = useState("")
   const [shopping, setShopping] = useState([]);
 
+  // console.log("EXIT EXIT NOW!!");
   useEffect(() => {
     API.getShopping(props.token, props.userId.id).then((data) => {
         // console.log(data);
         setShopping(data);
-    });
-}, [props.userId]);
+      });
+    }, [props.userId]);
 
 
   // WIP add new product to a user shopping list

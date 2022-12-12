@@ -17,7 +17,7 @@ function DonationList(props) {
     }, [props.userId])
 
     const donationListOwner = donation.map((d,i) => {
-        return <div key={i}>{d.name}</div>
+        return <div key={"a"+ d.id}>{d.name}</div>
     })
 
 
@@ -59,7 +59,7 @@ function DonationList(props) {
                 </div>
             )
         })
-        return <div key={i}>{products}</div>;
+        return <div key={d.id}>{products}</div>;
     })
 
     const handleFormSubmit = (e) => {
@@ -76,6 +76,12 @@ function DonationList(props) {
         console.log(newListItem)
 
         API.addToDonation(newListItem, props.token)
+        .then((data)=>{
+            API.getUser(props.userId.id).then(data=>{
+                console.log(data);
+                setDonation(data.DonationList)
+            })
+        })
         // .then((newDonationData) => {
         //     API.getDonations(props.userId.id).then(data => {
         //         console.log(data)
