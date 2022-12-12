@@ -2,15 +2,13 @@ import '../../styles/Kitchen.css';
 import API from '../../utils/API'
 import React, { useState, useEffect } from 'react'
 import Storage from "./Storage"
-
-import Storage from "./Storage";
 import KitchenById from "./KitchenById";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Kitchen(props) {
   const [kitchen, setKitchen] = useState([]);
   const [newKitchenLocation, setNewKitchenLocation] = useState("");
-  //   const navigate = useNavigate();
+const navigate = useNavigate();
 
   // Not currently being used
   // const [storages, setStorages] = useState([])
@@ -27,20 +25,13 @@ function Kitchen(props) {
       return <div key={s.id}>{s.storageType}</div>;
     });
     //I think that this is where our storage reroute should be handled
-    const handleRedirectClick = (e) => {
-      e.preventDefault();
-      console.log(`Go to ${k.User.name}'s kitchen # ${i + 1}`);
+    const handleRedirectClick = () => {
+      console.log(`Go to ${k.User.name}'s kitchen # ${i + 1} with id ${k.id}`);
 
       //Api call to get kitchen by id
       API.getOneKitchen(props.token, k.id).then((data) => {
         console.log(data)
-        return (
-            <Router>
-                <Routes>
-                    <Route path="/kitchenById" component= {<KitchenById/>}/>
-                </Routes>
-            </Router>
-        )
+        navigate(`/kitchen/${data.id}`)
       });
     };
 

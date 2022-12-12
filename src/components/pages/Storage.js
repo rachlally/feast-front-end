@@ -13,7 +13,9 @@ function Storage(props) {
     const [newProductName, setNewProductName] = useState("");
     const [newStorageType, setNewStorageType] = useState("refrigerator")
     const [newRecipeSearch, setnewRecipeSearch] = useState("")
+    const [recipeResults, setRecipeResults] = useState([])
     const [newStorageEdit, setNewStorageEdit] = useState('')
+
 
     useEffect(() => {
         API.getStorages(props.token, props.userId.id).then(data => {
@@ -99,6 +101,14 @@ function Storage(props) {
         )
     })
 
+    const recipeSearchResults = recipeResults.map((r,i)=>{
+        return (
+            <p>
+            {r.recipe.label}
+            </p>
+        )
+    })
+
     const DatePicker = () => {
         const [date, setDate] = useState({
             startDate: null,
@@ -153,14 +163,24 @@ function Storage(props) {
 
     const recipeFormSubmit = (e) => {
         e.preventDefault();
-        console.log("test")
-        recipeAPI.recipes(newRecipeSearch)
+        // recipeAPI.recipes(newRecipeSearch).then((data)=>{
+        //     console.log(data)
+        // })
 
-
-
-
-
+        fetch(
+            `https://api.edamam.com/api/recipes/v2?type=public&q=${newRecipeSearch}&app_id=f8d2a9ae&app_key=4d3ee4a8bbd450583932d553443686b8`
+          )
+            .then((data) => data.json())
+            .then((data) => console.log(data))
+            // .catch((err) => console.error(err))
+            .then((data)=>{
+                // console.log(data.count)
+                console.log(data)
+                setRecipeResults(data.hits)
+            })
     }
+
+    
 
     return (
         <>
@@ -215,20 +235,10 @@ function Storage(props) {
                     </button>
                 </form>
             </div>
+
+            {recipeSearchResults}
         </>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 export default Storage;

@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 function KitchenById() {
+
   return (
-    <div>hello</div>
+
+    <>
+    <h1>PLEASE WORK</h1>
+    </>
   )
 }
 

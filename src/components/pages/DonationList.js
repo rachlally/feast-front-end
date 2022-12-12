@@ -1,4 +1,4 @@
-// import Map from './Map';
+import Map from './Map';
 import API from '../../utils/API';
 import React, { useState, useEffect } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
@@ -147,6 +147,7 @@ function DonationList(props) {
             <ul>
                 <li className="m-4 p-4 font-bold">{donations}</li>
             </ul>
+            <Map/>
             </div>
         );
 }
