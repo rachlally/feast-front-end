@@ -2,7 +2,7 @@
 import API from '../../utils/API'
 import React, { useState, useEffect } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
-import Recipe from './Recipe';
+import recipeAPI from './Recipe';
 // import Recipe from "./Recipe"
 
 function Storage(props) {
@@ -100,7 +100,11 @@ function Storage(props) {
     const recipeFormSubmit = (e) => {
         e.preventDefault();
         console.log("test")
-        Recipe(newRecipeSearch)
+        recipeAPI.recipes(newRecipeSearch)
+
+
+
+        
 
     }
 
