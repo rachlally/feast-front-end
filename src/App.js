@@ -1,3 +1,4 @@
+
 import { useEffect, useInsertionEffect, useState } from "react";
 import Footer from "./components/Footer";
 import Navbar from './components/Navbar';
@@ -11,6 +12,8 @@ import Calendar from './components/pages/Calendar';
 import Kitchen from './components/pages/Kitchen';
 import Recipe from './components/pages/Recipe';
 import Storage from './components/pages/Storage';
+
+import KitchenById from './components/pages/KitchenById';
 
 function App() {
   const [userId, setUserId] = useState(0);
@@ -98,6 +101,7 @@ function App() {
           <Route path="/kitchen" element={<Kitchen userId={userId} token={token}/>} />
           {/* <Route path="/recipe" element={<Recipe/>}/> */}
           <Route path="/storage" element={<Storage userId={userId} token={token}/>}/>
+          <Route path="/kitchen/:id" component= {<KitchenById/>}/>
         </Routes>
       </Router>
 
