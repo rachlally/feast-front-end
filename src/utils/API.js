@@ -1,9 +1,9 @@
 
 // DEV SERVER
-const URL_PREFIX = 'http://localhost:3001'
+// const URL_PREFIX = 'http://localhost:3001'
 
 // LIVE SERVER
-// const URL_PREFIX = 'https://wastenot.herokuapp.com'
+const URL_PREFIX = 'https://wastenot.herokuapp.com'
 
 const API = {
     //login user
@@ -38,6 +38,17 @@ const API = {
             method:"POST",
             body:JSON.stringify(userObj),
             headers:{
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
+
+    //get storage by kitchenId
+    getStoragesByKitchenId: (token, kitchenId)=>{
+        return fetch(`${URL_PREFIX}/api/storages/kitchens/${kitchenId}` ,{
+            method:"GET",
+            headers:{
+                "Authorization": `Bearer ${token}`,
                 "Content-Type":"application/json"
             }
         }).then(res=>res.json())
