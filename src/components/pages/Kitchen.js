@@ -38,9 +38,12 @@ function Kitchen(props) {
 
     //handle kitchen delete
     API.deleteKitchen(id, props.token).then((data) => {
+      API.getKitchens(props.token, props.userId.id).then((data) => {
       console.log(data);
+      setKitchen(data);
     });
-  };
+  });
+}
 
   // console.log(kitchens)
   const handleFormSubmit = (e) => {
@@ -52,6 +55,7 @@ function Kitchen(props) {
       UserId: props.userId.id,
     };
     setNewKitchenLocation("");
+    setNewKitchenName("");
     console.log(newKitchen);
 
     API.addToKitchen(newKitchen, props.token).then((data) => {
@@ -116,7 +120,7 @@ function Kitchen(props) {
                 type="button"
                 onClick={()=> handleRedirectClick(k.User, k.id)}
               >
-                Add Storage
+                View Kitchen
               </button>
               <button
                 key={"f" + k.id}
