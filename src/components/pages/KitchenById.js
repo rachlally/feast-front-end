@@ -38,7 +38,7 @@ function KitchenById(props) {
         // console.log(data);
         setStorages(data);
       });
-    });
+      });
   };
 
   const recipeFormSubmit = (search) => {
@@ -154,7 +154,6 @@ function KitchenById(props) {
 
             API.editStorage(newStorage, s.id, props.token).then((data)=>{
               API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
-                // console.log(data);
                 setStorages(data);
               });
             })
@@ -168,7 +167,6 @@ function KitchenById(props) {
 
             API.deleteStorage(s.id, props.token).then((data)=> {
               API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
-                // console.log(data);
                 setStorages(data);
               });
             })
