@@ -19,6 +19,7 @@ function KitchenById(props) {
 
   const currentURL = window.location.href;
   const kitchenId = currentURL.substring(currentURL.lastIndexOf("/") + 1);
+  const APIKey = process.env.EDAMAME_API_KEY;
   // console.log(kitchenId)
 
   useEffect(() => {
@@ -146,6 +147,7 @@ function KitchenById(props) {
             onChange={(e) => setNewStorageType(e.target.value)}
           >
             {/* refers to reasonForMessage */}
+            <option value="">Select Storage</option>
             <option value="Refrigerator">Refrigerator</option>
             <option value="Freezer">Freezer</option>
             <option value="Pantry">Pantry</option>
@@ -259,6 +261,7 @@ function KitchenById(props) {
                     onChange={(e) => setNewStorageEdit(e.target.value)}
                   >
                     {/* refers to reasonForMessage */}
+                    <option value="">Select Storage</option>
                     <option value="Refrigerator">Refrigerator</option>
                     <option value="Freezer">Freezer</option>
                     <option value="Pantry">Pantry</option>
