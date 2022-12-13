@@ -54,6 +54,7 @@ function Kitchen(props) {
       zipCode: newKitchenLocation,
       UserId: props.userId.id,
     };
+    console.log(newKitchen);
     setNewKitchenLocation("");
     setNewKitchenName("");
     console.log(newKitchen);
@@ -64,13 +65,6 @@ function Kitchen(props) {
         setKitchen(data);
       });
     });
-    // .then((newKitchenData) => {
-    //     console.log(props)
-    //     API.getKitchens(props.userId.id).then(data => {
-    //         console.log(data)
-    // setKitchen(data.zipCode)
-    // })
-    // })
   };
 
   return (
