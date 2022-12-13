@@ -39,7 +39,7 @@ useEffect(()=>{
       )
     })} */}
     {storages.map((kitchens, i)=>{
-       kitchens.Products.map((products,i)=>{
+       const kitchenProducts = kitchens.Products.map((products,i)=>{
         console.log(products.name)
         
         return(
@@ -51,7 +51,10 @@ useEffect(()=>{
         )
       })
       return(
+        <>
         <h1>{kitchens.storageType}</h1>
+        <h2>{kitchenProducts}</h2>
+        </>
       )
     })}
     </>
