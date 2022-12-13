@@ -24,11 +24,16 @@ function Storage(props) {
     });
   }, [props.userId]);
 
-  const handleStorageDelete = (e) => {
-    e.preventDefault();
+  const handleStorageDelete = (id) => {
+    // e.preventDefault();
     console.log("test");
 
-    API.deleteStorage(storage.id, props.token);
+    API.deleteStorage(id, props.token).then((data)=>{
+        API.getStorages(props.token, props.userId.id).then((data)=> {
+            console.log(data)
+            setStorage(data)
+        })
+    });
   };
 
   const handleAddStorageForm = (e) => {
