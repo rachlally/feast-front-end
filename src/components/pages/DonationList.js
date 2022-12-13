@@ -1,4 +1,4 @@
-// import Map from './Map';
+import Map from './Map';
 import API from '../../utils/API';
 import React, { useState, useEffect } from 'react';
 import Datepicker from 'react-tailwindcss-datepicker';
@@ -11,7 +11,7 @@ function DonationList(props) {
 
     useEffect(() => {
         API.getDonations(props.token, props.userId.id).then((data) => {
-            // console.log(data)
+            console.log(data)
             setDonation(data)
         })
     }, [props.userId])
@@ -64,7 +64,7 @@ function DonationList(props) {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log(donation[0])
+        console.log(donation)
         const newListItem = {
             name: newProductName,
             isPerishable: true,
@@ -147,6 +147,7 @@ function DonationList(props) {
             <ul>
                 <li className="m-4 p-4 font-bold">{donations}</li>
             </ul>
+            <Map/>
             </div>
         );
 }

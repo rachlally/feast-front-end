@@ -9,9 +9,11 @@ const recipeAPI = {
     fetch(
       `https://api.edamam.com/api/recipes/v2?type=public&q=${ingredientInput}&app_id=f8d2a9ae&app_key=4d3ee4a8bbd450583932d553443686b8`
     )
-      .then((response) => response.json())
-      .then((response) => console.log(response))
+      .then((recipes) => recipes.json())
+      .then((recipes) => console.log(recipes))
       .catch((err) => console.error(err));
+
+  
 
     // function Recipe(ingredientInput) {
 

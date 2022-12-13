@@ -56,10 +56,10 @@ function ShoppingList(props) {
         console.log(shopping[0])
       const newListItem = {
         name: newProductName,
-        isPerishable: true,
+        // isPerishable: true,
         //dates are passed in as YYYY-MM-DD
-        datePurchased: datePurchased,
-        expirationDate: expirationDate,
+        // datePurchased: datePurchased,
+        // expirationDate: expirationDate,
         ShoppingListId: shopping[0].id
       };
       setNewProductName("")
@@ -71,7 +71,7 @@ function ShoppingList(props) {
           API.getShopping(props.userId.id).then(data => {
               // console.log(data)
               setShopping(data[0].Products)
-            //   setNewProductName(shopping);
+              setNewProductName(shopping);
             //   console.log(newProductName)
           })
       });
