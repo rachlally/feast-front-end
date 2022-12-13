@@ -248,7 +248,13 @@ function KitchenById(props) {
                 <p className='text-red-500'>
                   Expires on: {p.expirationDate}
                 </p>
-                
+                <button
+                  className="inline-block m-2 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                  type="button"
+                  onClick={() => handleStorageProductDelete(p.id)}
+                >
+                  Delete Product
+                </button>
               </div>
             );
           });
@@ -270,20 +276,6 @@ function KitchenById(props) {
                     Add a product
                   </button>
                 </form>
-                <button
-                  className="inline-block m-2 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
-                  type="button"
-                  onClick={() => handleStorageProductDelete(p.id)}
-                >
-                  Delete Product
-                </button>
-              </div>
-            );
-          });
-          return (
-            <>
-              <div>
-                <h1>{s.storageType}</h1>
                 <h2>{products}</h2>
               </div>
               <div className="flex">
