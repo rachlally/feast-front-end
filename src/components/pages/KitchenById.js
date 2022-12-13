@@ -15,6 +15,7 @@ function KitchenById(props) {
 
   const currentURL = window.location.href;
   const kitchenId = currentURL.substring(currentURL.lastIndexOf("/") + 1);
+  const APIKey = process.env.EDAMAME_API_KEY;
   // console.log(kitchenId)
 
   useEffect(() => {
