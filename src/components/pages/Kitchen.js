@@ -50,7 +50,6 @@ function Kitchen(props) {
       name:newKitchenName,
       zipCode: newKitchenLocation,
       UserId: props.userId.id,
-      UserId: props.userId.id,
     };
     setNewKitchenLocation("");
     console.log(newKitchen);
