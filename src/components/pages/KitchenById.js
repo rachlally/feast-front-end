@@ -26,8 +26,10 @@ function KitchenById(props) {
     API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
       // console.log(data);
       setStorages(data);
+      
     });
   }, [kitchenId]);
+
 
   const handleAddStorageForm = (e) => {
     e.preventDefault();
@@ -70,12 +72,12 @@ function KitchenById(props) {
     // Might need to be addToProducts
     API.addProduct(newProduct, props.token).then((data) => {
       console.log(data)
-//         API.getProductsByStorageId(props.token, s.id).then((data) => {
-//         console.log(data);
-//         setProduct(data);
-// });
-})
-  }
+        API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
+        console.log(data);
+        setStorages(data);
+    });
+  })
+}
 
   const handleStorageDelete = (id) => {
     console.log("test");
@@ -85,6 +87,16 @@ function KitchenById(props) {
         setStorages(data);
       });
       })
+  };
+
+  const handleStorageProductDelete = (id) => {
+
+    API.deleteStorageProduct(id, props.token).then((data)=> {
+      API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
+        console.log(data);
+        setStorages(data);
+      })
+    })
   };
 
   const handleStorageEdit = (id) => {
@@ -218,6 +230,13 @@ function KitchenById(props) {
                     Add a product
                   </button>
                 </form>
+                <button
+                  className="inline-block m-2 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                  type="button"
+                  onClick={() => handleStorageProductDelete(p.id)}
+                >
+                  Delete Product
+                </button>
               </div>
             );
           });
