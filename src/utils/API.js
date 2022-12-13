@@ -43,6 +43,17 @@ const API = {
         }).then(res=>res.json())
     },
 
+    //get storage by kitchenId
+    getStoragesByKitchenId: (token, kitchenId)=>{
+        return fetch(`${URL_PREFIX}/api/storages/kitchens/${kitchenId}` ,{
+            method:"GET",
+            headers:{
+                "Authorization": `Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
+
     //Get kitchens
     getKitchens: (token, userId)=>{
         return fetch(`${URL_PREFIX}/api/kitchens/user/${userId}`,{

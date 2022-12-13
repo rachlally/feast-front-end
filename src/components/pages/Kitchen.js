@@ -16,7 +16,6 @@ function Kitchen(props) {
 
   useEffect(() => {
     console.log(props.userId.id);
-    console.log(props.userId.id)
     API.getKitchens(props.token, props.userId.id).then((data) => {
       console.log(data);
       setKitchen(data);
@@ -39,9 +38,12 @@ function Kitchen(props) {
 
     //handle kitchen delete
     API.deleteKitchen(id, props.token).then((data) => {
+      API.getKitchens(props.token, props.userId.id).then((data) => {
       console.log(data);
+      setKitchen(data);
     });
-  };
+  });
+}
 
   // console.log(kitchens)
   const handleFormSubmit = (e) => {
@@ -50,9 +52,11 @@ function Kitchen(props) {
     const newKitchen = {
       name:newKitchenName,
       zipCode: newKitchenLocation,
-      UserId: props.userId.id
+      UserId: props.userId.id,
     };
+    console.log(newKitchen);
     setNewKitchenLocation("");
+    setNewKitchenName("");
     console.log(newKitchen);
 
     API.addToKitchen(newKitchen, props.token).then((data) => {
@@ -110,7 +114,7 @@ function Kitchen(props) {
                 type="button"
                 onClick={()=> handleRedirectClick(k.User, k.id)}
               >
-                Add Storage
+                View Kitchen
               </button>
               <button
                 key={"f" + k.id}
