@@ -34,7 +34,7 @@ function KitchenById(props) {
     setNewStorageType("");
     console.log(newStorage);
     API.addToStorage(newStorage, props.token).then((data) => {
-      API.getUser(props.token, props.userId.id).then((data) => {
+      API.getStorages(props.token, props.userId.id).then((data) => {
         console.log(data);
         setStorages(data);
       });
@@ -113,7 +113,11 @@ function KitchenById(props) {
             };
             setNewStorageEdit("");
 
-            API.editStorage(newStorage, s.id, props.token);
+            API.editStorage(newStorage, s.id, props.token).then((data)=>{
+              API.getStorages(props.token,props.userId.id).then((data)=> {
+                setStorages(data);
+              })
+            })
             // .then((data) =>{API.getUser(props.userId.id).then((data))
 
             // })
@@ -122,8 +126,11 @@ function KitchenById(props) {
             e.preventDefault();
             console.log("test");
 
-            API.deleteStorage(s.id, props.token);
-            console.log(s);
+            API.deleteStorage(s.id, props.token).then((data)=> {
+              API.getStorages(props.token, props.userId.id).then((data)=> {
+                setStorages(data);
+              })
+            })
           };
           const products = s.Products.map((p, i) => {
             // console.log(p.name);
