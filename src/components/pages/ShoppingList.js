@@ -42,15 +42,13 @@ function ShoppingList(props) {
       };
       setNewProductName("")
       // setDatePurchased("")
-      setExpirationDate("")
+      // setExpirationDate("")
       console.log(newListItem)
       
       API.addToShopping(newListItem, props.token).then((newShoppingData) => {
-          API.getShopping(props.userId.id).then(data => {
-              // console.log(data)
-              setShopping(data[0].Products)
-              setNewProductName(shopping);
-            //   console.log(newProductName)
+          API.getShopping(props.token, props.userId.id).then(data => {
+              console.log(data)
+              setShopping(data)
           })
       });
     };
