@@ -44,9 +44,7 @@ useEffect(()=>{
         
         return(
           <div key={i}>
-            <h2>{products.name}</h2>
-        
-        
+            <h2>{products.name} expires on: {products.expirationDate}</h2>
           </div>
         )
       })
