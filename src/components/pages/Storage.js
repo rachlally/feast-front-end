@@ -83,7 +83,7 @@ function Storage(props) {
             .then((data) => {
                 // console.log(data.count)
                 console.log(data)
-                setRecipeResults(data.hits)
+                setRecipeResults(data.hits.label)
             })
     }
     const handleStorageEdit = (e) => {

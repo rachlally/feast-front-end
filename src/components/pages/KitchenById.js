@@ -2,12 +2,6 @@ import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
 
 
-
-// console.log(window.location.href)
-
-
-
-
 function KitchenById(props) {
   const [storages, setStorages] = useState([]);
 

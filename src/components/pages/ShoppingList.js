@@ -32,7 +32,7 @@ function ShoppingList(props) {
         e.preventDefault();
         // console.log(newProductName)
         console.log(shopping[0])
-      const newListItem = {
+        const newListItem = {
         name: newProductName,
         // isPerishable: true,
         //dates are passed in as YYYY-MM-DD
