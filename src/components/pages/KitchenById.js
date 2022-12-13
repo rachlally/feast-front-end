@@ -66,15 +66,15 @@ function KitchenById(props) {
     }
     setNewProductName("");
     console.log(newProduct);
-    // Might need to be addToProducts
     API.addProduct(newProduct, props.token).then((data) => {
       console.log(data)
-//         API.getProductsByStorageId(props.token, s.id).then((data) => {
-//         console.log(data);
-//         setProduct(data);
-// });
-})
-  }
+        API.getProductsByStorageId(props.token, id).then((data) => {
+        console.log(data);
+        setProduct(data);
+//    });
+    })
+  })
+  };
 
   const handleStorageDelete = (id) => {
     console.log("test");
