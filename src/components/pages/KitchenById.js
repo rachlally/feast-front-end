@@ -134,7 +134,7 @@ function KitchenById(props) {
     return (
       <Datepicker
         primaryColor={"green"}
-        placeholder={"Choose your dates"}
+        placeholder={"Choose your dates. The first is purchase date, second is expiration date"}
         useRange={false}
         value={date}
         onChange={handleDateChange}
@@ -268,6 +268,7 @@ function KitchenById(props) {
                     value={newProductName}
                     onChange={(e) => setNewProductName(e.target.value)}
                     className="bg-gray-800 text-white rounded-lg mb-1 mt-0.5 leading-tight w-full h-10 appearance-none block"
+                    placeholder='Add an item to your storage'
                     />
                     <DatePicker/>
                   <button
