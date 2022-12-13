@@ -3,7 +3,7 @@ import API from "../../utils/API";
 import React, { useState, useEffect } from "react";
 import Storage from "./Storage";
 import KitchenById from "./KitchenById";
-import { useNavigate, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 function Kitchen(props) {
   const [kitchen, setKitchen] = useState([]);
@@ -50,8 +50,7 @@ function Kitchen(props) {
     const newKitchen = {
       name:newKitchenName,
       zipCode: newKitchenLocation,
-      UserId: props.userId.id,
-      UserId: props.userId.id,
+      UserId: props.userId.id
     };
     setNewKitchenLocation("");
     console.log(newKitchen);
@@ -62,13 +61,6 @@ function Kitchen(props) {
         setKitchen(data);
       });
     });
-    // .then((newKitchenData) => {
-    //     console.log(props)
-    //     API.getKitchens(props.userId.id).then(data => {
-    //         console.log(data)
-    // setKitchen(data.zipCode)
-    // })
-    // })
   };
 
   return (

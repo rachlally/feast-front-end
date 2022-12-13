@@ -1,9 +1,9 @@
 
 // DEV SERVER
-const URL_PREFIX = 'http://localhost:3001'
+// const URL_PREFIX = 'http://localhost:3001'
 
 // LIVE SERVER
-// const URL_PREFIX = 'https://wastenot.herokuapp.com'
+const URL_PREFIX = 'https://wastenot.herokuapp.com'
 
 const API = {
     //login user
@@ -172,6 +172,19 @@ const API = {
             }
         }).then(res=>res.json())
     },
+
+    // Get products by storage id
+    getProductsByStorageId: (token, StorageId) => {
+        return fetch(`${URL_PREFIX}/api/products/storage/${StorageId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-type':'application/json'
+            }
+        }).then(res=>res.json())
+    },
+
+    // add to storages
     addToStorage: (storageObj, token)=>{
         return fetch(`${URL_PREFIX}/api/storages/`,{
             method:"POST",
