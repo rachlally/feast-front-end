@@ -16,7 +16,6 @@ function Kitchen(props) {
 
   useEffect(() => {
     console.log(props.userId.id);
-    console.log(props.userId.id)
     API.getKitchens(props.token, props.userId.id).then((data) => {
       console.log(data);
       setKitchen(data);
