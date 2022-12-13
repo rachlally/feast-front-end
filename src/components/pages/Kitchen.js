@@ -51,8 +51,8 @@ function Kitchen(props) {
       zipCode: newKitchenLocation,
       UserId: props.userId.id,
     };
-    setNewKitchenLocation("");
     console.log(newKitchen);
+    setNewKitchenLocation("");
 
     API.addToKitchen(newKitchen, props.token).then((data) => {
       API.getKitchens(props.token, props.userId.id).then((data) => {
