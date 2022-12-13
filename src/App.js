@@ -109,7 +109,7 @@ function App() {
           />
           {/* <Route path="/recipe" element={<Recipe/>}/> */}
           <Route path="/storage" element={<Storage userId={userId} token={token}/>}/>
-          <Route path="/kitchen/:id" element= {<KitchenById/>}/>
+          <Route path="/kitchen/:id" element= {<KitchenById userId={userId} token={token}/>}/>
         </Routes>
       </Router>
 
