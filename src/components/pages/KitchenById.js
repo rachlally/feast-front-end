@@ -41,24 +41,34 @@ function KitchenById(props) {
     });
   };
 
-  const recipeFormSubmit = (e) => {
-    e.preventDefault();
-    // recipeAPI.recipes(newRecipeSearch).then((data)=>{
-    //     console.log(data)
-    // })
-
-    fetch(
-      `https://api.edamam.com/api/recipes/v2?type=public&q=${newRecipeSearch}&app_id=f8d2a9ae&app_key=4d3ee4a8bbd450583932d553443686b8`
-    )
-      .then((data) => data.json())
-      .then((data) => console.log(data))
-      // .catch((err) => console.error(err))
-      .then((data) => {
-        // console.log(data.count)
-        console.log(data);
-        setRecipeResults(data.hits);
+  const recipeFormSubmit = (search) => {
+    let edamameURL = `https://api.edamam.com/api/recipes/v2?type=public&q=${search}&app_id=20dc2327&app_key=9db171bf015112ec263145950b7c52cb`;
+    // console.log("edamameURL", edamameURL);
+    fetch(edamameURL)
+      .then((res) => res.json())
+      .then((response) => {
+        console.log(response);
+        setRecipeResults(response.hits);
       });
   };
+
+  recipeFormSubmit(newRecipeSearch);
+
+  // recipeAPI.recipes(newRecipeSearch).then((data)=>{
+  //     console.log(data)
+  // })
+
+  // fetch(
+  //   `https://api.edamam.com/api/recipes/v2?type=public&q=${newRecipeSearch}&app_id=f8d2a9ae&app_key=4d3ee4a8bbd450583932d553443686b8`
+  // )
+  //   .then((data) => data.json())
+  //   .then((data) => console.log(data))
+  //   // .catch((err) => console.error(err))
+  //   .then((data) => {
+  //     // console.log(data.count)
+  //     console.log(data.count);
+  //     setRecipeResults(data.hits);
+  //   });
 
   return (
     <>
@@ -100,10 +110,38 @@ function KitchenById(props) {
           </form>
         </div>
         {recipeResults.map((r, i) => {
-          return <p>{r.recipe.label}</p>;
+          return (
+            <div className="border">
+              <a
+                className="hover:text-yellow-400  hover:tracking-wide"
+                href={r.recipe.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src={r.recipe.images.SMALL.url} alt="Recipe"></img>
+              </a>
+              <h1>{r.recipe.label}</h1>
+              <hr />
+              <p>
+                {r.recipe.ingredientLines.map((ing, i) => {
+                  return <p>{ing}</p>;
+                })}
+              </p>
+              <hr />
+              <a
+                className="hover:text-yellow-400  hover:tracking-wide"
+                href={r.recipe.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Go to recipe!
+              </a>
+              <hr />
+            </div>
+          );
         })}
       </div>
-      <div className="flex flex-wrap">
+      <div className="border">
         {storages.map((s, i) => {
           const handleStorageEdit = (e) => {
             e.preventDefault();
@@ -138,16 +176,18 @@ function KitchenById(props) {
             return (
               <div key={i}>
                 <h2>
-                  {p.name} 
-                Expires on: {p.expirationDate}
+                  {p.name}
+                  Expires on: {p.expirationDate}
                 </h2>
               </div>
             );
           });
           return (
             <>
-              <h1>{s.storageType}</h1>
-              <h2>{products}</h2>
+              <div>
+                <h1>{s.storageType}</h1>
+                <h2>{products}</h2>
+              </div>
               <div className="flex">
                 <form className="" onSubmit={handleStorageEdit}>
                   <button
