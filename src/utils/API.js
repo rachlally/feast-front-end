@@ -173,6 +173,30 @@ const API = {
         }).then(res => res.json())
     },
 
+    // Add product to storage
+    // addProductToStorage: (productObj, token, storageId) => {
+    //     return fetch(`${URL_PREFIX}/api/products/storage/${storageId}`,{
+    //         method: 'POST',
+    //         body: JSON.stringify(productObj),
+    //         headers: {
+    //             'Content-Type':'application/json',
+    //             'Authorization': `Bearer ${token}`
+    //         }
+    //     }).then(res => res.json())
+    // },
+
+    // Add a product
+    addProduct: (productObj, token) => {
+        return fetch(`${URL_PREFIX}/api/products/`,{
+            method: 'POST',
+            body: JSON.stringify(productObj),
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => res.json())
+    },
+
     //Get products
     getProducts: (token, KitchenId)=> {
         return fetch(`${URL_PREFIX}/api/products/kitchen/${KitchenId}`,{
@@ -206,6 +230,7 @@ const API = {
             }
         }).then(res=>res.json())
     },
+
     //get one kitchen by id
     getOneKitchen: (token, kitchenId)=>{
         return fetch(`${URL_PREFIX}/api/kitchens/${kitchenId}`,{
