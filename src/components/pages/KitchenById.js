@@ -106,6 +106,31 @@ function KitchenById(props) {
     // })
   };
 
+  const DatePicker = () => {
+    const [date, setDate] = useState({
+      startDate: null,
+      endDate: null,
+    });
+
+    const handleDateChange = (newDate) => {
+      console.log(newDate);
+      console.log(newDate.startDate);
+      console.log(newDate.endDate);
+      setDatePurchased(newDate.startDate);
+      setExpirationDate(newDate.endDate);
+    };
+
+    return (
+      <Datepicker
+        primaryColor={"green"}
+        placeholder={"Choose your dates"}
+        useRange={false}
+        value={date}
+        onChange={handleDateChange}
+      />
+    );
+  };
+
   recipeFormSubmit(newRecipeSearch);
 
   // recipeAPI.recipes(newRecipeSearch).then((data)=>{
@@ -203,21 +228,16 @@ function KitchenById(props) {
 
             return (
               <div key={i}>
-                <h2>
-                  {p.name}
-                  Expires on: {p.expirationDate}
+                <h2 className='text-green-500'>
+                  {p.name} 
                 </h2>
-                <form>
-                  <input
-                    value={newProductName}
-                    onChange={(e) => setNewProductName(e.target.value)}
-                    />
-                  <button
-                    type="button"
-                    onClick={()=> handleAddProduct(s.id)}>
-                    Add a product
-                  </button>
-                </form>
+                <p className='text-blue-500'>
+                  Purchased on: {p.datePurchased}
+                </p>
+                <p className='text-red-500'>
+                  Expires on: {p.expirationDate}
+                </p>
+                
               </div>
             );
           });
@@ -225,6 +245,20 @@ function KitchenById(props) {
             <>
               <div>
                 <h1>{s.storageType}</h1>
+                {/* Add a product form */}
+                <form>
+                  <input
+                    value={newProductName}
+                    onChange={(e) => setNewProductName(e.target.value)}
+                    className="bg-gray-800 text-white rounded-lg mb-1 mt-0.5 leading-tight w-full h-10 appearance-none block"
+                    />
+                    <DatePicker/>
+                  <button
+                    type="button"
+                    onClick={()=> handleAddProduct(s.id)}>
+                    Add a product
+                  </button>
+                </form>
                 <h2>{products}</h2>
               </div>
               <div className="flex">
