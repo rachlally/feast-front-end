@@ -34,11 +34,11 @@ function KitchenById(props) {
     setNewStorageType("");
     console.log(newStorage);
     API.addToStorage(newStorage, props.token).then((data) => {
-      API.getStorages(props.token, props.userId.id).then((data) => {
-        console.log(data);
+      API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
+        // console.log(data);
         setStorages(data);
       });
-    });
+      });
   };
 
   const recipeFormSubmit = (search) => {
@@ -152,8 +152,9 @@ function KitchenById(props) {
             setNewStorageEdit("");
 
             API.editStorage(newStorage, s.id, props.token).then((data)=>{
-              API.getStorages(props.token,props.userId.id).then((data)=> {
+              API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
                 setStorages(data);
+        
               })
             })
             // .then((data) =>{API.getUser(props.userId.id).then((data))
@@ -165,10 +166,10 @@ function KitchenById(props) {
             console.log("test");
 
             API.deleteStorage(s.id, props.token).then((data)=> {
-              API.getStorages(props.token, props.userId.id).then((data)=> {
+              API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
                 setStorages(data);
+              });
               })
-            })
           };
           const products = s.Products.map((p, i) => {
             // console.log(p.name);
