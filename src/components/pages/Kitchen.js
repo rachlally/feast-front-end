@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 
 import Storage from "./Storage";
 import KitchenById from "./KitchenById";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 
 function Kitchen(props) {
   const [kitchen, setKitchen] = useState([]);
@@ -21,27 +21,34 @@ function Kitchen(props) {
     });
   }, [props.userId]);
 
+  const navigate = useNavigate();
+
+  const handleRedirectClick = (e) => {
+    e.preventDefault()
+      navigate(`/kitchen/:id`);
+    };
+
   const kitchens = kitchen.map((k, i) => {
     const storages = k.Storages.map((s, i) => {
       return <div key={s.id}>{s.storageType}</div>;
     });
     //I think that this is where our storage reroute should be handled
-    const handleRedirectClick = (e) => {
-      e.preventDefault();
-      console.log(`Go to ${k.User.name}'s kitchen # ${i + 1}`);
+    // const handleRedirectClick = (e) => {
+    //   e.preventDefault();
+    //   console.log(`Go to ${k.User.name}'s kitchen # ${i + 1}`);
 
-      //Api call to get kitchen by id
-      API.getOneKitchen(props.token, k.id).then((data) => {
-        console.log(data)
-        return (
-            <Router>
-                <Routes>
-                    <Route path="/kitchenById" component= {<KitchenById/>}/>
-                </Routes>
-            </Router>
-        )
-      });
-    };
+    //   //Api call to get kitchen by id
+    //   API.getOneKitchen(props.token, k.id).then((data) => {
+    //     console.log(data)
+    //     return (
+    //         <Router>
+    //             <Routes>
+    //                 <Route path="/kitchenById" component= {<KitchenById/>}/>
+    //             </Routes>
+    //         </Router>
+    //     )
+    //   });
+    // };
 
     const handleKitchenDelete = (e) => {
       e.preventDefault();
@@ -52,7 +59,6 @@ function Kitchen(props) {
         console.log(data)
       })
     }
-
 
     return (
       <>
@@ -73,7 +79,7 @@ function Kitchen(props) {
             type="button"
             onClick={handleRedirectClick}
           >
-            Add Storage
+            Go to this kitchen
           </button>
           <button key={"f" + k.id}
             className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
@@ -92,6 +98,7 @@ function Kitchen(props) {
       </>
     );
   });
+
   // console.log(kitchens)
   const handleFormSubmit = (e) => {
     e.preventDefault();

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 function KitchenById() {
+  console.log('kitchenById')
   return (
-    <div>hello</div>
+    <div>KitchenById</div>
+    
   )
 }
 
