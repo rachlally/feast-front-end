@@ -69,7 +69,6 @@ function KitchenById(props) {
     }
     setNewProductName("");
     console.log(newProduct);
-    // Might need to be addToProducts
     API.addProduct(newProduct, props.token).then((data) => {
       console.log(data)
         API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
@@ -116,6 +115,31 @@ function KitchenById(props) {
     // .then((data) =>{API.getUser(props.userId.id).then((data))
     
     // })
+  };
+
+  const DatePicker = () => {
+    const [date, setDate] = useState({
+      startDate: null,
+      endDate: null,
+    });
+
+    const handleDateChange = (newDate) => {
+      console.log(newDate);
+      console.log(newDate.startDate);
+      console.log(newDate.endDate);
+      setDatePurchased(newDate.startDate);
+      setExpirationDate(newDate.endDate);
+    };
+
+    return (
+      <Datepicker
+        primaryColor={"green"}
+        placeholder={"Choose your dates. The first is purchase date, second is expiration date"}
+        useRange={false}
+        value={date}
+        onChange={handleDateChange}
+      />
+    );
   };
 
   recipeFormSubmit(newRecipeSearch);
@@ -215,21 +239,15 @@ function KitchenById(props) {
 
             return (
               <div key={i}>
-                <h2>
-                  {p.name}
-                  Expires on: {p.expirationDate}
+                <h2 className='text-green-500'>
+                  {p.name} 
                 </h2>
-                <form>
-                  <input
-                    value={newProductName}
-                    onChange={(e) => setNewProductName(e.target.value)}
-                    />
-                  <button
-                    type="button"
-                    onClick={()=> handleAddProduct(s.id)}>
-                    Add a product
-                  </button>
-                </form>
+                <p className='text-blue-500'>
+                  Purchased on: {p.datePurchased}
+                </p>
+                <p className='text-red-500'>
+                  Expires on: {p.expirationDate}
+                </p>
                 <button
                   className="inline-block m-2 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
                   type="button"
@@ -244,6 +262,21 @@ function KitchenById(props) {
             <>
               <div>
                 <h1>{s.storageType}</h1>
+                {/* Add a product form */}
+                <form>
+                  <input
+                    value={newProductName}
+                    onChange={(e) => setNewProductName(e.target.value)}
+                    className="bg-gray-800 text-white rounded-lg mb-1 mt-0.5 leading-tight w-full h-10 appearance-none block"
+                    placeholder='Add an item to your storage'
+                    />
+                    <DatePicker/>
+                  <button
+                    type="button"
+                    onClick={()=> handleAddProduct(s.id)}>
+                    Add a product
+                  </button>
+                </form>
                 <h2>{products}</h2>
               </div>
               <div className="flex">
