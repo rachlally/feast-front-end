@@ -22,8 +22,8 @@ function DonationList(props) {
     const newListItem = {
       name: newProductName,
       // isPerishable: true,
-      // datePurchased: datePurchased,
-      // expirationDate: expirationDate,
+      datePurchased: datePurchased,
+      expirationDate: expirationDate,
       DonationListId: donation[0].id,
     };
     setNewProductName("");
@@ -128,7 +128,9 @@ function DonationList(props) {
                   >
                     Add to Shopping
                   </button>
-                  {p.name} | Expires on {p.expirationDate}
+                  <p>{p.name}</p>
+                  <p className='text-red-600'>Expires on {p.expirationDate}</p>
+                   
                   <div className="float-right">
                     <button
                       className="inline-block px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
