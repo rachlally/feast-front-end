@@ -3,7 +3,7 @@ import API from "../../utils/API";
 import React, { useState, useEffect } from "react";
 import Storage from "./Storage";
 import KitchenById from "./KitchenById";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 function Kitchen(props) {
   const [kitchen, setKitchen] = useState([]);
