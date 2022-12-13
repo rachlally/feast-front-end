@@ -34,8 +34,8 @@ function KitchenById(props) {
     setNewStorageType("");
     console.log(newStorage);
     API.addToStorage(newStorage, props.token).then((data) => {
-      API.getStorages(props.token, props.userId.id).then((data) => {
-        console.log(data);
+      API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
+        // console.log(data);
         setStorages(data);
       });
     });
@@ -81,6 +81,7 @@ function KitchenById(props) {
             onChange={(e) => setNewStorageType(e.target.value)}
           >
             {/* refers to reasonForMessage */}
+            <option value="">Select Storage</option>
             <option value="Refrigerator">Refrigerator</option>
             <option value="Freezer">Freezer</option>
             <option value="Pantry">Pantry</option>
@@ -152,9 +153,10 @@ function KitchenById(props) {
             setNewStorageEdit("");
 
             API.editStorage(newStorage, s.id, props.token).then((data)=>{
-              API.getStorages(props.token,props.userId.id).then((data)=> {
+              API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
+                // console.log(data);
                 setStorages(data);
-              })
+              });
             })
             // .then((data) =>{API.getUser(props.userId.id).then((data))
 
@@ -165,9 +167,10 @@ function KitchenById(props) {
             console.log("test");
 
             API.deleteStorage(s.id, props.token).then((data)=> {
-              API.getStorages(props.token, props.userId.id).then((data)=> {
+              API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
+                // console.log(data);
                 setStorages(data);
-              })
+              });
             })
           };
           const products = s.Products.map((p, i) => {
@@ -203,6 +206,7 @@ function KitchenById(props) {
                     onChange={(e) => setNewStorageEdit(e.target.value)}
                   >
                     {/* refers to reasonForMessage */}
+                    <option value="">Select Storage</option>
                     <option value="Refrigerator">Refrigerator</option>
                     <option value="Freezer">Freezer</option>
                     <option value="Pantry">Pantry</option>

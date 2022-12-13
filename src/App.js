@@ -11,6 +11,7 @@ import Calendar from "./components/pages/Calendar";
 import Kitchen from "./components/pages/Kitchen";
 import Recipe from "./components/pages/Recipe";
 import Storage from "./components/pages/Storage";
+import Our404 from "./components/pages/Our404"
 
 import KitchenById from "./components/pages/KitchenById";
 
@@ -110,6 +111,7 @@ function App() {
           {/* <Route path="/recipe" element={<Recipe/>}/> */}
           <Route path="/storage" element={<Storage userId={userId} token={token}/>}/>
           <Route path="/kitchen/:id" element= {<KitchenById userId={userId} token={token}/>}/>
+          <Route path="*" element={<Our404/>}/>
         </Routes>
       </Router>
 
