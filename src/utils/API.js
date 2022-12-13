@@ -173,6 +173,30 @@ const API = {
         }).then(res => res.json())
     },
 
+    // Add product to storage
+    // addProductToStorage: (productObj, token, storageId) => {
+    //     return fetch(`${URL_PREFIX}/api/products/storage/${storageId}`,{
+    //         method: 'POST',
+    //         body: JSON.stringify(productObj),
+    //         headers: {
+    //             'Content-Type':'application/json',
+    //             'Authorization': `Bearer ${token}`
+    //         }
+    //     }).then(res => res.json())
+    // },
+
+    // Add a product
+    addProduct: (productObj, token) => {
+        return fetch(`${URL_PREFIX}/api/products/`,{
+            method: 'POST',
+            body: JSON.stringify(productObj),
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => res.json())
+    },
+
     //Get products
     getProducts: (token, KitchenId)=> {
         return fetch(`${URL_PREFIX}/api/products/kitchen/${KitchenId}`,{
@@ -183,6 +207,19 @@ const API = {
             }
         }).then(res=>res.json())
     },
+
+    // Get products by storage id
+    getProductsByStorageId: (token, StorageId) => {
+        return fetch(`${URL_PREFIX}/api/products/storage/${StorageId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-type':'application/json'
+            }
+        }).then(res=>res.json())
+    },
+
+    // add to storages
     addToStorage: (storageObj, token)=>{
         return fetch(`${URL_PREFIX}/api/storages/`,{
             method:"POST",
@@ -193,6 +230,7 @@ const API = {
             }
         }).then(res=>res.json())
     },
+
     //get one kitchen by id
     getOneKitchen: (token, kitchenId)=>{
         return fetch(`${URL_PREFIX}/api/kitchens/${kitchenId}`,{

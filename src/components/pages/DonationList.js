@@ -69,6 +69,23 @@ function DonationList(props) {
     );
   };
 
+  const deleteItem = (id) => {
+    API.deleteDonation(id, props.token).then((data) => {
+      API.getDonations(props.token, props.userId.id).then((data) => {
+        console.log("item deleted");
+        setDonation(data);
+      });
+    });
+  };
+
+  // MOVE AN ITEM YOU ARE DONATING TO THE SHOPPING LIST
+  const addToShopping = (id) => {
+    API.addToShopping(id, props.token).then((data) => {
+      console.log(data);
+      // console.log("please work");
+    });
+  };
+
   return (
     <div className="bg-sky-300 font-mono justify-center">
       {/* Donation list belongs to */}
@@ -103,32 +120,11 @@ function DonationList(props) {
           {donation.map((d, i) => {
             //Maps over products of donation list
             const products = d.Products.map((p, i) => {
-              const deleteItem = (e) => {
-                e.preventDefault();
-                API.deleteDonation(p.id, props.token).then((data) => {
-                  API.getDonations(props.token, props.userId.id).then(
-                    (data) => {
-                      console.log("item deleted");
-                      setDonation(data);
-                    }
-                  );
-                });
-              };
-
-              // MOVE AN ITEM YOU ARE DONATING TO THE SHOPPING LIST
-              const addToShopping = (e) => {
-                e.preventDefault();
-                API.addToShopping(p.id, props.token).then((data) => {
-                  console.log(data);
-                  console.log("please work");
-                });
-              };
-
               return (
                 <div key={i}>
                   <button
                     className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
-                    onClick={addToShopping}
+                    onClick={() => addToShopping(p.id)}
                   >
                     Add to Shopping
                   </button>
@@ -136,7 +132,7 @@ function DonationList(props) {
                   <div className="float-right">
                     <button
                       className="inline-block px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
-                      onClick={deleteItem}
+                      onClick={() => deleteItem(p.id)}
                     >
                       Delete Item
                     </button>

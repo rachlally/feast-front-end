@@ -12,6 +12,10 @@ function KitchenById(props) {
   const [newRecipeSearch, setnewRecipeSearch] = useState("");
   const [recipeResults, setRecipeResults] = useState([]);
   const [newStorageEdit, setNewStorageEdit] = useState("");
+  const [newProductName, setNewProductName] = useState("");
+  const [product, setProduct] = useState([]);
+  const [datePurchased, setDatePurchased] = useState(null);
+  const [expirationDate, setExpirationDate] = useState(null);
 
   const currentURL = window.location.href;
   const kitchenId = currentURL.substring(currentURL.lastIndexOf("/") + 1);
@@ -50,6 +54,55 @@ function KitchenById(props) {
         console.log(response);
         setRecipeResults(response.hits);
       });
+  };
+
+  const handleAddProduct = (id) => {
+    console.log(props)
+    const newProduct = {
+      name: newProductName,
+      datePurchased: datePurchased,
+      expirationDate: expirationDate,
+      StorageId: id
+    }
+    setNewProductName("");
+    console.log(newProduct);
+    // Might need to be addToProducts
+    API.addProduct(newProduct, props.token).then((data) => {
+      console.log(data)
+//         API.getProductsByStorageId(props.token, s.id).then((data) => {
+//         console.log(data);
+//         setProduct(data);
+// });
+})
+  }
+
+  const handleStorageDelete = (id) => {
+    console.log("test");
+
+    API.deleteStorage(id, props.token).then((data)=> {
+      API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
+        setStorages(data);
+      });
+      })
+  };
+
+  const handleStorageEdit = (id) => {
+    const newStorage = {
+      storageType: newStorageEdit,
+      KitchenId: kitchenId,
+    };
+    setNewStorageEdit("");
+
+    API.editStorage(newStorage, id, props.token).then((data)=>{
+      API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
+        setStorages(data);
+
+      })
+    })
+
+    // .then((data) =>{API.getUser(props.userId.id).then((data))
+    
+    // })
   };
 
   recipeFormSubmit(newRecipeSearch);
@@ -143,36 +196,8 @@ function KitchenById(props) {
       </div>
       <div className="border">
         {storages.map((s, i) => {
-          const handleStorageEdit = (e) => {
-            e.preventDefault();
-            const newStorage = {
-              storageType: newStorageEdit,
-              KitchenId: kitchenId,
-            };
-            setNewStorageEdit("");
-
-            API.editStorage(newStorage, s.id, props.token).then((data)=>{
-              API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
-                setStorages(data);
-        
-              })
-            })
-            // .then((data) =>{API.getUser(props.userId.id).then((data))
-
-            // })
-          };
-          const handleStorageDelete = (e) => {
-            e.preventDefault();
-            console.log("test");
-
-            API.deleteStorage(s.id, props.token).then((data)=> {
-              API.getStoragesByKitchenId(props.token, kitchenId).then((data) => {
-                setStorages(data);
-              });
-              })
-          };
           const products = s.Products.map((p, i) => {
-            // console.log(p.name);
+            // console.log(p);
 
             return (
               <div key={i}>
@@ -180,6 +205,17 @@ function KitchenById(props) {
                   {p.name}
                   Expires on: {p.expirationDate}
                 </h2>
+                <form>
+                  <input
+                    value={newProductName}
+                    onChange={(e) => setNewProductName(e.target.value)}
+                    />
+                  <button
+                    type="button"
+                    onClick={()=> handleAddProduct(s.id)}>
+                    Add a product
+                  </button>
+                </form>
               </div>
             );
           });
@@ -190,11 +226,11 @@ function KitchenById(props) {
                 <h2>{products}</h2>
               </div>
               <div className="flex">
-                <form className="" onSubmit={handleStorageEdit}>
+                <form className="">
                   <button
                     className="inline-block m-2 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
                     type="button"
-                    onClick={handleStorageEdit}
+                    onClick={() => handleStorageEdit(s.id)}
                   >
                     Edit Storage
                   </button>
@@ -216,7 +252,7 @@ function KitchenById(props) {
                 <button
                   className="inline-block m-2 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
                   type="button"
-                  onClick={handleStorageDelete}
+                  onClick={() => handleStorageDelete(s.id)}
                 >
                   Delete Storage
                 </button>
