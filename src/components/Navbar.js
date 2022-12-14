@@ -20,9 +20,14 @@ function Navbar(props) {
         navigate("/")
     }
     return (
-        <ul className="bg-slate-800 p-8 display flex row flex-wrap justify-around text-purple-200 font-mono font-bold">
+        <ul className="navbar bg-slate-800 p-8 display flex row flex-wrap justify-around text-purple-200 font-mono font-bold">
         {props.isLoggedIn ? 
         <>
+         {/* <img
+          className="w-96"
+          src="../../../assets/burger.png"
+          alt="Burger"
+        /> */}
             <a className='hover:text-yellow-400  hover:tracking-wide' href="/logout " onClick = {logoutFunc}>Logout</a> 
             <a className='hover:text-yellow-400  hover:tracking-wide' href="/kitchen">Kitchen(s)</a>
             <a className='hover:text-yellow-400  hover:tracking-wide' href="/shoppinglist">Shopping List</a>
@@ -30,7 +35,7 @@ function Navbar(props) {
             </>
             : 
             <>
-            <a className='hover:text-yellow-400  hover:tracking-wide' href="/">Welcome! Create an account or login to manage your kitchens!</a>
+            <a className='hover:text-yellow-400  hover:tracking-wide' href="/"><div className="flex flex-col items-center"><p>Welcome to WasteNot, where you can manage all your kitchens to reduce food waste!</p> <p>Create an account or login to manage your kitchens!</p></div></a>
             </>
             }
             

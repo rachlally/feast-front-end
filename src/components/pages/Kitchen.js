@@ -69,9 +69,9 @@ function Kitchen(props) {
   };
 
   return (
-    <div className="bg-sky-300 kitchen-background">
+    <div>
       {/* Add a kitchen */}
-      <div className="flex grid content-center">
+      <div className="flex grid content-center bg-sky-300">
         <form class="flex m-3" onSubmit={handleFormSubmit}>
           <input
             name="name"
@@ -92,19 +92,19 @@ function Kitchen(props) {
           </button>
         </form>
       </div>
-      <div class="flex justify-center">
-        <div className="block p-6 m-6 rounded-lg w-full grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+      <div class="flex justify-center bg-sky-200 h-screen">
+        <div className="kitchen-card block px-6 mx-6 rounded-lg w-full grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
           {kitchen.map((k, i) => {
             //I think that this is where our storage reroute should be handled
             return (
               <>
                 {/* kitchen lists */}
 
-                <div className="bg-sky-200 p-3 m-3 rounded-lg shadow-xl shadow-green-200 max-w-sm" key={"z" + k.id}>
+                <div className="bg-white p-3 m-3 rounded-lg shadow-xl shadow-green-200 max-w-sm" key={"z" + k.id}>
                   <div key={"a" + k.id} className="text-xl text-bold">
                     {k.User.name}'s {k.name} kitchen
                   </div>
-                  <div className="m-4">
+                  <div className="mx-4">
                     <div key={"b" + k.id}>
                       This kitchen is found at zipcode: {k.zipCode}
                     </div>

@@ -4,6 +4,7 @@ import Datepicker from "react-tailwindcss-datepicker";
 import { useLocation } from "react-router-dom";
 import "../../styles/KitchenById.css";
 
+
 // console.log(window.location.href)
 
 function KitchenById(props) {
@@ -22,7 +23,7 @@ function KitchenById(props) {
   const location = useLocation();
   const kitchenId = location.state.kitchenId;
   const kitchenName = location.state.kitchenName;
-  const APIKey = process.env.EDAMAME_API_KEY;
+  const APIKey = process.env.REACT_APP_EDAMAME_API_KEY;
   // console.log(kitchenId)
 
   useEffect(() => {
@@ -166,8 +167,8 @@ function KitchenById(props) {
         Welcome to your {kitchenName} kitchen!
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-3">
-        <div className="border border-sky-300 overflow-auto">
-          <div className="flex justify-between mx-6 border border-green-500">
+        <div className="overflow-auto h-screen">
+          <div className="flex justify-between mx-6 mb-1">
             <div>
               <form className="flex" onSubmit={handleAddStorageForm}>
                 {/* Container for select storage and dropdown */}
@@ -200,15 +201,15 @@ function KitchenById(props) {
               // console.log(p);
 
               return (
-                <div key={p.id}>
+                <div className="mx-6 flex justify-between" key={p.id}>
                   <h2 key={"a" + p.id} className="text-green-500">
                     {p.name}
                   </h2>
                   <p key={"a" + p.id} className="text-blue-500">
-                    Purchased on: {p.datePurchased}
+                    Purchased: {p.datePurchased}
                   </p>
                   <p key={"a" + p.id} className="text-red-500">
-                    Expires on: {p.expirationDate}
+                    Expires: {p.expirationDate}
                   </p>
                   <button
                     key={"a" + p.id}
@@ -216,13 +217,13 @@ function KitchenById(props) {
                     type="button"
                     onClick={() => handleStorageProductDelete(p.id)}
                   >
-                    Delete Product
+                    Delete
                   </button>
                 </div>
               );
             });
             return (
-              <div className='border border-red-500'>
+              <div className='border rounded mb-1'>
                 <div className="mr-2" key={s.id}>
                   <h1 className="mx-6 flex justify-center text-lg font-semibold">
                     {s.storageType}
@@ -303,10 +304,10 @@ function KitchenById(props) {
             );
           })}
         </div>
-        <div className="border border-purple-500 overflow-auto h-screen">
+        <div className="overflow-auto h-screen">
         <div>
             <form
-              className="flex justify-between mx-6 border border-red-500"
+              className="flex justify-between mx-6 mb-1"
               onSubmit={recipeFormSubmit}
             >
               <div>
@@ -325,7 +326,7 @@ function KitchenById(props) {
         </div>
           {recipeResults.map((r, i) => {
             return (
-              <div className="mb-1 grid grid-cols-1 lg:grid-cols-2 border border-green-500">
+              <div className="mb-1 grid grid-cols-1 lg:grid-cols-2 border rounded">
                 <img
                   className="rounded"
                   src={r.recipe.images.SMALL.url}
@@ -343,7 +344,7 @@ function KitchenById(props) {
                 </div>
 
                 <a
-                  className="mt-1 w-1/2 lg:w-1/3 ml-1 px-4 py-1.5 bg-green-500 text-white font-medium text-s leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                  className="mt-1 w-1/2 lg:w-1/3 ml-1 px-4 py-1.5 mb-1 bg-green-500 text-white font-medium text-s leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
                   href={r.recipe.url}
                   target="_blank"
                   rel="noreferrer"
