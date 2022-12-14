@@ -18,8 +18,6 @@ function KitchenById(props) {
   const [datePurchased, setDatePurchased] = useState(null);
   const [expirationDate, setExpirationDate] = useState(null);
 
-  // const currentURL = window.location.href;
-  // const kitchenId = currentURL.substring(currentURL.lastIndexOf("/") + 1);
   const location = useLocation();
   const kitchenId = location.state.kitchenId;
   const kitchenName = location.state.kitchenName;
@@ -114,9 +112,6 @@ function KitchenById(props) {
       });
     });
 
-    // .then((data) =>{API.getUser(props.userId.id).then((data))
-
-    // })
   };
 
   const DatePicker = () => {
@@ -143,27 +138,9 @@ function KitchenById(props) {
     );
   };
 
-  // recipeFormSubmit(newRecipeSearch);
-
-  // recipeAPI.recipes(newRecipeSearch).then((data)=>{
-  //     console.log(data)
-  // })
-
-  // fetch(
-  //   `https://api.edamam.com/api/recipes/v2?type=public&q=${newRecipeSearch}&app_id=f8d2a9ae&app_key=4d3ee4a8bbd450583932d553443686b8`
-  // )
-  //   .then((data) => data.json())
-  //   .then((data) => console.log(data))
-  //   // .catch((err) => console.error(err))
-  //   .then((data) => {
-  //     // console.log(data.count)
-  //     console.log(data.count);
-  //     setRecipeResults(data.hits);
-  //   });
-
   return (
-    <>
-      <h1 className="flex text-xl font-semibold justify-center m-1">
+    <div className="bg-sky-300">
+      <h1 className="flex text-xl font-semibold justify-center">
         Welcome to your {kitchenName} kitchen!
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-3">
@@ -356,7 +333,7 @@ function KitchenById(props) {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

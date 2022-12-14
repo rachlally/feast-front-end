@@ -36,12 +36,6 @@ function DonationList(props) {
       });
     });
 
-    // .then((newDonationData) => {
-    //     API.getDonations(props.userId.id).then(data => {
-    //         console.log(data)
-    //         setDonation(data[0].Products)
-    //     })
-    // })
   };
 
   const DatePicker = () => {
