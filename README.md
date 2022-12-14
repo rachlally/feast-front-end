@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# WasteNot Kitchen Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+The motiviation for creating this application was to help users better organize and track products in their kitchen(s).  Users can input their kitchen locations, storage locations, and what products are in those locations.  Once this information is added, users can easily track products through the application. 
 
-In the project directory, you can run:
+The ultimate goal is waste prevention.  This is done through encouraging users to consume products in their kitchen through the recipe search.  Or encouraging users to donate products to nearby food banks through the Google Maps search.
 
-### `npm start`
+While creating the front end application, the developers learned how to use Create-React.  They gained more experience with retrieving, adding, and deleting data through GET, POST and DELETE routes.  The developers successfully deployed to Netlify.  They learned how to connect their deployed Heroku API with the front end application.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Table of Contents
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [Installation](#installation)
+- [Technology](#technology)
+- [Usage](#usage)
+- [Screenshot](#screenshot)
+- [Credits](#credits)
+- [License](#license)
+- [Contributing](#contributing)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+To install, fork or clone the repository from https://github.com/rachlally/feast-front-end.  Run `npm install` for package installation.  Run `npm start` to start the Create-React-Application.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Link to the back-end repo at https://github.com/rachlally/feast-back-end.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technology 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This application is a Create-React Application.  JSON Web Tokens was installed to secure information retrieval and authorization between client and server. BCrypt was installed to hash user's passwords.  TaillwindCSS was used as the styling framework.
 
-### `npm run eject`
+Google MAPs API was used for Food Bank search.  Edamam Recipe API was used for recipe inspiration search.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Usage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+View the deployed WasteNot application at: https://wastenotkitchentracker.netlify.app/ .
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+View the API at the deployed link: https://wastenot.herokuapp.com/.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+First time users are prompted to create an account.  Returning users will login with their information.  Upon signing in, users can view their different kitchen locations by name and zipcode.  This is where users can add a new kitchen.  Next, users can view what is saved to each kitchen.  On this page, users can view what products are in their kitchen, organized by different location types (ie Freezer, Refrigerator, Pantry, etc.).
 
-## Learn More
+Users are encouraged to use what products they have.  This is done by the Edamam Recipe search included on this page.  Users can also save products to a shopping list.  They can also save items to a donation list and easily search nearby Food Bank location with the Google Map search.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Screenshot
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Deployed API](DeployedAPI.png)
 
-### Code Splitting
+## Credits
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+A huge thank you to our TAs with the UW Coding Bootcamp.  Special thanks to Lindsay Fitzgerald for her assistance.
 
-### Analyzing the Bundle Size
+Developers of this application:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Andrew Massey https://github.com/amassey42
 
-### Making a Progressive Web App
+Nathan Alexander https://github.com/NathanAlexander1
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Philip Schreiber https://github.com/Sullisters
 
-### Advanced Configuration
+Rachel Lally https://github.com/rachlally
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+MIT License
 
-### `npm run build` fails to minify
+Copyright (c) 2022 rachlally
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## How to Contribute
+
+To contribute, contact the developers through links above.
+
+![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)

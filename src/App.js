@@ -111,7 +111,7 @@ function App() {
               path="/kitchen/:id"
               element={<KitchenById userId={userId} token={token} />}
             />
-            <Route path="/*" element={<Our404/>}/>
+            <Route path="*" element={<Our404/>}/>
           </Routes>
         </Router>
       <Footer />
