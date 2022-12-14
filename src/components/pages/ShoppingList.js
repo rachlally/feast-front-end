@@ -5,7 +5,7 @@ import API from "../../utils/API";
 import Datepicker from 'react-tailwindcss-datepicker';
 import { isTemplateElement } from "@babel/types";
 // import ExpirationDate from "./ExpirationDate";
-// import '../styles/ShoppingList.css';
+import '../../styles/ShoppingList.css';
 
 // New
 function ShoppingList(props) {
@@ -93,7 +93,7 @@ function ShoppingList(props) {
         </button>
       </form>
       </div>
-      <ul>
+      <ul className="overflow-auto shopping-list">
         <li className="m-4 p-4 font-bold">{shopping.map((s, i) => {
         const products = s.Products.map((p, i) => {
             //   console.log(p);
@@ -116,6 +116,7 @@ function ShoppingList(props) {
     })}</li>
       </ul>
     </div>
+
   );
 }
 
