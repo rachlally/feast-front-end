@@ -173,6 +173,16 @@ const API = {
         }).then(res => res.json())
     },
 
+    // Delete a product from shoppingList
+    deleteShopping: (id, token) => {
+        return fetch(`${URL_PREFIX}/api/products/${id}`,{
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => res.json())
+    },    
+
     // Add product to storage
     // addProductToStorage: (productObj, token, storageId) => {
     //     return fetch(`${URL_PREFIX}/api/products/storage/${storageId}`,{
