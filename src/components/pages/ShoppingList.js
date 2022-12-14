@@ -64,6 +64,7 @@ function ShoppingList(props) {
 
   return (
     <div className="h-screen bg-sky-300 font-mono flex flex-col flex-wrap content-center">
+     
       <div>
       <h1 className="text-purple-800 font-mono font-bold underline">
         {shopping.map((s, i) => {
