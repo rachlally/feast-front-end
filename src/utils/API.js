@@ -42,6 +42,17 @@ const API = {
         }).then(res=>res.json())
     },
 
+    //get storage by kitchenId
+    getStoragesByKitchenId: (token, kitchenId)=>{
+        return fetch(`${URL_PREFIX}/api/storages/kitchens/${kitchenId}` ,{
+            method:"GET",
+            headers:{
+                "Authorization": `Bearer ${token}`,
+                "Content-Type":"application/json"
+            }
+        }).then(res=>res.json())
+    },
+
     //Get kitchens
     getKitchens: (token, userId)=>{
         return fetch(`${URL_PREFIX}/api/kitchens/user/${userId}`,{
@@ -65,6 +76,7 @@ const API = {
         }).then(res=>res.json())
     },
 
+    //Delete a kitchen
     deleteKitchen: (id, token) => {
         return fetch(`${URL_PREFIX}/api/kitchens/${id}`,{
             method: 'DELETE',
@@ -85,6 +97,7 @@ const API = {
         }).then(res=>res.json())
     },
 
+    //Edit Storages
     editStorage: (storageObj, id, token) => {
         return fetch(`${URL_PREFIX}/api/storages/${id}`,{
             method:"PUT",
@@ -96,6 +109,7 @@ const API = {
         }).then(res=>res.json())
     },
 
+    //Delete Storages
     deleteStorage: (id, token) => {
         return fetch(`${URL_PREFIX}/api/storages/${id}`,{
             method: 'DELETE',
@@ -116,7 +130,7 @@ const API = {
         }).then(res=>res.json())
     },
 
-    // Add product to donationList
+    //Add product to donationList
     addToDonation: (donationObj, token) => {
         return fetch(`${URL_PREFIX}/api/products/`,{
             method: 'POST',
@@ -128,7 +142,7 @@ const API = {
         }).then(res => res.json())
     },
 
-    // Delete a product from donationList
+    //Delete a product from donationList
     deleteDonation: (id, token) => {
         return fetch(`${URL_PREFIX}/api/products/${id}`,{
             method: 'DELETE',
@@ -161,6 +175,38 @@ const API = {
         }).then(res => res.json())
     },
 
+    //Delete a product from shoppingList
+    deleteShopping: (id, token) => {
+        return fetch(`${URL_PREFIX}/api/products/${id}`,{
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => res.json())
+    },    
+
+    // Add a product
+    addProduct: (productObj, token) => {
+        return fetch(`${URL_PREFIX}/api/products/`,{
+            method: 'POST',
+            body: JSON.stringify(productObj),
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => res.json())
+    },
+
+    // Delete a product from storage
+    deleteStorageProduct: (id, token) => {
+        return fetch(`${URL_PREFIX}/api/products/${id}`,{
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(res => res.json())
+    },
+
     //Get products
     getProducts: (token, KitchenId)=> {
         return fetch(`${URL_PREFIX}/api/products/kitchen/${KitchenId}`,{
@@ -171,6 +217,19 @@ const API = {
             }
         }).then(res=>res.json())
     },
+
+    // Get products by storage id
+    getProductsByStorageId: (token, StorageId) => {
+        return fetch(`${URL_PREFIX}/api/products/storage/${StorageId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-type':'application/json'
+            }
+        }).then(res=>res.json())
+    },
+
+    // add to storages
     addToStorage: (storageObj, token)=>{
         return fetch(`${URL_PREFIX}/api/storages/`,{
             method:"POST",
@@ -181,6 +240,7 @@ const API = {
             }
         }).then(res=>res.json())
     },
+
     //get one kitchen by id
     getOneKitchen: (token, kitchenId)=>{
         return fetch(`${URL_PREFIX}/api/kitchens/${kitchenId}`,{

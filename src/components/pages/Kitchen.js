@@ -1,143 +1,137 @@
-import '../../styles/Kitchen.css';
-import API from '../../utils/API'
-import React, { useState, useEffect } from 'react'
-
-import Storage from "./Storage";
+import "../../styles/Kitchen.css";
+import API from "../../utils/API";
+import React, { useState, useEffect } from "react";
 import KitchenById from "./KitchenById";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 function Kitchen(props) {
   const [kitchen, setKitchen] = useState([]);
   const [newKitchenLocation, setNewKitchenLocation] = useState("");
-  //   const navigate = useNavigate();
+  const [newKitchenName, setNewKitchenName] = useState("");
+  const navigate = useNavigate();
 
   // Not currently being used
   // const [storages, setStorages] = useState([])
 
   useEffect(() => {
+    // console.log(props.userId.id);
     API.getKitchens(props.token, props.userId.id).then((data) => {
-      // console.log(data)
+      // console.log(data);
       setKitchen(data);
     });
   }, [props.userId]);
 
-  const kitchens = kitchen.map((k, i) => {
-    const storages = k.Storages.map((s, i) => {
-      return <div key={s.id}>{s.storageType}</div>;
+  const handleRedirectClick = (user, id) => {
+    // console.log(`Go to ${user.name}'s kitchen with id ${id}`);
+
+    //Api call to get kitchen by id
+    API.getOneKitchen(props.token, id).then((data) => {
+      console.log(data);
+      navigate(`/kitchen/${data.id}`,{state:{kitchenId:id, kitchenName:data.name}});
     });
-    //I think that this is where our storage reroute should be handled
-    const handleRedirectClick = (e) => {
-      e.preventDefault();
-      console.log(`Go to ${k.User.name}'s kitchen # ${i + 1}`);
+  };
 
-      //Api call to get kitchen by id
-      API.getOneKitchen(props.token, k.id).then((data) => {
-        console.log(data)
-        return (
-            <Router>
-                <Routes>
-                    <Route path="/kitchenById" component= {<KitchenById/>}/>
-                </Routes>
-            </Router>
-        )
-      });
-    };
+  const handleKitchenDelete = (id) => {
+    //e.preventDefault();
+    console.log("test");
 
-    const handleKitchenDelete = (e) => {
-      e.preventDefault();
-      console.log("test")
-      
-      //handle kitchen delete
-      API.deleteKitchen(k.id, props.token).then((data)=>{
-        console.log(data)
-      })
-    }
-
-
-    return (
-      <>
-        {/* kitchen lists */}
-        <div className="border" key={k.id}>
-          <div key={"a" + k.id} className="text-xl text-bold">
-            {k.User.name}'s Kitchen #{i + 1}
-          </div>
-          <div key={"b" + k.id}>
-            This kitchen is found at zipcode: {k.zipCode}
-          </div>
-          <div key={"c" + k.id}>It belongs to {k.User.name}</div>
-          <div key={"d" + k.id}>
-            It has the following storage type: {storages}
-          </div>
-          <button key={"e" + k.id}
-            className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
-            type="button"
-            onClick={handleRedirectClick}
-          >
-            Add Storage
-          </button>
-          <button key={"f" + k.id}
-            className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
-            type="button"
-            onClick={handleKitchenDelete}
-          >
-            Delete Kitchen
-          </button>
-          {/* <Link to="/storage" element={<Storage />}onClick={handleRedirectClick}>Add Storage</Link> */}
-          {/* <Router>
-            <Routes>
-            <Route path="/storage" element={<Storage/>}/>
-            </Routes>
-          </Router> */}
-        </div>
-      </>
-    );
+    //handle kitchen delete
+    API.deleteKitchen(id, props.token).then((data) => {
+      API.getKitchens(props.token, props.userId.id).then((data) => {
+      // console.log(data);
+      setKitchen(data);
+    });
   });
+}
+
   // console.log(kitchens)
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    // console.log(kitchen[0])
+    // console.log(kitchen);
     const newKitchen = {
+      name:newKitchenName,
       zipCode: newKitchenLocation,
-      UserId: kitchen[0].UserId,
+      UserId: props.userId.id,
     };
+    // console.log(newKitchen);
     setNewKitchenLocation("");
-    console.log(newKitchen);
+    setNewKitchenName("");
+    // console.log(newKitchen);
 
     API.addToKitchen(newKitchen, props.token).then((data) => {
-      API.getUser(props.userId.id).then((data) => {
-        console.log(data);
-        setKitchen(data.Kitchens);
+      API.getKitchens(props.token, props.userId.id).then((data) => {
+        // console.log(data);
+        setKitchen(data);
       });
     });
-    // .then((newKitchenData) => {
-    //     console.log(props)
-    //     API.getKitchens(props.userId.id).then(data => {
-    //         console.log(data)
-    // setKitchen(data.zipCode)
-    // })
-    // })
   };
 
   return (
-    <div>
-      
+    <div className="bg-sky-300">
       {/* Add a kitchen */}
       <div className="flex">
         {/* <h1>{kitchen[0].zipCode}'s Kitchens</h1> */}
-      <form onSubmit={handleFormSubmit}>
-        <input
-          name="zipCode"
-          placeholder="Zipcode, please?"
-          value={newKitchenLocation}
-          onChange={(e) => setNewKitchenLocation(e.target.value)}
-        />
-        <br />
-        <button className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">
-          Create Kitchen
-        </button>
-      </form>
+        <form onSubmit={handleFormSubmit}>
+        <input name='name'
+        placeholder='kitchen name'
+        value={newKitchenName}
+        onChange={(e)=> setNewKitchenName(e.target.value)}/>
+          <input
+            name="zipCode"
+            placeholder="Zipcode, please?"
+            value={newKitchenLocation}
+            onChange={(e) => setNewKitchenLocation(e.target.value)}
+          />
+          <br />
+          <button className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">
+            Create Kitchen
+          </button>
+        </form>
       </div>
-      {kitchens}
+      <div class="flex justify-center">
+      <div className="block p-6 m-6 rounded-lg shadow-lg bg-green-200 max-w-sm">
+      {kitchen.map((k, i) => {
+        // const storages = k.Storages.map((s, i) => {
+        //   return <div key={s.id}>{s.storageType}</div>;
+        // });
+        //I think that this is where our storage reroute should be handled
+        return (
+          <>
+            {/* kitchen lists */}
+            
+            <div className="border bg-sky-200 p-3 m-3" key={"z" + k.id}>
+              <div key={"a" + k.id} className="text-xl text-bold">
+                {k.User.name}'s Kitchen: {k.name}
+              </div>
+              <div key={"b" + k.id}>
+                This kitchen is found at zipcode: {k.zipCode}
+              </div>
+              <div key={"c" + k.id}>It belongs to {k.User.name}</div>
+              <div key={"d" + k.id}>
+                {/* It has the following storage type: {storages} */}
+              </div>
+              <button
+                key={"e" + k.id}
+                className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                type="button"
+                onClick={()=> handleRedirectClick(k.User, k.id)}
+              >
+                View Kitchen
+              </button>
+              <button
+                key={"f" + k.id}
+                className="inline-block m-3 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                type="button"
+                onClick={()=>handleKitchenDelete(k.id)}
+              >
+                Delete Kitchen
+              </button>
+            </div>
+          </>
+        );
+      })}
+      </div>
+    </div>
     </div>
   );
 }
