@@ -17,7 +17,7 @@ function Navbar(props) {
     const navigate = useNavigate();
     const logoutFunc = () => {
         props.handleLogout();
-        navigate("/login")
+        navigate("/")
     }
     return (
         <ul className="bg-slate-800 p-8 display flex row flex-wrap justify-around text-purple-200 font-mono font-bold">
@@ -30,7 +30,7 @@ function Navbar(props) {
             </>
             : 
             <>
-            <a className='hover:text-yellow-400  hover:tracking-wide' href="/login">Welcome! Create an account or login to manage your kitchens!</a>
+            <a className='hover:text-yellow-400  hover:tracking-wide' href="/">Welcome! Create an account or login to manage your kitchens!</a>
             </>
             }
             

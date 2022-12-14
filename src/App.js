@@ -83,7 +83,7 @@ function App() {
           <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
           <Routes>
             <Route
-              path="/login"
+              path="/"
               element={
                 <Login
                   isLoggedIn={isLoggedIn}
@@ -111,7 +111,7 @@ function App() {
               path="/kitchen/:id"
               element={<KitchenById userId={userId} token={token} />}
             />
-            <Route path="/*" element={<Our404/>}/>
+            <Route path="*" element={<Our404/>}/>
           </Routes>
         </Router>
       <Footer />
