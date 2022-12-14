@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import '../styles/Login.css';
+import '../../styles/Login.css'
 
 export default function Login(props) {
   const navigate = useNavigate();
@@ -32,14 +32,14 @@ export default function Login(props) {
     });
   };
   return (
-    <div className="flex justify-center m-4 ">
-      <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
-        <form className="form-group mb-6" onSubmit={loginHandle}>
-          <h2>Login</h2>
+    <div className="flex justify-center bg-sky-300 login-background">
+      <div className="block p-6 rounded-lg drop-shadow-2xl bg-white max-w-sm login-card">
+        <form className="form-group" onSubmit={loginHandle}>
+          <h2 className='font-semibold mb-1'>Login</h2>
 
           <input
             name="email"
-            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className=" mb-1 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             value={loginEmail}
             onChange={(e) => setLoginEmail(e.target.value)}
             placeholder="email"
@@ -59,17 +59,17 @@ export default function Login(props) {
         </form>
 
         <form onSubmit={signupHandle}>
-          <h2>Create Account</h2>
+          <h2 className='font-semibold mb-1'>Create Account</h2>
           <input
             name="userName"
-            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className=" mb-1 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             value={signupUserName}
             onChange={(e) => setSignupUserName(e.target.value)}
             placeholder="Username"
           />
           <input
             name="email"
-            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className=" mb-1 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             value={signupEmail}
             onChange={(e) => setSignupEmail(e.target.value)}
             placeholder="email"

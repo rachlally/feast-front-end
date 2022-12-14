@@ -15,27 +15,6 @@ import {
 
 import "../../styles/DonationList.css";
 
-// let autocomplete;
-// function initAutocomplete(){
-//     autocomplete= new google.maps.places.Autocomplete(
-//         document.getElementById('autocomplete'),
-//         {
-//             types:['establishment'],
-//             componentRestrictions:{'country': ['AU']},
-//             fields:['places_id', 'geometry', 'name']
-//         });
-//         autocomplete.addListener('place_changed', onPlaceChanged);
-// }
-// function onPlaceChanged(){
-//     var place = autocomplete.getPlace();
-
-//     if(!place.geometry){
-//         document.getElementById('autocomplete').placeholder='Enter a place';
-//     } else {
-//         document.getElementById('details').innerHTML=place.name;
-//     }
-// }
-
 function MapInit() {
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVq588qSxiAVHeDMayN1kY-qnHdVMF6CQ&libraries=places&callback=initAutocomplete"
@@ -101,7 +80,7 @@ function Map() {
           style={{
             boxSizing: `border-box`,
             border: `1px solid transparent`,
-            width: `240px`,
+            width: `200px`,
             height: `32px`,
             padding: `0 12px`,
             borderRadius: `3px`,
@@ -111,6 +90,7 @@ function Map() {
             textOverflow: `ellipses`,
             position: "absolute",
             left: "50%",
+            top: "90%",
             marginLeft: "-120px",
           }}
         />

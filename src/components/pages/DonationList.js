@@ -36,12 +36,6 @@ function DonationList(props) {
       });
     });
 
-    // .then((newDonationData) => {
-    //     API.getDonations(props.userId.id).then(data => {
-    //         console.log(data)
-    //         setDonation(data[0].Products)
-    //     })
-    // })
   };
 
   const DatePicker = () => {
@@ -87,36 +81,39 @@ function DonationList(props) {
   };
 
   return (
-    <div className="bg-sky-300 font-mono justify-center">
+    <div className="bg-sky-300 font-helvetica justify-center">
       {/* Donation list belongs to */}
-      <h1 className="text-purple-800 font-mono font-bold underline">
+      <h1 className="text-white font-helvetica font-bold">
         {donation.map((d, i) => {
-          return <div key={"a" + d.id}>{d.name}</div>;
+          return <div className="flex justify-center" key={"a" + d.id}>{d.name}</div>;
         })}
       </h1>
 
       {/* Input form to add information */}
       <form
+        className='flex grid grid-cols-1'
         onSubmit={handleFormSubmit}
-        className="flex"
         // className=""
       >
-        <input
-          name="newProductName"
-          placeholder="Enter your product name"
-          value={newProductName}
-          onChange={(e) => setNewProductName(e.target.value)}
-          className="bg-gray-800 text-gray-700 rounded-lg mb-10 mt-0.5 leading-tight w-full appearance-none block"
-        />
-        <DatePicker />
-        <button className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">
+        <div className="flex mx-6">
+          <input
+            name="newProductName"
+            placeholder="Enter product name"
+            value={newProductName}
+            onChange={(e) => setNewProductName(e.target.value)}
+            className="bg-white text-black rounded mb-1 py-1.5 mt-0.5 leading-tight w-full appearance-none block mr-1"
+          />
+          <DatePicker />
+        </div>
+        <button
+          className="lg:justify-self-center inline-block lg:w-1/6 mx-6 mt-1 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">
           Add to Donation List
         </button>
       </form>
 
       {/* Each item that is in the donation list, as well as the 'purchased' button */}
-      <ul>
-        <li className="m-4 p-4 font-bold">
+      <ul className="flex justify-center">
+        <li className="m-4 p-4 font-semibold">
           {donation.map((d, i) => {
             //Maps over products of donation list
             const products = d.Products.map((p, i) => {
@@ -124,16 +121,14 @@ function DonationList(props) {
                 <div key={i}>
                   
                   <p>{p.name}</p>
-                  <p className='text-red-600'>Expires on {p.expirationDate}</p>
-                   
-                  <div className="float-right">
+                  <p className='text-red-600'>Expires on {p.expirationDate}
                     <button
-                      className="inline-block px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                      className="ml-6 float-right inline-block px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
                       onClick={() => deleteItem(p.id)}
                     >
                       Delete Item
                     </button>
-                  </div>
+                  </p>
                 </div>
               );
             });
@@ -141,7 +136,9 @@ function DonationList(props) {
           })}
         </li>
       </ul>
-      <Map />
+      <div className="flex justify-center pb-20 pt-5">
+        <Map />
+      </div>
     </div>
   );
 }
