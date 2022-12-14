@@ -20,7 +20,7 @@ function Navbar(props) {
         navigate("/login")
     }
     return (
-        <ul className="bg-slate-800 p-8 display flex row flex-wrap justify-around text-purple-200 font-mono font-bold">
+        <ul className="navbar bg-slate-800 p-8 display flex row flex-wrap justify-around text-purple-200 font-mono font-bold">
         {props.isLoggedIn ? 
         <>
             <a className='hover:text-yellow-400  hover:tracking-wide' href="/logout " onClick = {logoutFunc}>Logout</a> 

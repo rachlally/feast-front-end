@@ -1,5 +1,5 @@
-.kitchen-background {
-    height: 100vh;
+.kitchen-card {
+    height: 30vh;
 }
 
 @media (max-width: 1024px) {
