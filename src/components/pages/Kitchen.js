@@ -1,7 +1,6 @@
 import "../../styles/Kitchen.css";
 import API from "../../utils/API";
 import React, { useState, useEffect } from "react";
-import Storage from "./Storage";
 import KitchenById from "./KitchenById";
 import { useNavigate, Navigate } from "react-router-dom";
 
@@ -15,20 +14,20 @@ function Kitchen(props) {
   // const [storages, setStorages] = useState([])
 
   useEffect(() => {
-    console.log(props.userId.id);
+    // console.log(props.userId.id);
     API.getKitchens(props.token, props.userId.id).then((data) => {
-      console.log(data);
+      // console.log(data);
       setKitchen(data);
     });
   }, [props.userId]);
 
   const handleRedirectClick = (user, id) => {
-    console.log(`Go to ${user.name}'s kitchen with id ${id}`);
+    // console.log(`Go to ${user.name}'s kitchen with id ${id}`);
 
     //Api call to get kitchen by id
     API.getOneKitchen(props.token, id).then((data) => {
       console.log(data);
-      navigate(`/kitchen/${data.id}`);
+      navigate(`/kitchen/${data.id}`,{state:{kitchenId:id, kitchenName:data.name}});
     });
   };
 
@@ -39,7 +38,7 @@ function Kitchen(props) {
     //handle kitchen delete
     API.deleteKitchen(id, props.token).then((data) => {
       API.getKitchens(props.token, props.userId.id).then((data) => {
-      console.log(data);
+      // console.log(data);
       setKitchen(data);
     });
   });
@@ -48,20 +47,20 @@ function Kitchen(props) {
   // console.log(kitchens)
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(kitchen);
+    // console.log(kitchen);
     const newKitchen = {
       name:newKitchenName,
       zipCode: newKitchenLocation,
       UserId: props.userId.id,
     };
-    console.log(newKitchen);
+    // console.log(newKitchen);
     setNewKitchenLocation("");
     setNewKitchenName("");
-    console.log(newKitchen);
+    // console.log(newKitchen);
 
     API.addToKitchen(newKitchen, props.token).then((data) => {
       API.getKitchens(props.token, props.userId.id).then((data) => {
-        console.log(data);
+        // console.log(data);
         setKitchen(data);
       });
     });
@@ -100,7 +99,7 @@ function Kitchen(props) {
           <>
             {/* kitchen lists */}
             
-            <div className="border bg-sky-200 p-3 m-3" key={k.id}>
+            <div className="border bg-sky-200 p-3 m-3" key={"z" + k.id}>
               <div key={"a" + k.id} className="text-xl text-bold">
                 {k.User.name}'s Kitchen: {k.name}
               </div>
