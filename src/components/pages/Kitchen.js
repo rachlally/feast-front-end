@@ -1,7 +1,6 @@
 import "../../styles/Kitchen.css";
 import API from "../../utils/API";
 import React, { useState, useEffect } from "react";
-import Storage from "./Storage";
 import KitchenById from "./KitchenById";
 import { useNavigate, Navigate } from "react-router-dom";
 
@@ -15,20 +14,20 @@ function Kitchen(props) {
   // const [storages, setStorages] = useState([])
 
   useEffect(() => {
-    console.log(props.userId.id);
+    // console.log(props.userId.id);
     API.getKitchens(props.token, props.userId.id).then((data) => {
-      console.log(data);
+      // console.log(data);
       setKitchen(data);
     });
   }, [props.userId]);
 
   const handleRedirectClick = (user, id) => {
-    console.log(`Go to ${user.name}'s kitchen with id ${id}`);
+    // console.log(`Go to ${user.name}'s kitchen with id ${id}`);
 
     //Api call to get kitchen by id
     API.getOneKitchen(props.token, id).then((data) => {
       console.log(data);
-      navigate(`/kitchen/${data.id}`);
+      navigate(`/kitchen/${data.id}`,{state:{kitchenId:id, kitchenName:data.name}});
     });
   };
 
@@ -39,7 +38,7 @@ function Kitchen(props) {
     //handle kitchen delete
     API.deleteKitchen(id, props.token).then((data) => {
       API.getKitchens(props.token, props.userId.id).then((data) => {
-      console.log(data);
+      // console.log(data);
       setKitchen(data);
     });
   });
@@ -48,27 +47,27 @@ function Kitchen(props) {
   // console.log(kitchens)
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(kitchen);
+    // console.log(kitchen);
     const newKitchen = {
       name:newKitchenName,
       zipCode: newKitchenLocation,
       UserId: props.userId.id,
     };
-    console.log(newKitchen);
+    // console.log(newKitchen);
     setNewKitchenLocation("");
     setNewKitchenName("");
-    console.log(newKitchen);
+    // console.log(newKitchen);
 
     API.addToKitchen(newKitchen, props.token).then((data) => {
       API.getKitchens(props.token, props.userId.id).then((data) => {
-        console.log(data);
+        // console.log(data);
         setKitchen(data);
       });
     });
   };
 
   return (
-    <div>
+    <div className="bg-sky-300">
       {/* Add a kitchen */}
       <div className="flex">
         {/* <h1>{kitchen[0].zipCode}'s Kitchens</h1> */}
@@ -89,6 +88,8 @@ function Kitchen(props) {
           </button>
         </form>
       </div>
+      <div class="flex justify-center">
+      <div className="block p-6 m-6 rounded-lg shadow-lg bg-green-200 max-w-sm">
       {kitchen.map((k, i) => {
         // const storages = k.Storages.map((s, i) => {
         //   return <div key={s.id}>{s.storageType}</div>;
@@ -97,7 +98,8 @@ function Kitchen(props) {
         return (
           <>
             {/* kitchen lists */}
-            <div className="border" key={k.id}>
+            
+            <div className="border bg-sky-200 p-3 m-3" key={"z" + k.id}>
               <div key={"a" + k.id} className="text-xl text-bold">
                 {k.User.name}'s Kitchen: {k.name}
               </div>
@@ -118,7 +120,7 @@ function Kitchen(props) {
               </button>
               <button
                 key={"f" + k.id}
-                className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                className="inline-block m-3 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
                 type="button"
                 onClick={()=>handleKitchenDelete(k.id)}
               >
@@ -128,6 +130,8 @@ function Kitchen(props) {
           </>
         );
       })}
+      </div>
+    </div>
     </div>
   );
 }

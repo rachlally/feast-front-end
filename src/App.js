@@ -7,10 +7,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/pages/Login";
 import ShoppingList from "./components/pages/ShoppingList";
 import DonationList from "./components/pages/DonationList";
-import Calendar from "./components/pages/Calendar";
+// import Calendar from "./components/pages/Calendar";
 import Kitchen from "./components/pages/Kitchen";
-import Recipe from "./components/pages/Recipe";
-import Storage from "./components/pages/Storage";
 import Our404 from "./components/pages/Our404";
 
 import KitchenById from "./components/pages/KitchenById";
@@ -80,48 +78,42 @@ function App() {
 
   return (
     <div className="App">
-
-      <Router>
-        <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
-        <Routes>
-          <Route
-            path="/login"
-            element={
-              <Login
-                isLoggedIn={isLoggedIn}
-                handleLoginSubmit={handleLoginSubmit}
-                handleSignupSubmit={handleSignupSubmit}
-                userId={userId}
-                token={token}
-              />
-            }
-          />
-          
-          <Route
-            path="/shoppinglist"
-            element={<ShoppingList userId={userId} token={token} />}
-          />
-          <Route
-            path="/donationlist"
-            element={<DonationList userId={userId} token={token} />}
-          />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route
-            path="/kitchen"
-            element={<Kitchen userId={userId} token={token} />}
-          />
-          {/* <Route path="/recipe" element={<Recipe/>}/> */}
-          <Route
-            path="/storage"
-            element={<Storage userId={userId} token={token} />}
-          />
-          <Route
-            path="/kitchen/:id"
-            element={<KitchenById userId={userId} token={token} />}
-          />
-          <Route path="*" element={<Our404 />} />
-        </Routes>
-      </Router>
+  
+        <Router>
+          <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+          <Routes>
+            <Route
+              path="/login"
+              element={
+                <Login
+                  isLoggedIn={isLoggedIn}
+                  handleLoginSubmit={handleLoginSubmit}
+                  handleSignupSubmit={handleSignupSubmit}
+                  userId={userId}
+                  token={token}
+                />
+              }
+            />
+            <Route
+              path="/shoppinglist"
+              element={<ShoppingList userId={userId} token={token} />}
+            />
+            <Route
+              path="/donationlist"
+              element={<DonationList userId={userId} token={token} />}
+            />
+            {/* <Route path="/calendar" element={<Calendar />} /> */}
+            <Route
+              path="/kitchen"
+              element={<Kitchen userId={userId} token={token} />}
+            />
+            <Route
+              path="/kitchen/:id"
+              element={<KitchenById userId={userId} token={token} />}
+            />
+            <Route path="/*" element={<Our404/>}/>
+          </Routes>
+        </Router>
       <Footer />
     </div>
   );
