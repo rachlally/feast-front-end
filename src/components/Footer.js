@@ -3,7 +3,7 @@ import '../styles/Footer.css';
 function Footer() {
     return (
         <>
-        <div className="bg-slate-800 p-8 w-full footer  text-sm">
+        <div className="bg-slate-800 p-8 w-full footer text-sm">
             <p className='display flex row flex-wrap justify-around text-purple-200 font-mono font-bold'> DEVELOPERS:
           <a className="hover:text-yellow-400  hover:tracking-wide" href="https://github.com/rachlally" target="_blank" rel="noreferrer">
             Rachel Lally

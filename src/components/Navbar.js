@@ -20,7 +20,7 @@ function Navbar(props) {
         navigate("/")
     }
     return (
-        <ul className="bg-slate-800 p-8 display flex row flex-wrap justify-around text-purple-200 font-mono font-bold">
+        <ul className="navbar bg-slate-800 p-8 display flex row flex-wrap justify-around text-purple-200 font-mono font-bold">
         {props.isLoggedIn ? 
         <>
          {/* <img
