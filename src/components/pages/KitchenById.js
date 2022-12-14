@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
-import Storage from "./Storage";
 import Datepicker from "react-tailwindcss-datepicker";
-import recipeAPI from "./Recipe";
+import { useLocation } from "react-router-dom";
 
 // console.log(window.location.href)
 
@@ -17,8 +16,11 @@ function KitchenById(props) {
   const [datePurchased, setDatePurchased] = useState(null);
   const [expirationDate, setExpirationDate] = useState(null);
 
-  const currentURL = window.location.href;
-  const kitchenId = currentURL.substring(currentURL.lastIndexOf("/") + 1);
+  // const currentURL = window.location.href;
+  // const kitchenId = currentURL.substring(currentURL.lastIndexOf("/") + 1);
+  const location = useLocation();
+  const kitchenId = location.state.kitchenId
+  const kitchenName = location.state.kitchenName
   const APIKey = process.env.EDAMAME_API_KEY;
   // console.log(kitchenId)
 
@@ -58,6 +60,8 @@ function KitchenById(props) {
         setRecipeResults(response.hits);
       });
   };
+
+  recipeFormSubmit(newRecipeSearch)
 
   const handleAddProduct = (id) => {
     console.log(props)
@@ -162,7 +166,7 @@ function KitchenById(props) {
 
   return (
     <>
-      <p>Welcome to your kitchen!</p>
+      <p>Welcome to {kitchenName}</p>
       <div className="flex">
         <form onSubmit={handleAddStorageForm}>
           <select
@@ -238,17 +242,17 @@ function KitchenById(props) {
             // console.log(p);
 
             return (
-              <div key={i}>
-                <h2 className='text-green-500'>
+              <div key={p.id}>
+                <h2 key={"a" + p.id}className='text-green-500'>
                   {p.name} 
                 </h2>
-                <p className='text-blue-500'>
+                <p key={"a" + p.id} className='text-blue-500'>
                   Purchased on: {p.datePurchased}
                 </p>
-                <p className='text-red-500'>
+                <p key={"a" + p.id} className='text-red-500'>
                   Expires on: {p.expirationDate}
                 </p>
-                <button
+                <button key={"a" + p.id}
                   className="inline-block m-2 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
                   type="button"
                   onClick={() => handleStorageProductDelete(p.id)}
@@ -260,11 +264,12 @@ function KitchenById(props) {
           });
           return (
             <>
-              <div>
+              <div key={s.id}>
                 <h1>{s.storageType}</h1>
                 {/* Add a product form */}
-                <form>
+                <form key={"a" + s.id}>
                   <input
+                  key={"b" + s.id}
                     value={newProductName}
                     onChange={(e) => setNewProductName(e.target.value)}
                     className="bg-gray-800 text-white rounded-lg mb-1 mt-0.5 leading-tight w-full h-10 appearance-none block"
@@ -272,16 +277,18 @@ function KitchenById(props) {
                     />
                     <DatePicker/>
                   <button
+                  key={"c" + s.id}
                     type="button"
                     onClick={()=> handleAddProduct(s.id)}>
                     Add a product
                   </button>
                 </form>
-                <h2>{products}</h2>
+                <h2 key={"d" + s.id}>{products}</h2>
               </div>
-              <div className="flex">
-                <form className="">
+              <div key={"e" + s.id} className="flex">
+                <form key={"f" + s.id}className="">
                   <button
+                  key={"g" + s.id}
                     className="inline-block m-2 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
                     type="button"
                     onClick={() => handleStorageEdit(s.id)}
@@ -289,22 +296,24 @@ function KitchenById(props) {
                     Edit Storage
                   </button>
                   <select
+                  key={"h" + s.id}
                     className="form-field"
                     value={newStorageEdit}
                     onChange={(e) => setNewStorageEdit(e.target.value)}
                   >
                     {/* refers to reasonForMessage */}
-                    <option value="">Select Storage</option>
+                    <option key={"i" + s.id}value="">Select Storage</option>
                     <option value="Refrigerator">Refrigerator</option>
-                    <option value="Freezer">Freezer</option>
-                    <option value="Pantry">Pantry</option>
-                    <option value="Outdoor Fridge">Outdoor Fridge</option>
+                    <option key={"j" + s.id}value="Freezer">Freezer</option>
+                    <option key={"k" + s.id}value="Pantry">Pantry</option>
+                    <option key={"l" + s.id}value="Outdoor Fridge">Outdoor Fridge</option>
 
-                    <option value="Walk-In Freezer">Walk In Freezer</option>
+                    <option key={"m" + s.id} value="Walk-In Freezer">Walk In Freezer</option>
                     {/* <option value="other"><input>Other</input></option> */}
                   </select>
                 </form>
                 <button
+                key={"n" + s.id}
                   className="inline-block m-2 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
                   type="button"
                   onClick={() => handleStorageDelete(s.id)}

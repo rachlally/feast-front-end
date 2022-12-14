@@ -1,7 +1,6 @@
 import "../../styles/Kitchen.css";
 import API from "../../utils/API";
 import React, { useState, useEffect } from "react";
-import Storage from "./Storage";
 import KitchenById from "./KitchenById";
 import { useNavigate, Navigate } from "react-router-dom";
 
@@ -27,8 +26,8 @@ function Kitchen(props) {
 
     //Api call to get kitchen by id
     API.getOneKitchen(props.token, id).then((data) => {
-      // console.log(data);
-      navigate(`/kitchen/${data.id}`);
+      console.log(data);
+      navigate(`/kitchen/${data.id}`,{state:{kitchenId:id, kitchenName:data.name}});
     });
   };
 
@@ -97,7 +96,7 @@ function Kitchen(props) {
         return (
           <>
             {/* kitchen lists */}
-            <div className="border" key={k.id}>
+            <div className="border" key={"z" + k.id}>
               <div key={"a" + k.id} className="text-xl text-bold">
                 {k.User.name}'s Kitchen: {k.name}
               </div>
