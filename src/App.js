@@ -1,32 +1,36 @@
 import { useEffect, useInsertionEffect, useState } from "react";
 import Footer from "./components/Footer";
-import Navbar from './components/Navbar';
+import Navbar from "./components/Navbar";
 import API from "./utils/API";
 // import PageContainer from './components/PageContainer';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/pages/Login";
-import ShoppingList from './components/pages/ShoppingList';
-import DonationList from './components/pages/DonationList';
-import Calendar from './components/pages/Calendar';
-import Kitchen from './components/pages/Kitchen';
-import Recipe from './components/pages/Recipe';
-import Storage from './components/pages/Storage';
+import ShoppingList from "./components/pages/ShoppingList";
+import DonationList from "./components/pages/DonationList";
+// import Calendar from "./components/pages/Calendar";
+import Kitchen from "./components/pages/Kitchen";
+import Our404 from "./components/pages/Our404";
+
+import KitchenById from "./components/pages/KitchenById";
 
 function App() {
   const [userId, setUserId] = useState(0);
+  // const [kitchenId, setKitchenId] = useState(0)
+  const [userObj, setUserObj] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
-      console.log(storedToken);
+      // console.log(storedToken);
       API.getUserFromToken(storedToken).then((data) => {
         if (data.user) {
-          console.log(data);
+          // console.log(data)
           setToken(storedToken);
           setIsLoggedIn(true);
-          setUserId(data.user.id);
+          //   setUserId(data.user);
+          setUserId(data.user);
         }
       });
     } else {
@@ -35,14 +39,13 @@ function App() {
   }, []);
 
   const handleLoginSubmit = (userObj) => {
-  
     API.login({
       email: userObj.email,
       password: userObj.password,
     }).then((data) => {
       console.log(data);
       if (data.token) {
-        setUserId(data.user.id);
+        setUserId(data.user);
         setToken(data.token);
         setIsLoggedIn(true);
         localStorage.setItem("token", data.token);
@@ -65,7 +68,7 @@ function App() {
     }).then((data) => {
       console.log(data);
       if (data.token) {
-        setUserId(data.user.id);
+        setUserId(data.user);
         setToken(data.token);
         setIsLoggedIn(true);
         localStorage.setItem("token", data.token);
@@ -75,82 +78,43 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-      <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
-        <Routes>
-          <Route
-            path="/login"
-            element={
-              <Login
-                isLoggedIn={isLoggedIn}
-                handleLoginSubmit={handleLoginSubmit}
-                handleSignupSubmit={handleSignupSubmit}
-              />
-            }
-          />
-          <Route path="/shoppinglist" element={<ShoppingList/>}/>
-          <Route path="/donationlist" element={<DonationList/>}/>
-          <Route path="/calendar" element={<Calendar/>}/>
-          <Route path="/kitchen" element={<Kitchen userId={userId}/>} />
-          <Route path="/recipe" element={<Recipe/>}/>
-          <Route path="/storage" element={<Storage/>}/>
-        </Routes>
-      </Router>
-
-      {/* {isLoggedIn && <button onClick={handleLogout}>Logout</button>}
-      {isLoggedIn ? (
-        <div>
-          Put stuff here to append to page
-          <PageContainer />
-        </div>
-      ) : (
-        <> */}
-          {/*not logged in */}
-          {/* <h1>not logged in</h1>
-          <form onSubmit={handleLoginSubmit}>
-            <h2>Login</h2>
-            <input
-              name="email"
-              value={loginEmail}
-              onChange={(e) => setLoginEmail(e.target.value)}
-              placeholder="email"
+  
+        <Router>
+          <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+          <Routes>
+            <Route
+              path="/login"
+              element={
+                <Login
+                  isLoggedIn={isLoggedIn}
+                  handleLoginSubmit={handleLoginSubmit}
+                  handleSignupSubmit={handleSignupSubmit}
+                  userId={userId}
+                  token={token}
+                />
+              }
             />
-            <input
-              type="password"
-              name="password"
-              value={loginPassword}
-              onChange={(e) => setLoginPassword(e.target.value)}
-              placeholder="password"
+            <Route
+              path="/shoppinglist"
+              element={<ShoppingList userId={userId} token={token} />}
             />
-            <button>Log in!</button>
-          </form>
-
-          <form onSubmit={handleSignupSubmit}>
-            <h2>Create Account</h2>
-            <input
-              name="userName"
-              value={signupUserName}
-              onChange={(e) => setSignupUserName(e.target.value)}
-              placeholder="Username"
+            <Route
+              path="/donationlist"
+              element={<DonationList userId={userId} token={token} />}
             />
-            <input
-              name="email"
-              value={signupEmail}
-              onChange={(e) => setSignupEmail(e.target.value)}
-              placeholder="email"
+            {/* <Route path="/calendar" element={<Calendar />} /> */}
+            <Route
+              path="/kitchen"
+              element={<Kitchen userId={userId} token={token} />}
             />
-            <input
-              type="password"
-              name="password"
-              value={signupPassword}
-              onChange={(e) => setSignupPassword(e.target.value)}
-              placeholder="password"
+            <Route
+              path="/kitchen/:id"
+              element={<KitchenById userId={userId} token={token} />}
             />
-            <button>Sign up!</button>
-          </form> */}
-          <Footer />
-        {/* </> */}
-      {/* )} */}
+            <Route path="/*" element={<Our404/>}/>
+          </Routes>
+        </Router>
+      <Footer />
     </div>
   );
 }

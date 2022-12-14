@@ -1,42 +1,139 @@
-import '../../styles/Kitchen.css';
-import API from '../../utils/API'
-import React, { useState, useEffect } from 'react'
-
+import "../../styles/Kitchen.css";
+import API from "../../utils/API";
+import React, { useState, useEffect } from "react";
+import KitchenById from "./KitchenById";
+import { useNavigate, Navigate } from "react-router-dom";
 
 function Kitchen(props) {
-    const [kitchen, setKitchen] = useState([])
+  const [kitchen, setKitchen] = useState([]);
+  const [newKitchenLocation, setNewKitchenLocation] = useState("");
+  const [newKitchenName, setNewKitchenName] = useState("");
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        API.getKitchens(props.userId).then(data => {
-            // const allKitchens = data.map((a,i)=>{
-            //     return a.Storages;
-            // })
-            const userKitchens = data.filter((k) => {
-                if (k.UserId === props.userId) {
-                    return k;
-                } else {  
-                return null;
-                }
-            }) 
-            // const stringKitchen = JSON.stringify(userKitchens)
-            console.log(data)
-            setKitchen(userKitchens)
-            console.log(userKitchens)
- 
-        })
-    }, [props.userId])
+  // Not currently being used
+  // const [storages, setStorages] = useState([])
 
-    return (
-        <div>
-            <h1>Welcome to your Kitchen Placeholder</h1>
-            <div>
-                {kitchen.map((k,i)=>
-                <p key={i}> {k.zipCode}</p>)}
-                {/* {kitchen}  */}
+  useEffect(() => {
+    // console.log(props.userId.id);
+    API.getKitchens(props.token, props.userId.id).then((data) => {
+      // console.log(data);
+      setKitchen(data);
+    });
+  }, [props.userId]);
+
+  const handleRedirectClick = (user, id) => {
+    // console.log(`Go to ${user.name}'s kitchen with id ${id}`);
+
+    //Api call to get kitchen by id
+    API.getOneKitchen(props.token, id).then((data) => {
+      console.log(data);
+      navigate(`/kitchen/${data.id}`,{state:{kitchenId:id, kitchenName:data.name}});
+    });
+  };
+
+  const handleKitchenDelete = (id) => {
+    //e.preventDefault();
+    console.log("test");
+
+    //handle kitchen delete
+    API.deleteKitchen(id, props.token).then((data) => {
+      API.getKitchens(props.token, props.userId.id).then((data) => {
+      // console.log(data);
+      setKitchen(data);
+    });
+  });
+}
+
+  // console.log(kitchens)
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    // console.log(kitchen);
+    const newKitchen = {
+      name:newKitchenName,
+      zipCode: newKitchenLocation,
+      UserId: props.userId.id,
+    };
+    // console.log(newKitchen);
+    setNewKitchenLocation("");
+    setNewKitchenName("");
+    // console.log(newKitchen);
+
+    API.addToKitchen(newKitchen, props.token).then((data) => {
+      API.getKitchens(props.token, props.userId.id).then((data) => {
+        // console.log(data);
+        setKitchen(data);
+      });
+    });
+  };
+
+  return (
+    <div className="bg-sky-300">
+      {/* Add a kitchen */}
+      <div className="flex">
+        {/* <h1>{kitchen[0].zipCode}'s Kitchens</h1> */}
+        <form onSubmit={handleFormSubmit}>
+        <input name='name'
+        placeholder='kitchen name'
+        value={newKitchenName}
+        onChange={(e)=> setNewKitchenName(e.target.value)}/>
+          <input
+            name="zipCode"
+            placeholder="Zipcode, please?"
+            value={newKitchenLocation}
+            onChange={(e) => setNewKitchenLocation(e.target.value)}
+          />
+          <br />
+          <button className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">
+            Create Kitchen
+          </button>
+        </form>
+      </div>
+      <div class="flex justify-center">
+      <div className="block p-6 m-6 rounded-lg shadow-lg bg-green-200 max-w-sm">
+      {kitchen.map((k, i) => {
+        // const storages = k.Storages.map((s, i) => {
+        //   return <div key={s.id}>{s.storageType}</div>;
+        // });
+        //I think that this is where our storage reroute should be handled
+        return (
+          <>
+            {/* kitchen lists */}
+            
+            <div className="border bg-sky-200 p-3 m-3" key={"z" + k.id}>
+              <div key={"a" + k.id} className="text-xl text-bold">
+                {k.User.name}'s Kitchen: {k.name}
+              </div>
+              <div key={"b" + k.id}>
+                This kitchen is found at zipcode: {k.zipCode}
+              </div>
+              <div key={"c" + k.id}>It belongs to {k.User.name}</div>
+              <div key={"d" + k.id}>
+                {/* It has the following storage type: {storages} */}
+              </div>
+              <button
+                key={"e" + k.id}
+                className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                type="button"
+                onClick={()=> handleRedirectClick(k.User, k.id)}
+              >
+                View Kitchen
+              </button>
+              <button
+                key={"f" + k.id}
+                className="inline-block m-3 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                type="button"
+                onClick={()=>handleKitchenDelete(k.id)}
+              >
+                Delete Kitchen
+              </button>
             </div>
-
-        </div>
-    )
+          </>
+        );
+      })}
+      </div>
+    </div>
+    </div>
+  );
 }
 
 export default Kitchen;
