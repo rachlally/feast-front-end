@@ -4,6 +4,7 @@ import Datepicker from "react-tailwindcss-datepicker";
 import { useLocation } from "react-router-dom";
 import "../../styles/KitchenById.css";
 
+
 // console.log(window.location.href)
 
 function KitchenById(props) {
@@ -22,7 +23,7 @@ function KitchenById(props) {
   const location = useLocation();
   const kitchenId = location.state.kitchenId;
   const kitchenName = location.state.kitchenName;
-  const APIKey = process.env.EDAMAME_API_KEY;
+  const APIKey = process.env.REACT_APP_EDAMAME_API_KEY;
   // console.log(kitchenId)
 
   useEffect(() => {

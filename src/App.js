@@ -83,7 +83,7 @@ function App() {
           <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
           <Routes>
             <Route
-              path="/login"
+              path="/"
               element={
                 <Login
                   isLoggedIn={isLoggedIn}
