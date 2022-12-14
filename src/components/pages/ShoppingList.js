@@ -65,7 +65,7 @@ function ShoppingList(props) {
   return (
     <div className="bg-sky-300 font-mono flex flex-wrap justify-center">
       <h1 className="text-purple-800 font-mono font-bold underline">
-        {shopping.reverse().map((s, i) => {
+        {shopping.map((s, i) => {
       return <div key={i}>{s.name}</div>;
     })}
       </h1>

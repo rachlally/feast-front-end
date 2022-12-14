@@ -90,7 +90,7 @@ function DonationList(props) {
     <div className="bg-sky-300 font-mono justify-center">
       {/* Donation list belongs to */}
       <h1 className="text-purple-800 font-mono font-bold underline">
-        {donation.reverse().map((d, i) => {
+        {donation.map((d, i) => {
           return <div key={"a" + d.id}>{d.name}</div>;
         })}
       </h1>
