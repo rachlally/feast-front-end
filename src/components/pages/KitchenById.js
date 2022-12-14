@@ -49,8 +49,9 @@ function KitchenById(props) {
     });
   };
 
-  const recipeFormSubmit = (search) => {
-    let edamameURL = `https://api.edamam.com/api/recipes/v2?type=public&q=${search}&app_id=20dc2327&app_key=9db171bf015112ec263145950b7c52cb`;
+  const recipeFormSubmit = (e) => {
+    e.preventDefault();
+    let edamameURL = `https://api.edamam.com/api/recipes/v2?type=public&q=${newRecipeSearch}&app_id=20dc2327&app_key=9db171bf015112ec263145950b7c52cb`;
     // console.log("edamameURL", edamameURL);
     fetch(edamameURL)
       .then((res) => res.json())
@@ -60,7 +61,6 @@ function KitchenById(props) {
       });
   };
 
-  recipeFormSubmit(newRecipeSearch);
 
   const handleAddProduct = (id) => {
     console.log(props);
