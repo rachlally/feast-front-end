@@ -179,13 +179,13 @@ function KitchenById(props) {
 
               return (
                 <div className="mx-6 flex justify-between" key={p.id}>
-                  <h2 key={"a" + p.id} className="text-green-500">
+                  <h2 key={"a" + p.id} className="text-green-700">
                     {p.name}
                   </h2>
                   <p key={"a" + p.id} className="text-blue-500">
                     Purchased: {p.datePurchased}
                   </p>
-                  <p key={"a" + p.id} className="text-red-500">
+                  <p key={"a" + p.id} className="text-red-700">
                     Expires: {p.expirationDate}
                   </p>
                   <button
@@ -214,7 +214,7 @@ function KitchenById(props) {
                         value={newProductName}
                         onChange={(e) => setNewProductName(e.target.value)}
                         className="ml-6 form-control border pl-3 pb-1.5 pt-1 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Add an item to your storage"
+                        placeholder="Add an item"
                       />
                       <div className="mx-6">
                         <DatePicker />

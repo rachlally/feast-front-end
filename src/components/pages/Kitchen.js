@@ -100,7 +100,7 @@ function Kitchen(props) {
               <>
                 {/* kitchen lists */}
 
-                <div className="bg-white p-3 m-3 rounded-lg shadow-xl shadow-green-200 max-w-sm" key={"z" + k.id}>
+                <div className="flex flex-col items-center bg-white p-3 m-3 rounded-lg shadow-xl shadow-green-200 max-w-sm" key={"z" + k.id}>
                   <div key={"a" + k.id} className="text-xl text-bold">
                     {k.User.name}'s {k.name} kitchen
                   </div>
