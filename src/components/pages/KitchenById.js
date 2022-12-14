@@ -142,7 +142,7 @@ function KitchenById(props) {
     );
   };
 
-  recipeFormSubmit(newRecipeSearch);
+  // recipeFormSubmit(newRecipeSearch);
 
   // recipeAPI.recipes(newRecipeSearch).then((data)=>{
   //     console.log(data)

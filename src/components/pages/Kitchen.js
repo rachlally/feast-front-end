@@ -15,19 +15,19 @@ function Kitchen(props) {
   // const [storages, setStorages] = useState([])
 
   useEffect(() => {
-    console.log(props.userId.id);
+    // console.log(props.userId.id);
     API.getKitchens(props.token, props.userId.id).then((data) => {
-      console.log(data);
+      // console.log(data);
       setKitchen(data);
     });
   }, [props.userId]);
 
   const handleRedirectClick = (user, id) => {
-    console.log(`Go to ${user.name}'s kitchen with id ${id}`);
+    // console.log(`Go to ${user.name}'s kitchen with id ${id}`);
 
     //Api call to get kitchen by id
     API.getOneKitchen(props.token, id).then((data) => {
-      console.log(data);
+      // console.log(data);
       navigate(`/kitchen/${data.id}`);
     });
   };
@@ -39,7 +39,7 @@ function Kitchen(props) {
     //handle kitchen delete
     API.deleteKitchen(id, props.token).then((data) => {
       API.getKitchens(props.token, props.userId.id).then((data) => {
-      console.log(data);
+      // console.log(data);
       setKitchen(data);
     });
   });
@@ -48,20 +48,20 @@ function Kitchen(props) {
   // console.log(kitchens)
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(kitchen);
+    // console.log(kitchen);
     const newKitchen = {
       name:newKitchenName,
       zipCode: newKitchenLocation,
       UserId: props.userId.id,
     };
-    console.log(newKitchen);
+    // console.log(newKitchen);
     setNewKitchenLocation("");
     setNewKitchenName("");
-    console.log(newKitchen);
+    // console.log(newKitchen);
 
     API.addToKitchen(newKitchen, props.token).then((data) => {
       API.getKitchens(props.token, props.userId.id).then((data) => {
-        console.log(data);
+        // console.log(data);
         setKitchen(data);
       });
     });
