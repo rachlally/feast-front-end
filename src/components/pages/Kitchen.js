@@ -69,7 +69,7 @@ function Kitchen(props) {
   };
 
   return (
-    <div>
+    <div >
       {/* Add a kitchen */}
       <div className="flex grid content-center bg-sky-300">
         <form className="flex m-3" onSubmit={handleFormSubmit}>
@@ -92,7 +92,7 @@ function Kitchen(props) {
           </button>
         </form>
       </div>
-      <div className="flex justify-center bg-sky-200 h-screen">
+      <div className="flex justify-center bg-sky-200">
         <div className="kitchen-card block px-6 mx-6 rounded-lg w-full grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
           {kitchen.map((k, i) => {
             //I think that this is where our storage reroute should be handled
