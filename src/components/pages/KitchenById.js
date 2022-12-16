@@ -202,7 +202,7 @@ function KitchenById(props) {
               );
             });
             return (
-              <div className='border rounded m-4'>
+              <div className='border rounded pb-2 m-4'>
                 <div className="mr-2" key={s.id}>
                   <h1 className="mx-6 flex justify-center text-lg font-semibold">
                     {s.storageType}
