@@ -178,7 +178,8 @@ function KitchenById(props) {
               // console.log(p);
 
               return (
-                <div className="mx-6 flex justify-between" key={p.id}>
+                <div className="mx-6 flex justify-between border m-2" key={p.id}>
+                  <div className="flex flex-col">
                   <h2 key={"a" + p.id} className="text-green-700">
                     {p.name}
                   </h2>
@@ -188,6 +189,7 @@ function KitchenById(props) {
                   <p key={"a" + p.id} className="text-red-700">
                     Expires: {p.expirationDate}
                   </p>
+                  </div>
                   <button
                     key={"a" + p.id}
                     className="inline-block m-2 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
@@ -200,7 +202,7 @@ function KitchenById(props) {
               );
             });
             return (
-              <div className='border rounded mb-1'>
+              <div className='border rounded m-4'>
                 <div className="mr-2" key={s.id}>
                   <h1 className="mx-6 flex justify-center text-lg font-semibold">
                     {s.storageType}
@@ -303,7 +305,7 @@ function KitchenById(props) {
         </div>
           {recipeResults.map((r, i) => {
             return (
-              <div className="mb-1 grid grid-cols-1 lg:grid-cols-2 border rounded">
+              <div className="p-6 mb-1 grid grid-cols-1 lg:grid-cols-2 border rounded">
                 <img
                   className="rounded"
                   src={r.recipe.images.SMALL.url}
