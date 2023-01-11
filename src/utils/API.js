@@ -1,8 +1,8 @@
 // DEV SERVER
-// const URL_PREFIX = 'http://localhost:3001'
+const URL_PREFIX = 'http://localhost:3001'
 
 // LIVE SERVER
-const URL_PREFIX = 'https://wastenot.herokuapp.com'
+// const URL_PREFIX = 'https://wastenot.herokuapp.com'
 
 const API = {
     //login user
@@ -120,8 +120,8 @@ const API = {
     },
 
     //Get Donation list
-    getDonations: (token, userId)=>{
-        return fetch(`${URL_PREFIX}/api/donation/user/${userId}`,{
+    getDonations: (token, kitchenId)=>{
+        return fetch(`${URL_PREFIX}/api/donation/kitchen/${kitchenId}`,{
             method:"GET",
             headers:{
                 "Authorization": `Bearer ${token}`,
@@ -153,8 +153,8 @@ const API = {
     },
 
     //Get Shopping list
-    getShopping: (token, userId)=>{
-        return fetch(`${URL_PREFIX}/api/shopping/user/${userId}`,{
+    getShopping: (token, kitchenId)=>{
+        return fetch(`${URL_PREFIX}/api/shopping/kitchen/${kitchenId}`,{
             method:"GET",
             headers:{
                 "Authorization": `Bearer ${token}`,

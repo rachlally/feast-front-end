@@ -13,6 +13,8 @@ import Our404 from "./components/pages/Our404";
 
 import KitchenById from "./components/pages/KitchenById";
 
+import DonationById from "./components/pages/DonationById"
+
 function App() {
   const [userId, setUserId] = useState(0);
   // const [kitchenId, setKitchenId] = useState(0)
@@ -94,14 +96,10 @@ function App() {
                 />
               }
             />
-            <Route
-              path="/shoppinglist"
-              element={<ShoppingList userId={userId} token={token} />}
-            />
-            <Route
+            {/* <Route
               path="/donationlist"
               element={<DonationList userId={userId} token={token} />}
-            />
+            /> */}
             {/* <Route path="/calendar" element={<Calendar />} /> */}
             <Route
               path="/kitchen"
@@ -110,6 +108,14 @@ function App() {
             <Route
               path="/kitchen/:id"
               element={<KitchenById userId={userId} token={token} />}
+            />
+            <Route
+              path="/shopping/:id"
+              element={<ShoppingList userId={userId} token={token} />}
+            />
+            <Route
+              path="/donation/:id"
+              element={<DonationById userId={userId} token={token} />}
             />
             <Route path="*" element={<Our404/>}/>
           </Routes>
