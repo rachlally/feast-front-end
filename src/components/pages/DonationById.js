@@ -47,8 +47,7 @@ function DonationById(props) {
   };
 
   const DatePicker = () => {
-    const [datePurchased, setDatePurchased] = useState("");
-    const [expirationDate, setExpirationDate] = useState("");
+    
     const [date, setDate] = useState({
       startDate: null,
       endDate: null,
@@ -61,7 +60,7 @@ function DonationById(props) {
       // console.log(newDate.endDate);
       setDatePurchased(newDate.startDate);
       setExpirationDate(newDate.endDate);
-      // setDate(date);
+     
     };
 
     return (
