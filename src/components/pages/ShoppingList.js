@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Products from "../pages/Products";
 import API from "../../utils/API";
 // import DateChange from './DatePurchased';
@@ -9,18 +10,23 @@ import '../../styles/ShoppingList.css';
 
 // New
 function ShoppingList(props) {
+  const location = useLocation();
   const [newProductName, setNewProductName] = useState("");
   const [datePurchased, setDatePurchased] = useState("")
   const [expirationDate, setExpirationDate] = useState("")
   const [shopping, setShopping] = useState([]);
 
+  const kitchenId = location.state.kitchenId;
+  const kitchenName = location.state.kitchenName;
+  const shoppingId = location.state.shoppingId;
+
   // console.log("EXIT EXIT NOW!!");
   useEffect(() => {
-    API.getShopping(props.token, props.userId.id).then((data) => {
+    API.getShopping(props.token, kitchenId).then((data) => {
         // console.log(data);
         setShopping(data);
       });
-    }, [props.userId]);
+    }, [kitchenId]);
 
 
   // WIP add new product to a user shopping list
@@ -38,7 +44,7 @@ function ShoppingList(props) {
         //dates are passed in as YYYY-MM-DD
         // datePurchased: datePurchased,
         // expirationDate: expirationDate,
-        ShoppingListId: shopping[0].id
+        ShoppingListId: shoppingId
       };
       setNewProductName("")
       // setDatePurchased("")
@@ -46,7 +52,7 @@ function ShoppingList(props) {
       console.log(newListItem)
       
       API.addToShopping(newListItem, props.token).then((newShoppingData) => {
-          API.getShopping(props.token, props.userId.id).then(data => {
+          API.getShopping(props.token, kitchenId).then(data => {
               console.log(data)
               setShopping(data)
           })
@@ -55,7 +61,7 @@ function ShoppingList(props) {
 
     const deleteShoppingItem = (id)=> {
       API.deleteShopping(id, props.token).then ((data)=> {
-        API.getShopping(props.token, props.userId.id).then(data => {
+        API.getShopping(props.token, kitchenId).then(data => {
           setShopping(data)
         })
       })

@@ -4,7 +4,6 @@ import Datepicker from "react-tailwindcss-datepicker";
 import { useLocation } from "react-router-dom";
 import "../../styles/KitchenById.css";
 
-
 // console.log(window.location.href)
 
 function KitchenById(props) {
@@ -60,7 +59,6 @@ function KitchenById(props) {
       });
   };
 
-
   const handleAddProduct = (id) => {
     console.log(props);
     const newProduct = {
@@ -111,7 +109,6 @@ function KitchenById(props) {
         setStorages(data);
       });
     });
-
   };
 
   const DatePicker = () => {
@@ -140,36 +137,37 @@ function KitchenById(props) {
 
   return (
     <div className="bg-sky-300">
-      <h1 className="flex text-xl font-semibold justify-center">
-        Welcome to your {kitchenName} kitchen!
+      <h1 className="flex text-xl font-semibold text-center justify-center">
+        Welcome to your kitchen: {kitchenName}
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-3">
-        <div className="overflow-auto h-screen">
+        <div className="overflow-auto h-screen border rounded">
           <div className="flex justify-between mx-6 mb-1">
             <div>
-              <form className="flex" onSubmit={handleAddStorageForm}>
+              <form className="flex justify-between" onSubmit={handleAddStorageForm}>
                 {/* Container for select storage and dropdown */}
                 <div>
                   <p>Set storage type:</p>
-                  <select
-                    className="form-field block pl-3 pr-12 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    value={newStorageType}
-                    onChange={(e) => setNewStorageType(e.target.value)}
-                  >
-                    {/* refers to reasonForMessage */}
-                    <option value="">Select Storage type</option>
-                    <option value="Refrigerator">Refrigerator</option>
-                    <option value="Freezer">Freezer</option>
-                    <option value="Pantry">Pantry</option>
-                    <option value="Outdoor Fridge">Outdoor Fridge</option>
+ 
+                    <select
+                      className="form-field block pl-3 pr-12 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      value={newStorageType}
+                      onChange={(e) => setNewStorageType(e.target.value)}
+                    >
+                      {/* refers to reasonForMessage */}
+                      <option value="">Select Storage type</option>
+                      <option value="Refrigerator">Refrigerator</option>
+                      <option value="Freezer">Freezer</option>
+                      <option value="Pantry">Pantry</option>
+                      <option value="Outdoor Fridge">Outdoor Fridge</option>
 
-                    <option value="Walk In Freezer">Walk In Freezer</option>
-                    {/* <option value="other"><input>Other</input></option> */}
-                  </select>
+                      <option value="Walk In Freezer">Walk In Freezer</option>
+                      {/* <option value="other"><input>Other</input></option> */}
+                    </select>
                 </div>
-                <button className="inline-block mt-6 ml-1 px-4 py-1.5 bg-green-500 text-white font-medium text-s leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">
-                  Create Storage
-                </button>
+                  <button className="inline-block mt-6 ml-1 px-4 py-1.5 bg-green-500 text-white font-medium text-s leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">
+                    Create Storage
+                  </button>
               </form>
             </div>
           </div>
@@ -178,18 +176,23 @@ function KitchenById(props) {
               // console.log(p);
 
               return (
-                <div className="mx-6 flex justify-between" key={p.id}>
-                  <h2 key={"a" + p.id} className="text-green-700">
-                    {p.name}
-                  </h2>
-                  <p key={"a" + p.id} className="text-blue-500">
-                    Purchased: {p.datePurchased}
-                  </p>
-                  <p key={"a" + p.id} className="text-red-700">
-                    Expires: {p.expirationDate}
-                  </p>
+                <div
+                  className="mx-6 flex justify-between border m-2"
+                  key={p.id}
+                >
+                  <div className="flex flex-col">
+                    <h2 key={"a" + p.id} className="text-green-700">
+                      {p.name}
+                    </h2>
+                    <p key={"b" + p.id} className="text-blue-500">
+                      Purchased: {p.datePurchased}
+                    </p>
+                    <p key={"c" + p.id} className="text-red-700">
+                      Expires: {p.expirationDate}
+                    </p>
+                  </div>
                   <button
-                    key={"a" + p.id}
+                    key={"d" + p.id}
                     className="inline-block m-2 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
                     type="button"
                     onClick={() => handleStorageProductDelete(p.id)}
@@ -200,7 +203,7 @@ function KitchenById(props) {
               );
             });
             return (
-              <div className='border rounded mb-1'>
+              <div className="border rounded pb-2 m-4">
                 <div className="mr-2" key={s.id}>
                   <h1 className="mx-6 flex justify-center text-lg font-semibold">
                     {s.storageType}
@@ -216,6 +219,7 @@ function KitchenById(props) {
                         className="ml-6 form-control border pl-3 pb-1.5 pt-1 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         placeholder="Add an item"
                       />
+                      
                       <div className="mx-6">
                         <DatePicker />
                       </div>
@@ -281,8 +285,8 @@ function KitchenById(props) {
             );
           })}
         </div>
-        <div className="overflow-auto h-screen">
-        <div>
+        <div className="overflow-auto h-screen border rounded mx-4">
+          <div>
             <form
               className="flex justify-between mx-6 mb-1"
               onSubmit={recipeFormSubmit}
@@ -300,10 +304,10 @@ function KitchenById(props) {
                 Search recipes!
               </button>
             </form>
-        </div>
+          </div>
           {recipeResults.map((r, i) => {
             return (
-              <div className="mb-1 grid grid-cols-1 lg:grid-cols-2 border rounded">
+              <div className="p-6 mb-1 grid grid-cols-1 lg:grid-cols-2 border m-2 rounded">
                 <img
                   className="rounded"
                   src={r.recipe.images.SMALL.url}

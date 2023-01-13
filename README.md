@@ -43,7 +43,12 @@ Users are encouraged to use what products they have.  This is done by the Edamam
 
 ## Screenshot
 
-![Deployed API](DeployedAPI.png)
+![Kitchen](./src/assets/KitchenView.png)
+
+![KitchenAndRecipe](./src/assets/KitchenAndRecipe.png)
+
+![Donations](./src/assets/Donation.png)
+
 
 ## Credits
 

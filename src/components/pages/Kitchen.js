@@ -46,6 +46,28 @@ function Kitchen(props) {
     });
   };
 
+  const handleDonationClick = (id) =>{
+    console.log("test")
+
+    API.getDonations(props.token, id).then((data)=>{
+      console.log(data);
+      navigate(`/donation/${data[0].id}`, {
+        state: { data:data[0], kitchenName:data[0].Kitchen.name, kitchenId: data[0].KitchenId, donationId: data[0].id },
+      });
+    })
+  }
+
+  const handleShoppingClick = (id) =>{
+    console.log("test")
+
+    API.getShopping(props.token, id).then((data)=>{
+      console.log(data);
+      navigate(`/shopping/${data[0].id}`, {
+        state: { data:data[0], kitchenName:data[0].Kitchen.name, kitchenId: data[0].KitchenId, shoppingId: data[0].id },
+      });
+    })
+  }
+
   // console.log(kitchens)
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -69,7 +91,7 @@ function Kitchen(props) {
   };
 
   return (
-    <div>
+    <div className="h-screen bg-sky-300">
       {/* Add a kitchen */}
       <div className="flex grid content-center bg-sky-300">
         <form className="flex m-3" onSubmit={handleFormSubmit}>
@@ -92,7 +114,7 @@ function Kitchen(props) {
           </button>
         </form>
       </div>
-      <div className="flex justify-center bg-sky-200 h-screen">
+      <div className="flex justify-center text-center bg-sky-200">
         <div className="kitchen-card block px-6 mx-6 rounded-lg w-full grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
           {kitchen.map((k, i) => {
             //I think that this is where our storage reroute should be handled
@@ -115,7 +137,7 @@ function Kitchen(props) {
                       {/* It has the following storage type: {storages} */}
                     </div>
                     {/* Container div for view/delete buttons */}
-                    <div className="flex justify-between">
+                    <div className="flex justify-between justify-around flex-wrap">
                       <button
                         key={"e" + k.id}
                         className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
@@ -124,6 +146,26 @@ function Kitchen(props) {
                       >
                         View Kitchen
                       </button>
+
+
+                      <button
+                        key={"g" + k.id}
+                        className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                        type="button"
+                        onClick={() => handleDonationClick(k.id)}
+                      >
+                        View Donation List
+                      </button>
+
+                      <button
+                        key={"h" + k.id}
+                        className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                        type="button"
+                        onClick={() => handleShoppingClick(k.id)}
+                      >
+                        View Shopping List
+                      </button>
+
                       <button
                         key={"f" + k.id}
                         className="inline-block m-3 px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
@@ -132,6 +174,7 @@ function Kitchen(props) {
                       >
                         Delete Kitchen
                       </button>
+
                     </div>
                   </div>
                 </div>
