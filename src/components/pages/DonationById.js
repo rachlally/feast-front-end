@@ -10,6 +10,10 @@ function DonationById(props) {
   const [newProductName, setNewProductName] = useState("");
   const [datePurchased, setDatePurchased] = useState("");
   const [expirationDate, setExpirationDate] = useState("");
+  const [date, setDate] = useState({
+    startDate: "",
+    endDate: "",
+  });
   // const donationListData = location.state.data
   const kitchenId = location.state.kitchenId;
   const kitchenName = location.state.kitchenName;
@@ -18,12 +22,12 @@ function DonationById(props) {
 
   useEffect(() => {
     API.getDonations(props.token, kitchenId).then((data) => {
-      console.log(data);
+      // console.log(data);
       // console.log(donationListData)
       setDonationList(data);
       // console.log(donationList);
     });
-  }, [kitchenId]);
+  }, [kitchenId, props.token]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -40,24 +44,22 @@ function DonationById(props) {
 
     API.addToDonation(newListItem, props.token).then((data) => {
       API.getDonations(props.token, kitchenId).then((data) => {
-        console.log(data);
+        // console.log(data);
         setDonationList(data);
       });
     });
   };
 
   const DatePicker = () => {
-    const [date, setDate] = useState({
-      startDate: null,
-      endDate: null,
-    });
-
     const handleDateChange = (newDate) => {
       // console.log(newDate);
       // console.log(newDate.startDate);
       // console.log(newDate.endDate);
       setDatePurchased(newDate.startDate);
       setExpirationDate(newDate.endDate);
+      setDate(newDate)
+      console.log(newDate);
+      // setDate("")
     };
 
     return (
@@ -82,13 +84,8 @@ function DonationById(props) {
 
   return (
     <div className="bg-sky-300 font-helvetica justify-center">
-      <h1 className="text-white font-helvetica font-bold">
-        {donationList.map((dl, i) => {
-          return <div className="flex justify-center">{dl.name}</div>;
-        })}
-      </h1>
-      <p className="text-m text-bold flex justify-center">
-        Donation List for {kitchenName} at id {kitchenId}
+      <p className="text-m text-bold flex justify-center text-white font-helvetica font-bold">
+        Donation List for {kitchenName} kitchen
       </p>
 
       <form
@@ -111,28 +108,39 @@ function DonationById(props) {
         </button>
       </form>
 
-      <ul className="flex justify-center">
-        <li className="m-4 p-4 font-semibold">
-          {donationList.map((d, i) => {
-            const products = d.Products.map((p, i) => {
-              return (
-                <div key={i} className="flex">
-                  <p key={"a" + p.id}>{p.name}</p>
-                  <p key={"b" + p.id} className="text-red-600">
-                    Expires on {p.expirationDate}
-                    <button
-                      className="ml-6 float-right inline-block px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
-                      onClick={() => deleteItem(p.id)}
-                    >
-                      Delete Item
-                    </button>
-                  </p>
-                </div>
-              );
-            });
-            return <div key={d.id}>{products}</div>;
-          })}
-        </li>
+      <ul className="flex flex-col border-4 m-3">
+        <p className="text-m text-bold flex justify-center text-white font-helvetica font-bold">
+          Your list items:
+        </p>
+        <div className="flex justify-around px-2 mx-2 pt-2 mt-2">
+          <p>Name</p>
+          <p>Expiration</p>
+          <p>Delete</p>
+        </div>
+
+        {/* <li className="font-semibold flex justify-center"> */}
+        {donationList.map((d, i) => {
+          const products = d.Products.map((p, i) => {
+            return (
+              <div key={i} className="flex p-2 m-2 border-2 justify-around">
+                <p className="" key={"a" + p.id}>
+                  {p.name}
+                </p>
+                <p key={"b" + p.id} className="text-red-600 ">
+                  {p.expirationDate}
+                </p>
+                <button
+                  className="float-right inline-block px-4 py-1.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
+                  onClick={() => deleteItem(p.id)}
+                >
+                  Delete Item
+                </button>
+              </div>
+            );
+          });
+          return <div key={d.id}>{products}</div>;
+        })}
+        {/* </li> */}
       </ul>
 
       <div className="flex justify-center pb-20 pt-5">

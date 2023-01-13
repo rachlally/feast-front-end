@@ -9,6 +9,7 @@ function Kitchen(props) {
   const [newKitchenLocation, setNewKitchenLocation] = useState("");
   const [newKitchenName, setNewKitchenName] = useState("");
   const navigate = useNavigate();
+  // console.log(props)
 
   // Not currently being used
   // const [storages, setStorages] = useState([])
@@ -46,27 +47,37 @@ function Kitchen(props) {
     });
   };
 
-  const handleDonationClick = (id) =>{
-    console.log("test")
+  const handleDonationClick = (id) => {
+    console.log("test");
 
-    API.getDonations(props.token, id).then((data)=>{
+    API.getDonations(props.token, id).then((data) => {
       console.log(data);
       navigate(`/donation/${data[0].id}`, {
-        state: { data:data[0], kitchenName:data[0].Kitchen.name, kitchenId: data[0].KitchenId, donationId: data[0].id },
+        state: {
+          data: data[0],
+          kitchenName: data[0].Kitchen.name,
+          kitchenId: data[0].KitchenId,
+          donationId: data[0].id,
+        },
       });
-    })
-  }
+    });
+  };
 
-  const handleShoppingClick = (id) =>{
-    console.log("test")
+  const handleShoppingClick = (id) => {
+    console.log("test");
 
-    API.getShopping(props.token, id).then((data)=>{
+    API.getShopping(props.token, id).then((data) => {
       console.log(data);
       navigate(`/shopping/${data[0].id}`, {
-        state: { data:data[0], kitchenName:data[0].Kitchen.name, kitchenId: data[0].KitchenId, shoppingId: data[0].id },
+        state: {
+          data: data[0],
+          kitchenName: data[0].Kitchen.name,
+          kitchenId: data[0].KitchenId,
+          shoppingId: data[0].id,
+        },
       });
-    })
-  }
+    });
+  };
 
   // console.log(kitchens)
   const handleFormSubmit = (e) => {
@@ -114,30 +125,34 @@ function Kitchen(props) {
           </button>
         </form>
       </div>
-      <div className="flex justify-center text-center bg-sky-200">
+      <div className="flex flex-col text-xl text-bold justify-center text-center bg-sky-200">
+        <h1>{props.userId.name}'s Kitchen(s)</h1>
+        
         <div className="kitchen-card block px-6 mx-6 rounded-lg w-full grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
           {kitchen.map((k, i) => {
             //I think that this is where our storage reroute should be handled
             return (
-              <>
-                {/* kitchen lists */}
-
-                <div className="flex flex-col items-center bg-white p-3 m-3 rounded-lg shadow-xl shadow-green-200 max-w-sm" key={"z" + k.id}>
+              
+                <div
+                  key={"z" + k.id}
+                  className="flex flex-col items-center bg-white p-3 m-3 rounded-lg shadow-xl shadow-green-200 max-w-sm"
+                >
                   <div key={"a" + k.id} className="text-xl text-bold">
-                    {k.User.name}'s {k.name} kitchen
+                    {k.name} Kitchen
                   </div>
-                  <div className="mx-4">
+                  <br/>
+                  <div key={"i" + k.id} className="mx-4">
                     <div key={"b" + k.id}>
                       This kitchen is found at zipcode: {k.zipCode}
-                    </div>
-                    <div key={"c" + k.id}>
-                      This kitchen belongs to: {k.User.name}
                     </div>
                     <div key={"d" + k.id}>
                       {/* It has the following storage type: {storages} */}
                     </div>
                     {/* Container div for view/delete buttons */}
-                    <div className="flex justify-between justify-around flex-wrap">
+                    <div
+                      key={"j" + k.id}
+                      className="flex justify-between justify-around flex-wrap"
+                    >
                       <button
                         key={"e" + k.id}
                         className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
@@ -146,7 +161,6 @@ function Kitchen(props) {
                       >
                         View Kitchen
                       </button>
-
 
                       <button
                         key={"g" + k.id}
@@ -174,11 +188,10 @@ function Kitchen(props) {
                       >
                         Delete Kitchen
                       </button>
-
                     </div>
                   </div>
                 </div>
-              </>
+              
             );
           })}
         </div>

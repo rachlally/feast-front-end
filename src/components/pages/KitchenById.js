@@ -16,6 +16,10 @@ function KitchenById(props) {
   const [product, setProduct] = useState([]);
   const [datePurchased, setDatePurchased] = useState(null);
   const [expirationDate, setExpirationDate] = useState(null);
+  const [date, setDate] = useState({
+    startDate: null,
+    endDate: null,
+  });
 
   const location = useLocation();
   const kitchenId = location.state.kitchenId;
@@ -28,7 +32,7 @@ function KitchenById(props) {
       // console.log(data);
       setStorages(data);
     });
-  }, [kitchenId]);
+  }, [kitchenId, props.token]);
 
   const handleAddStorageForm = (e) => {
     e.preventDefault();
@@ -112,10 +116,7 @@ function KitchenById(props) {
   };
 
   const DatePicker = () => {
-    const [date, setDate] = useState({
-      startDate: null,
-      endDate: null,
-    });
+
 
     const handleDateChange = (newDate) => {
       console.log(newDate);
@@ -123,10 +124,14 @@ function KitchenById(props) {
       console.log(newDate.endDate);
       setDatePurchased(newDate.startDate);
       setExpirationDate(newDate.endDate);
+
+      setDate(newDate); 
+      console.log(newDate)
     };
 
     return (
       <Datepicker
+        primaryColor={"green"}
         placeholder={"Date"}
         useRange={false}
         value={date}
@@ -180,7 +185,7 @@ function KitchenById(props) {
                   className="mx-6 flex justify-between border m-2"
                   key={p.id}
                 >
-                  <div className="flex flex-col">
+                  <div key={"e" + p.id} className="flex flex-col">
                     <h2 key={"a" + p.id} className="text-green-700">
                       {p.name}
                     </h2>
@@ -203,7 +208,7 @@ function KitchenById(props) {
               );
             });
             return (
-              <div className="border rounded pb-2 m-4">
+              <div key={"o" + s.id} className="border rounded pb-2 m-4">
                 <div className="mr-2" key={s.id}>
                   <h1 className="mx-6 flex justify-center text-lg font-semibold">
                     {s.storageType}
@@ -211,7 +216,7 @@ function KitchenById(props) {
                   {/* Add a product form */}
                   <form className="flex grid mb-1" key={"a" + s.id}>
                     {/* Container for input forms */}
-                    <div className="flex justify-between mb-1">
+                    <div key={"o" + s.id} className="flex justify-between mb-1">
                       <input
                         key={"b" + s.id}
                         value={newProductName}
@@ -220,7 +225,7 @@ function KitchenById(props) {
                         placeholder="Add an item"
                       />
                       
-                      <div className="mx-6">
+                      <div key={"q" + s.id} className="mx-6">
                         <DatePicker />
                       </div>
                     </div>
