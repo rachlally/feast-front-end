@@ -1,5 +1,5 @@
 // DEV SERVER
-// const URL_PREFIX = 'http://localhost:3001'
+// // const URL_PREFIX = 'http://localhost:3001'
 import Geocode from "react-geocode";
 
 // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.

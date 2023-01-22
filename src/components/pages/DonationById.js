@@ -65,6 +65,13 @@ function DonationById(props) {
   };
 
   const DatePicker = () => {
+    
+    const [date, setDate] = useState({
+      startDate: null,
+      endDate: null,
+    })
+    ;
+
     const handleDateChange = (newDate) => {
       // console.log(newDate);
       // console.log(newDate.startDate);
@@ -74,6 +81,7 @@ function DonationById(props) {
       setDate(newDate);
       console.log(newDate);
       // setDate("")
+     
     };
 
     return (
