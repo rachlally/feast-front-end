@@ -138,7 +138,7 @@ function Kitchen(props) {
                   className="flex flex-col items-center bg-white p-3 m-3 rounded-lg shadow-xl shadow-green-200 max-w-sm"
                 >
                   <div key={"a" + k.id} className="text-xl text-bold">
-                    {k.name} Kitchen
+                    {k.name}
                   </div>
                   <br/>
                   <div key={"i" + k.id} className="mx-4">

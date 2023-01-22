@@ -14,6 +14,13 @@ function DonationById(props) {
     startDate: "",
     endDate: "",
   });
+
+  const [coordinates, setCoordinates] = useState({
+    lat: 47.606209,
+    lng: -122.332069,
+  });
+
+  const [loading, setLoading] = useState(true);
   // const donationListData = location.state.data
   const kitchenId = location.state.kitchenId;
   const kitchenName = location.state.kitchenName;
@@ -26,6 +33,13 @@ function DonationById(props) {
       // console.log(donationListData)
       setDonationList(data);
       // console.log(donationList);
+      var zipCode = data[0].Kitchen.zipCode;
+      console.log(zipCode);
+      API.getCoordinatesFromZip(zipCode).then((data) => {
+        console.log(data);
+        setCoordinates(data);
+        setLoading(false);
+      });
     });
   }, [kitchenId, props.token]);
 
@@ -57,7 +71,7 @@ function DonationById(props) {
       // console.log(newDate.endDate);
       setDatePurchased(newDate.startDate);
       setExpirationDate(newDate.endDate);
-      setDate(newDate)
+      setDate(newDate);
       console.log(newDate);
       // setDate("")
     };
@@ -83,9 +97,9 @@ function DonationById(props) {
   };
 
   return (
-    <div className="bg-sky-300 font-helvetica justify-center">
+    <div className="bg-sky-300 font-helvetica justify-center pb-20 ">
       <p className="text-m text-bold flex justify-center text-white font-helvetica font-bold">
-        Donation List for {kitchenName} kitchen
+        Donation List for kitchen: {kitchenName}
       </p>
 
       <form
@@ -108,14 +122,20 @@ function DonationById(props) {
         </button>
       </form>
 
-      <ul className="flex flex-col border-4 m-3">
-        <p className="text-m text-bold flex justify-center text-white font-helvetica font-bold">
-          Your list items:
-        </p>
-        <div className="flex justify-around px-2 mx-2 pt-2 mt-2">
-          <p>Name</p>
-          <p>Expiration</p>
-          <p>Delete</p>
+      <div className="flex justify-center pt-5">
+        {loading ? null : <Map lat={coordinates.lat} lng={coordinates.lng} />}
+      </div>
+
+      <ul className="flex flex-col border-4 m-3 ">
+        <div>
+          <p className="text-m text-bold flex justify-center text-white font-helvetica font-bold">
+            Your list items:
+          </p>
+          <div className="flex justify-around px-2 mx-2 pt-2 mt-2 ">
+            <p>Name</p>
+            <p>Expiration</p>
+            <p>Delete</p>
+          </div>
         </div>
 
         {/* <li className="font-semibold flex justify-center"> */}
@@ -142,10 +162,6 @@ function DonationById(props) {
         })}
         {/* </li> */}
       </ul>
-
-      <div className="flex justify-center pb-20 pt-5">
-        <Map />
-      </div>
     </div>
   );
 }

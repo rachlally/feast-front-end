@@ -6,7 +6,6 @@ import API from "./utils/API";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/pages/Login";
 import ShoppingList from "./components/pages/ShoppingList";
-import DonationList from "./components/pages/DonationList";
 // import Calendar from "./components/pages/Calendar";
 import Kitchen from "./components/pages/Kitchen";
 import Our404 from "./components/pages/Our404";

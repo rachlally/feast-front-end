@@ -73,7 +73,7 @@ function ShoppingList(props) {
      
       <div>
       <p className="text-m text-bold flex justify-center text-white font-helvetica font-bold pb-4">
-        Shopping List for {kitchenName} kitchen
+        Shopping List for kitchen: {kitchenName}
       </p>
 
       <form
@@ -102,7 +102,7 @@ function ShoppingList(props) {
             
             // Returning product names
             return ( 
-            <div key={i} className="flex justify-between items-center">
+            <div key={i} className="flex justify-between items-center p-2 m-2 border-2 ">
               {p.name}
               <button 
                 className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
