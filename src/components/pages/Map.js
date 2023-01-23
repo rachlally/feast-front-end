@@ -15,7 +15,7 @@ import {
 
 import "../../styles/DonationList.css";
 
-function MapInit() {
+function MapInit({lat, lng}) {
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVq588qSxiAVHeDMayN1kY-qnHdVMF6CQ&libraries=places&callback=initAutocomplete"
     async
@@ -27,15 +27,16 @@ function MapInit() {
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
-      <Map />
+      <Map lat={lat} lng={lng}/>
   );
 }
 
-function Map() {
+function Map({lat, lng}) {
+  console.log(lat,lng)
     // let autocomplete;
     const [autocomplete, setautocomplete ] = useState(null)
-    const [centerLatCoordinates, setCenterLatCoordinates ] = useState(47.606209)
-    const [centerLongCoordinates, setCenterLongCoordinates ] = useState(-122.332069)
+    const [centerLatCoordinates, setCenterLatCoordinates ] = useState(lat)
+    const [centerLongCoordinates, setCenterLongCoordinates ] = useState(lng)
 
 
     function onLoad (a) {
