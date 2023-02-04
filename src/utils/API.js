@@ -1,12 +1,12 @@
 // DEV SERVER
 import Geocode from "react-geocode";
-const URL_PREFIX = 'http://localhost:3001'
+// const URL_PREFIX = 'http://localhost:3001'
 
 // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_KEY);
 
 // LIVE SERVER
-// const URL_PREFIX = "https://wastenot.herokuapp.com";
+const URL_PREFIX = "https://wastenot.herokuapp.com";
 
 const API = {
   //login user
