@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Products from "../pages/Products";
+// import Products from "../pages/Products";
 import API from "../../utils/API";
 // import DateChange from './DatePurchased';
-import Datepicker from 'react-tailwindcss-datepicker';
-import { isTemplateElement } from "@babel/types";
+// import Datepicker from 'react-tailwindcss-datepicker';
+// import { isTemplateElement } from "@babel/types";
 // import ExpirationDate from "./ExpirationDate";
 import '../../styles/ShoppingList.css';
 
@@ -12,8 +12,8 @@ import '../../styles/ShoppingList.css';
 function ShoppingList(props) {
   const location = useLocation();
   const [newProductName, setNewProductName] = useState("");
-  const [datePurchased, setDatePurchased] = useState("")
-  const [expirationDate, setExpirationDate] = useState("")
+  // const [datePurchased, setDatePurchased] = useState("")
+  // const [expirationDate, setExpirationDate] = useState("")
   const [shopping, setShopping] = useState([]);
 
   const kitchenId = location.state.kitchenId;
@@ -26,7 +26,7 @@ function ShoppingList(props) {
         // console.log(data);
         setShopping(data);
       });
-    }, [kitchenId]);
+    }, [kitchenId, props.token]);
 
 
   // WIP add new product to a user shopping list

@@ -14,7 +14,6 @@ function DonationById(props) {
     startDate: "",
     endDate: "",
   });
-
   const [coordinates, setCoordinates] = useState({
     lat: 47.606209,
     lng: -122.332069,
@@ -34,9 +33,9 @@ function DonationById(props) {
       setDonationList(data);
       // console.log(donationList);
       var zipCode = data[0].Kitchen.zipCode;
-      console.log(zipCode);
+      // console.log(zipCode);
       API.getCoordinatesFromZip(zipCode).then((data) => {
-        console.log(data);
+        // console.log(data);
         setCoordinates(data);
         setLoading(false);
       });
@@ -65,12 +64,7 @@ function DonationById(props) {
   };
 
   const DatePicker = () => {
-    
-    const [date, setDate] = useState({
-      startDate: null,
-      endDate: null,
-    })
-    ;
+ 
 
     const handleDateChange = (newDate) => {
       // console.log(newDate);
