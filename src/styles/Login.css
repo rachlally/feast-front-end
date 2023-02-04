@@ -5,4 +5,5 @@
 .login-card {
     height: 50vh;
     margin-top: 10vh;
+    block-size: fit-content;
 }

@@ -51,7 +51,7 @@ function Kitchen(props) {
     console.log("test");
 
     API.getDonations(props.token, id).then((data) => {
-      console.log(data);
+      // console.log(data);
       navigate(`/donation/${data[0].id}`, {
         state: {
           data: data[0],
@@ -102,7 +102,7 @@ function Kitchen(props) {
   };
 
   return (
-    <div className="h-screen bg-sky-300">
+    <div className="h-screen overflow-auto bg-sky-300">
       {/* Add a kitchen */}
       <div className="flex grid content-center bg-sky-300">
         <form className="flex m-3" onSubmit={handleFormSubmit}>
@@ -118,7 +118,12 @@ function Kitchen(props) {
             className="bg-white text-black rounded-lg mr-1 mb-1 mt-0.5 leading-tight w-full h-10 appearance-none block"
             placeholder="Zipcode, please?"
             value={newKitchenLocation}
-            onChange={(e) => setNewKitchenLocation(e.target.value)}
+            // onChange={(e) => setNewKitchenLocation(e.target.value)}
+
+            onChange={(e)=>{
+              const {value} = e.target;
+              setNewKitchenLocation(value.replace(/[^\d{5}]$/, "").substr(0, 5));
+            }}
           />
           <button className="inline-block px-4 mb-1 mt-0.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">
             Create Kitchen
@@ -128,7 +133,7 @@ function Kitchen(props) {
       <div className="flex flex-col text-xl text-bold justify-center text-center bg-sky-200">
         <h1>{props.userId.name}'s Kitchen(s)</h1>
         
-        <div className="kitchen-card block px-6 mx-6 rounded-lg w-full grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+        <div className="kitchen-card block px-6 rounded-lg w-full grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
           {kitchen.map((k, i) => {
             //I think that this is where our storage reroute should be handled
             return (

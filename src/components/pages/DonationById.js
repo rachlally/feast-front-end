@@ -33,9 +33,9 @@ function DonationById(props) {
       setDonationList(data);
       // console.log(donationList);
       var zipCode = data[0].Kitchen.zipCode;
-      console.log(zipCode);
+      // console.log(zipCode);
       API.getCoordinatesFromZip(zipCode).then((data) => {
-        console.log(data);
+        // console.log(data);
         setCoordinates(data);
         setLoading(false);
       });
