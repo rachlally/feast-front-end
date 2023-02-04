@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Products from "../pages/Products";
+// import Products from "../pages/Products";
 import API from "../../utils/API";
 // import DateChange from './DatePurchased';
-import Datepicker from 'react-tailwindcss-datepicker';
-import { isTemplateElement } from "@babel/types";
+// import Datepicker from 'react-tailwindcss-datepicker';
+// import { isTemplateElement } from "@babel/types";
 // import ExpirationDate from "./ExpirationDate";
 import '../../styles/ShoppingList.css';
 
@@ -12,8 +12,8 @@ import '../../styles/ShoppingList.css';
 function ShoppingList(props) {
   const location = useLocation();
   const [newProductName, setNewProductName] = useState("");
-  const [datePurchased, setDatePurchased] = useState("")
-  const [expirationDate, setExpirationDate] = useState("")
+  // const [datePurchased, setDatePurchased] = useState("")
+  // const [expirationDate, setExpirationDate] = useState("")
   const [shopping, setShopping] = useState([]);
 
   const kitchenId = location.state.kitchenId;
@@ -26,7 +26,7 @@ function ShoppingList(props) {
         // console.log(data);
         setShopping(data);
       });
-    }, [kitchenId]);
+    }, [kitchenId, props.token]);
 
 
   // WIP add new product to a user shopping list
@@ -72,24 +72,22 @@ function ShoppingList(props) {
     <div className="h-screen bg-sky-300 font-mono flex flex-col flex-wrap content-center">
      
       <div>
-      <h1 className="text-purple-800 font-mono font-bold underline">
-        {shopping.map((s, i) => {
-      return <div key={i}>{s.name}</div>;
-    })}
-      </h1>
+      <p className="text-m text-bold flex justify-center text-white font-helvetica font-bold pb-4">
+        Shopping List for kitchen: {kitchenName}
+      </p>
 
       <form
         onSubmit={handleFormSubmit}
-      className="pl-4"
+      className="flex flex-col"
       >
         <input
           name="newProductName"
-          placeholder="product"
+          placeholder="Enter product name"
           value={newProductName}
           onChange={(e) => setNewProductName(e.target.value)}
           // className='pl-3'
         />
-        <br />
+        {/* <br /> */}
         <button
           className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
         >
@@ -104,7 +102,7 @@ function ShoppingList(props) {
             
             // Returning product names
             return ( 
-            <div key={i} className="flex justify-between items-center">
+            <div key={i} className="flex justify-between items-center p-2 m-2 border-2 ">
               {p.name}
               <button 
                 className="inline-block m-3 px-4 py-1.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out"
