@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import API from "../../utils/API";
 import Map from "./Map";
 import Datepicker from "react-tailwindcss-datepicker";
+// let xyz;
 
 function DonationById(props) {
   const [donationList, setDonationList] = useState([]);
@@ -18,6 +19,7 @@ function DonationById(props) {
     lat: 47.606209,
     lng: -122.332069,
   });
+  const [clustererData, setClustererData] = useState([])
 
   const [loading, setLoading] = useState(true);
   // const donationListData = location.state.data
@@ -35,9 +37,19 @@ function DonationById(props) {
       var zipCode = data[0].Kitchen.zipCode;
       // console.log(zipCode);
       API.getCoordinatesFromZip(zipCode).then((data) => {
-        // console.log(data);
+        console.log(data);
         setCoordinates(data);
+        console.log(coordinates)
+        
         setLoading(false);
+        API.getFoodBanks(data.lat, data.lng).then((data)=>{
+          // console.log("test")
+          console.log(data.results)
+          setClustererData(data.results)
+          console.log(clustererData)
+          // xyz = data.results
+          // console.log(xyz)
+        })
       });
     });
   }, [kitchenId, props.token]);
@@ -57,7 +69,6 @@ function DonationById(props) {
 
     API.addToDonation(newListItem, props.token).then((data) => {
       API.getDonations(props.token, kitchenId).then((data) => {
-        // console.log(data);
         setDonationList(data);
       });
     });

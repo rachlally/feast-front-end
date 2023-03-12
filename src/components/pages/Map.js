@@ -38,7 +38,7 @@ function Map({ lat, lng }) {
   const [centerLongCoordinates, setCenterLongCoordinates] = useState(lng);
 
   function onLoad(a) {
-    console.log("autocomplete: ", a);
+    // console.log("autocomplete: ", a);
 
     setautocomplete(a);
   }
