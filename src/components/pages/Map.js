@@ -63,9 +63,18 @@ function Map({ lat, lng, foodBanks }) {
     return location.lat + location.lng;
   }
 
+  let iconMarker= new window.google.maps.MarkerImage(
+    "https://www.clipartmax.com/png/small/5-55328_leader-person-icon.png",
+    null, /* size is determined at runtime */
+    null, /* origin is 0,0 */
+    null, /* anchor is bottom center of the scaled image */
+    new window.google.maps.Size(32, 32)
+);
+
   return (
     <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
       <Marker
+        icon={iconMarker}
         position={{ lat: centerLatCoordinates, lng: centerLongCoordinates }}
       />
 
