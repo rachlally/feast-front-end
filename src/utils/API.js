@@ -270,12 +270,11 @@ const API = {
     );
   },
 
-  getFoodBanks: (lat,lng,radius=5000) => {
-    return fetch(`${URL_PREFIX}/api/foodbanks/`, {
+  getFoodBanks: (lat,lng,radius=7500) => {
+    return fetch(`${URL_PREFIX}/api/foodbanks/?lat=${lat}&lng=${lng}&radius=${radius}`, {
       method: "GET",
-      query: {lat,lng,radius},
+      // body: JSON.stringify({lat:lat,lng:lng,radius:radius}),
       headers: {
-        // Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     }).then((res) => res.json());

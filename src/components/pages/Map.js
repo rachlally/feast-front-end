@@ -5,6 +5,7 @@ import React, { useState, useMemo } from "react";
 import {
   GoogleMap,
   useLoadScript,
+  LoadScript,
   Marker,
   Autocomplete,
   SearchBox,
@@ -15,7 +16,8 @@ import {
 
 import "../../styles/DonationList.css";
 
-function MapInit({ lat, lng }) {
+function MapInit({ lat, lng, foodBanks }) {
+  // console.log(foodBanks);
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVq588qSxiAVHeDMayN1kY-qnHdVMF6CQ&libraries=places&callback=initAutocomplete"
     async
@@ -27,12 +29,13 @@ function MapInit({ lat, lng }) {
   });
 
   if (!isLoaded) return <div>Loading...</div>;
-  return <Map lat={lat} lng={lng} />;
+  return <Map lat={lat} lng={lng} foodBanks={foodBanks} />;
 }
 
-function Map({ lat, lng }) {
+function Map({ lat, lng, foodBanks }) {
   // console.log(lat, lng);
   // let autocomplete;
+  // console.log(foodBanks);
   const [autocomplete, setautocomplete] = useState(null);
   const [centerLatCoordinates, setCenterLatCoordinates] = useState(lat);
   const [centerLongCoordinates, setCenterLongCoordinates] = useState(lng);
@@ -48,7 +51,6 @@ function Map({ lat, lng }) {
   );
   let searchLat;
   let searchLong;
-
 
   //onPlaceChange may not be necessary anymore since we have the maps rendering how we want it.
   function onPlaceChanged() {
@@ -89,6 +91,21 @@ function Map({ lat, lng }) {
     () => ({ lat: centerLatCoordinates, lng: centerLongCoordinates }),
     [centerLatCoordinates, centerLongCoordinates]
   );
+
+  let locations = foodBanks.map((f) => {
+    return f.geometry.location;
+  });
+  console.log(locations);
+
+  const markerImage = {
+    imagePath:
+      "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m5.png", // so you must have m1.png, m2.png, m3.png, m4.png, m5.png and m6.png in that folder
+  };
+
+  function createKey(location) {
+    return location.lat + location.lng;
+  }
+  
   return (
     <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
       <Marker
@@ -117,6 +134,14 @@ function Map({ lat, lng }) {
           }}
         />
       </Autocomplete>
+
+      <MarkerClusterer markerImage={markerImage}>
+          {(clusterer) =>
+            locations.map((location) => (
+              <Marker key={createKey(location)} position={location} clusterer={clusterer} />
+            ))
+          }
+        </MarkerClusterer>
     </GoogleMap>
   );
 }
