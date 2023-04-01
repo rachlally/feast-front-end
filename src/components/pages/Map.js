@@ -54,7 +54,7 @@ function Map({ lat, lng, foodBanks }) {
   });
   console.log(locations);
 
-  const markerImage = {
+  const clusterImage = {
     imagePath:
       "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m5.png", // so you must have m1.png, m2.png, m3.png, m4.png, m5.png and m6.png in that folder
   };
@@ -69,7 +69,7 @@ function Map({ lat, lng, foodBanks }) {
         position={{ lat: centerLatCoordinates, lng: centerLongCoordinates }}
       />
 
-      <MarkerClusterer markerImage={markerImage}>
+      <MarkerClusterer clusterImage={clusterImage}>
         {(clusterer) =>
           locations.map((location) => (
             <Marker
