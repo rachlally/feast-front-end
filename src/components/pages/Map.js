@@ -9,13 +9,11 @@ import {
   Autocomplete,
   MarkerClusterer,
 } from "@react-google-maps/api";
-// import { MarkerClusterer } from "@googlemaps/markerclusterer";
-// import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 
 import "../../styles/DonationList.css";
 
 function MapInit({ lat, lng, foodBanks }) {
-  // console.log(foodBanks);
+  console.log(foodBanks);
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVq588qSxiAVHeDMayN1kY-qnHdVMF6CQ&libraries=places&callback=initAutocomplete"
     async
@@ -49,11 +47,6 @@ function Map({ lat, lng, foodBanks }) {
     [centerLatCoordinates, centerLongCoordinates]
   );
 
-  let locations = foodBanks.map((f) => {
-    return f.geometry.location;
-  });
-  console.log(locations);
-
   const clusterImage = {
     imagePath:
       "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m5.png", // so you must have m1.png, m2.png, m3.png, m4.png, m5.png and m6.png in that folder
@@ -80,10 +73,11 @@ function Map({ lat, lng, foodBanks }) {
 
       <MarkerClusterer clusterImage={clusterImage}>
         {(clusterer) =>
-          locations.map((location) => (
+          foodBanks.map((fb) => (
             <Marker
-              key={createKey(location)}
-              position={location}
+              title={fb.name}
+              key={createKey(fb.geometry.location)}
+              position={fb.geometry.location}
               clusterer={clusterer}
             />
           ))
