@@ -68,6 +68,7 @@ function Map({ lat, lng, foodBanks }) {
     <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
       <Marker
         icon={iconMarker}
+        label={"Your zipcode location"}
         position={{ lat: centerLatCoordinates, lng: centerLongCoordinates }}
       />
 
