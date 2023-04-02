@@ -79,6 +79,7 @@ function Map({ lat, lng, foodBanks }) {
               key={createKey(fb.geometry.location)}
               position={fb.geometry.location}
               clusterer={clusterer}
+              onDblClick={() => console.log("Double clicked")}
             />
           ))
         }
