@@ -57,7 +57,7 @@ function Map({ lat, lng, foodBanks }) {
   }
 
   let iconMarker= new window.google.maps.MarkerImage(
-    "https://lh3.googleusercontent.com/bECXZ2YW3j0yIEBVo92ECVqlnlbX9ldYNGrCe0Kr4VGPq-vJ9Xncwvl16uvosukVXPfV=w300",
+    "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
     null, /* size is determined at runtime */
     null, /* origin is 0,0 */
     null, /* anchor is bottom center of the scaled image */
@@ -68,7 +68,6 @@ function Map({ lat, lng, foodBanks }) {
     <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
       <Marker
         icon={iconMarker}
-        label={"Your zipcode location"}
         position={{ lat: centerLatCoordinates, lng: centerLongCoordinates }}
       />
 
@@ -76,7 +75,7 @@ function Map({ lat, lng, foodBanks }) {
         {(clusterer) =>
           foodBanks.map((fb) => (
             <Marker
-              title={fb.name}
+              title={`${fb.name} - ${fb.vicinity}`}
               key={createKey(fb.geometry.location)}
               position={fb.geometry.location}
               clusterer={clusterer}
