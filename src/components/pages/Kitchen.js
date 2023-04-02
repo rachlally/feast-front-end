@@ -148,7 +148,7 @@ function Kitchen(props) {
                   <br/>
                   <div key={"i" + k.id} className="mx-4">
                     <div key={"b" + k.id}>
-                      This kitchen is found at zipcode: {k.zipCode}
+                      This kitchen is found at: {k.zipCode}
                     </div>
                     <div key={"d" + k.id}>
                       {/* It has the following storage type: {storages} */}

@@ -79,7 +79,7 @@ function Map({ lat, lng, foodBanks }) {
               key={createKey(fb.geometry.location)}
               position={fb.geometry.location}
               clusterer={clusterer}
-              onDblClick={() => console.log("Double clicked")}
+              onDblClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${fb.place_id}`,'_blank')}
             />
           ))
         }
