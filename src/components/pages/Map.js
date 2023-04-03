@@ -6,7 +6,6 @@ import {
   GoogleMap,
   useLoadScript,
   Marker,
-  Autocomplete,
   MarkerClusterer,
 } from "@react-google-maps/api";
 
@@ -82,7 +81,7 @@ function Map({ lat, lng, foodBanks }) {
               onDblClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${fb.place_id}`,'_blank')}
             />
           ))
-        }
+}
       </MarkerClusterer>
     </GoogleMap>
   );
