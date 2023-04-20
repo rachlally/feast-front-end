@@ -18,12 +18,15 @@ function DonationById(props) {
     lat: 47.606209,
     lng: -122.332069,
   });
+  const [clustererData, setClustererData] = useState([]);
+  const [foodBanks, setFoodBanks] = useState([])
 
   const [loading, setLoading] = useState(true);
   // const donationListData = location.state.data
   const kitchenId = location.state.kitchenId;
   const kitchenName = location.state.kitchenName;
   const donationId = location.state.donationId;
+  // let foodBanks;
   // console.log(props)
 
   useEffect(() => {
@@ -37,7 +40,16 @@ function DonationById(props) {
       API.getCoordinatesFromZip(zipCode).then((data) => {
         // console.log(data);
         setCoordinates(data);
+        // console.log(coordinates)
         setLoading(false);
+        API.getFoodBanks(data.lat, data.lng).then((data)=>{
+          // console.log("test")
+          // console.log(data.results)
+          setClustererData(data.results)
+          // console.log(clustererData)
+          setFoodBanks(data.results);
+          console.log(foodBanks);
+        })
       });
     });
   }, [kitchenId, props.token]);
@@ -57,7 +69,6 @@ function DonationById(props) {
 
     API.addToDonation(newListItem, props.token).then((data) => {
       API.getDonations(props.token, kitchenId).then((data) => {
-        // console.log(data);
         setDonationList(data);
       });
     });
@@ -125,7 +136,7 @@ function DonationById(props) {
       </form>
 
       <div className="flex justify-center pt-5">
-        {loading ? null : <Map lat={coordinates.lat} lng={coordinates.lng} />}
+        {loading ? null : <Map lat={coordinates.lat} lng={coordinates.lng} foodBanks={foodBanks}/>}
       </div>
 
       <ul className="flex flex-col border-4 m-3 ">

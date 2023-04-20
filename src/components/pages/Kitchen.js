@@ -116,13 +116,13 @@ function Kitchen(props) {
           <input
             name="zipCode"
             className="bg-white text-black rounded-lg mr-1 mb-1 mt-0.5 leading-tight w-full h-10 appearance-none block"
-            placeholder="Zipcode, please?"
+            placeholder="Please enter your kitchen's full address"
             value={newKitchenLocation}
             // onChange={(e) => setNewKitchenLocation(e.target.value)}
 
             onChange={(e)=>{
               const {value} = e.target;
-              setNewKitchenLocation(value.replace(/[^\d{5}]$/, "").substr(0, 5));
+              setNewKitchenLocation(value);
             }}
           />
           <button className="inline-block px-4 mb-1 mt-0.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-300 active:shadow-lg transition duration-150 ease-in-out">
@@ -148,7 +148,7 @@ function Kitchen(props) {
                   <br/>
                   <div key={"i" + k.id} className="mx-4">
                     <div key={"b" + k.id}>
-                      This kitchen is found at zipcode: {k.zipCode}
+                      This kitchen is found at: {k.zipCode}
                     </div>
                     <div key={"d" + k.id}>
                       {/* It has the following storage type: {storages} */}

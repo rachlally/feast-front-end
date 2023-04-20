@@ -1,12 +1,13 @@
-// DEV SERVER
 import Geocode from "react-geocode";
-// const URL_PREFIX = 'http://localhost:3001'
 
 // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_KEY);
 
 // LIVE SERVER
-const URL_PREFIX = "https://wastenot.herokuapp.com";
+// const URL_PREFIX = "https://wastenot.herokuapp.com";
+
+// DEV SERVER
+const URL_PREFIX = 'http://localhost:3001'
 
 const API = {
   //login user
@@ -268,6 +269,22 @@ const API = {
       }
     );
   },
+
+  getFoodBanks: (lat,lng,radius=7500) => {
+    return fetch(`${URL_PREFIX}/api/foodbanks/?lat=${lat}&lng=${lng}&radius=${radius}`, {
+      method: "GET",
+      // body: JSON.stringify({lat:lat,lng:lng,radius:radius}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
+  }
+
+  // getFoodBanks: (lat, lng, radius=5000) => {
+  //   return fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&keyword=food%20bank&key=AIzaSyBVq588qSxiAVHeDMayN1kY-qnHdVMF6CQ`, {
+  //     method: "GET",
+  //   }).then((res) => res.json());
+  // },
 };
 
 export default API;
